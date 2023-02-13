@@ -28,20 +28,23 @@ Geneal format of the web app
       |         |                                   |
 
 ___________________________________________________________________________________________________________________________________________
-Steps 
-
-1- set up login
-2- design tables 
 ___________________________________________________________________________________________________________________________________________
 TODO:
 
 1- Update Design
+
 2-fix login page showing up on refresh
+
 3- add patient details view
+
 4- add button to bavaria
+
 5- add button to FDA
+
 6- pick Portal colors for each entity ( FDA, Bavaria, Hopkins)
+
 7- finish up Vendia set up
+
 8- Important fix login page design and finish SignUp function-View
 
 
