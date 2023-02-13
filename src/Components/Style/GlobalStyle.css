@@ -1,0 +1,52 @@
+:root {
+  /* Hopkins */
+  --hopkins-header-text-color: white;
+  --hopkins-header-background-color: #343a40;
+  --hopkins-sidenav-text-color: white;
+  --hopkins-sidenav-background-color: #343a40;
+  /* Bavaria */
+  --bavaria-header-text-color: white;
+  --bavaria-header-background-color: rgb(174, 104, 104);
+  --bavaria-sidenav-text-color: white;
+  --bavaria-sidenav-background-color: rgb(174, 104, 104);
+  /* FDA  */
+  --fda-header-text-color: white;
+  --fda-header-background-color: #0a3f73;
+  --fda-sidenav-text-color: white;
+  --fda-sidenav-background-color: #0a3f73;
+  /* global colors */
+  --header-text-color: var(--hopkins-header-text-color);
+  --header-background-color: var(--hopkins-header-background-color);
+  --header-icon-text-color: white;
+  --sidenav-text-color: var(--hopkins-sidenav-text-color);
+  --sidenav-background-color: var(--hopkins-sidenav-background-color);
+}
+
+.header-text-color {
+  color: var(--header-text-color);
+}
+.header-icon-text-color {
+  color: var(--header-icon-text-color);
+}
+.navbar-toggler-icon {
+  background-color: white;
+}
+.navbar-toggler {
+  border-color: white;
+}
+.header-background {
+  background-color: var(--header-background-color);
+}
+.hopkins-header-background {
+  background-color: #343a40;
+}
+.bavaria-header-background {
+  background-color: var(--bavaria-header-background-color);
+}
+.fda-header-background {
+  background-color: var(--fda-header-background-color);
+}
+.sidenav-style {
+  background-color: var(--sidenav-background-color);
+  border: 2px solid black;
+}
