@@ -1,9 +1,48 @@
-finish router
+# DoesntMatterForNow
+_______________________________________________________________________________________________________________________________________
+Instructions for installing various things required for the project
+
+install node from node.js(https://nodejs.org/en/), make sure it's the recommended verson
+install git
+clone the repository 
+install the liabrary by typing npm install on the terminal
+________________________________________________________________________________________________________________________________________
+Geneal format of the web app
+
+          User
+           |
+           |
+          \ /
+      |login|sign up|     (also forgot password)
+      
+      Three Different views depending on weather they are from FDA, Pharma or doc
+      
+      **Doc view** 
+      _____________________________________________
+      |     **GENERAL TAB**                         |
+      |____________________________________________ |
+      | View    |                                   |
+      | patients|                                 --|----->this changes depending on the thing the person selects from the side tab 
+      | etc     |                                   |       && general tab and side tab remains the same 
+      |         |                                   |        // plan on using bootstrap for the layout
+      |         |                                   |
+
+___________________________________________________________________________________________________________________________________________
+Steps 
+
+1- set up login
+2- design tables 
+___________________________________________________________________________________________________________________________________________
 TODO:
-create different colors per entity // Done
-home = jane = patient = status // DOne
-fda = status // Done
-bavaria = status // Done
-add card in main body for each // WIP
-Create Patient Details page
-finish up grid
+
+1- Update Design
+2-fix login page showing up on refresh
+3- add patient details view
+4- add button to bavaria
+5- add button to FDA
+6- pick Portal colors for each entity ( FDA, Bavaria, Hopkins)
+7- finish up Vendia set up
+8- Important fix login page design and finish SignUp function-View
+
+
+
