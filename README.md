@@ -1,3 +1,7 @@
+#ToLogIn-UseThisEmail:
+email: Terror@Runtime.com
+pass: CSC131
+
 # DoesntMatterForNow
 _______________________________________________________________________________________________________________________________________
 Instructions for installing various things required for the project
