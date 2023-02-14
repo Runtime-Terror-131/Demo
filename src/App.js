@@ -8,14 +8,19 @@ import { Header, SideNav } from "./Components";
 import { Routes, Route } from "react-router-dom";
 import { useContextValues } from "./Context/Context";
 import { Bavaria, Home, FDA, NoMatch, Hopkins, Patient, Login } from "./Pages";
-
+import { checkIfUserStillLoggedIn } from "./Config/Firebase-Config";
 function App() {
   const [user, setUser] = useState(null);
   const { userType } = useContextValues();
 
+  useEffect(() => {
+    checkIfUserStillLoggedIn(user, setUser);
+  }, []);
   return (
     <div>
-       
+      {!user ? (
+        <Login setUser={setUser} />
+      ) : (
         <>
           <Header />
           <Container fluid>
@@ -42,7 +47,7 @@ function App() {
             </Row>
           </Container>
         </>
-      
+      )}
     </div>
   );
 }
