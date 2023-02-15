@@ -50,3 +50,7 @@
   background-color: var(--sidenav-background-color);
   border: 2px solid black;
 }
+.nav-height {
+  height: 100vh;
+}
+
