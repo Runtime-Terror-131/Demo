@@ -21,6 +21,22 @@ Geneal format of the web app
           \ /
       |login|sign up|     (also forgot password)
       
+      
+      
+       ______________________________________________________
+      |                       LOGO/APP NAME                 |
+      |                    ____________________             |
+      |                   |  your email        |            |
+      |                   |  |__________|      |            |
+      |                   |                    |            |
+      |                   |  your password     |            |
+      |                   |  |___________|     |            |
+      |                   |                    |            |
+      |                   |   |login|sign up|  |            |
+      |                   |                    |            |
+      |                   |__________forgot pas|            |
+      |_____________________________________________________|
+      
       Three Different views depending on weather they are from FDA, Pharma or doc
       
       **Doc view** 
