@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
@@ -10,6 +10,7 @@ export default function Login({ setUser }) {
   const SignUpButtonClick = () => {
     setToggleLogin(false);
   };
+
   return (
     <div
       style={{
@@ -21,7 +22,7 @@ export default function Login({ setUser }) {
         height: "100vh",
       }}
     >
-      <Card className="text-center" style={{ width: "40vw" }}>
+      <Card className="text-center login-view" style={{ width: "40vw" }}>
         <Card.Header style={{ background: "#343a40", color: "white" }}>
           <h1>RunTime Terror</h1>
         </Card.Header>

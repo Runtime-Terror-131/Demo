@@ -1,10 +1,53 @@
 import React, { useEffect } from "react";
-import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import { Button, Card, Col, Form, Nav, Row } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-import { patients, patientHeaders } from "../../Components/Data/patients";
+import { patients } from "../../Components/Data/patients";
 import { AgGridReact } from "ag-grid-react";
+import { Navigate, NavLink } from "react-router-dom";
+class detailsButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.btnClickedHandler = this.btnClickedHandler.bind(this);
+  }
+  btnClickedHandler(e) {
+    console.log("button click");
 
+    let link = document.getElementById("detailsLink");
+    link.state = () => {
+      return (state = { myState: "myStateValue" });
+    };
+    link.click();
+    //this.props.clicked(this.props.value);
+  }
+  render() {
+    return <Button onClick={this.btnClickedHandler}>Details</Button>;
+  }
+}
 export default function Patient() {
+  const patientHeaders = [
+    {
+      field: "detials",
+      cellRenderer: detailsButton,
+    },
+    { field: "name" },
+    { field: "age" },
+    { field: "address" },
+    { field: "insurance_number" },
+    { field: "height" },
+    { field: "weight" },
+    { field: "blood_pressure" },
+    { field: "blood_type" },
+    { field: "temperature" },
+    { field: "oxygen_saturation" },
+    { field: "patient_ID" },
+    { field: "allergies" },
+    { field: "current_medications" },
+    { field: "family_history" },
+    { field: "currently_employed" },
+    { field: "currently_insured" },
+    { field: "ICD_Health_Code" },
+  ];
+
   return (
     <Row>
       <Col lg={10}>
@@ -70,6 +113,13 @@ export default function Patient() {
           columnDefs={patientHeaders}
         ></AgGridReact>
       </div>
+      <NavLink
+        to={"/hopkins/patient/details"}
+        style={{ display: "none" }}
+        id="detailsLink"
+      >
+        test
+      </NavLink>
     </Row>
   );
 }

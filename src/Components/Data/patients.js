@@ -1,4 +1,3 @@
-import { Button } from "react-bootstrap";
 export const patients = [
   {
     name: "monotonoustest",
@@ -818,27 +817,4 @@ export const patients = [
     ICD_Health_Code: "C00–D48",
   },
   //  { name: "", age: "", address: "", insurance_number: "", height: "", weight: "", blood_pressure: "", blood_type: "", temperature: "", oxygen_saturation: "", patient_ID: "", allergies: "", current_medications: "", family_history: "", currently_employed: "", currently_insured: "", ICD_Health_Code: ""   },
-];
-const detailsButton = () => {
-  return <Button>Details</Button>;
-};
-export const patientHeaders = [
-  { field: "detials", cellRenderer: detailsButton },
-  { field: "name" },
-  { field: "age" },
-  { field: "address" },
-  { field: "insurance_number" },
-  { field: "height" },
-  { field: "weight" },
-  { field: "blood_pressure" },
-  { field: "blood_type" },
-  { field: "temperature" },
-  { field: "oxygen_saturation" },
-  { field: "patient_ID" },
-  { field: "allergies" },
-  { field: "current_medications" },
-  { field: "family_history" },
-  { field: "currently_employed" },
-  { field: "currently_insured" },
-  { field: "ICD_Health_Code" },
 ];

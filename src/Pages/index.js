@@ -7,6 +7,7 @@ import NoMatch from "./NoMatch";
 import Hopkins from "./Hopkins/Hopkins";
 import HopkinsHome from "./Hopkins/HopkinsHome";
 import Patient from "./Hopkins/Patient";
+import PatientDetails from "./Hopkins/PatientDetails";
 import Login from "./Login/Login";
 export {
   Bavaria,
@@ -19,4 +20,5 @@ export {
   HopkinsHome,
   BavariaHome,
   FDAHome,
+  PatientDetails,
 };

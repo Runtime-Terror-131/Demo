@@ -18,14 +18,16 @@ import {
   HopkinsHome,
   BavariaHome,
   FDAHome,
+  PatientDetails,
 } from "./Pages";
 import { checkIfUserStillLoggedIn } from "./Config/Firebase-Config";
 function App() {
   const [user, setUser] = useState(null);
   const { userType } = useContextValues();
-  checkIfUserStillLoggedIn(user, setUser);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    checkIfUserStillLoggedIn(user, setUser);
+  }, []);
   return (
     <div>
       {!user ? (
@@ -44,12 +46,13 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="Hopkins" element={<Hopkins />}>
                       <Route path="home" element={<HopkinsHome />} />
-                      <Route path="patient" element={<Patient />} />
+                      <Route path="patient" element={<Patient />}></Route>
                     </Route>
                     <Route
-                      path="bavaria"
-                      element={<Bavaria userType={userType} />}
-                    >
+                      path="hopkins/patient/details"
+                      element={<PatientDetails />}
+                    />
+                    <Route path="bavaria" element={<Bavaria />}>
                       <Route path="home" element={<BavariaHome />} />
                     </Route>
                     <Route path="fda" element={<FDA />}>

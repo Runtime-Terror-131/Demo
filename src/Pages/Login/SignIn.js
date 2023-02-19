@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, FloatingLabel } from "react-bootstrap";
+import { Form, Button, FloatingLabel, Col } from "react-bootstrap";
 import {
   auth,
   register,
@@ -34,7 +34,7 @@ export default function SignIn({ setLoginUser }) {
     }
   };
   return (
-    <>
+    <div>
       <FloatingLabel
         controlId="floatingInput"
         label="Email address"
@@ -64,6 +64,6 @@ export default function SignIn({ setLoginUser }) {
           Submit
         </Button>
       </div>
-    </>
+    </div>
   );
 }

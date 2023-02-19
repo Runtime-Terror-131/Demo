@@ -34,7 +34,6 @@ const loginUser = async (email, password, setUser, setLoginErrorMessage) => {
     .then((userCredential) => {
       const user = userCredential.user;
       setUser(user);
-
       // ...
     })
     .catch((error) => {
@@ -54,15 +53,11 @@ const logout = () => {
 const checkIfUserStillLoggedIn = (user, setUser) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
       setUser(user);
       const uid = user.uid;
       // ...
     } else {
-      // User is signed out
-      // ...
-      return null;
+      return false;
     }
   });
 };
