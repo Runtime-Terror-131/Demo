@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-import { patients, patientHeaders } from "../Components/Data/patients";
+import { patients, patientHeaders } from "../../Components/Data/patients";
 import { AgGridReact } from "ag-grid-react";
 
 export default function Patient() {

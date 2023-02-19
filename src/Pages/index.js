@@ -1,8 +1,22 @@
-import Bavaria from "./Bavaria";
-import FDA from "./FDA";
+import Bavaria from "./Bavaria/Bavaria";
+import BavariaHome from "./Bavaria/BavariaHome";
+import FDA from "./FDA/FDA";
+import FDAHome from "./FDA/FDAHome";
 import Home from "./Home";
 import NoMatch from "./NoMatch";
-import Hopkins from "./Hopkins";
-import Patient from "./Patient";
+import Hopkins from "./Hopkins/Hopkins";
+import HopkinsHome from "./Hopkins/HopkinsHome";
+import Patient from "./Hopkins/Patient";
 import Login from "./Login/Login";
-export { Bavaria, FDA, Home, Hopkins, NoMatch, Patient, Login };
+export {
+  Bavaria,
+  FDA,
+  Home,
+  Hopkins,
+  NoMatch,
+  Patient,
+  Login,
+  HopkinsHome,
+  BavariaHome,
+  FDAHome,
+};
