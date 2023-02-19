@@ -1,21 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Form, Nav, Row } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { patients } from "../../Components/Data/patients";
 import { AgGridReact } from "ag-grid-react";
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
 class detailsButton extends React.Component {
   constructor(props) {
     super(props);
     this.btnClickedHandler = this.btnClickedHandler.bind(this);
   }
   btnClickedHandler(e) {
-    console.log("button click");
-
     let link = document.getElementById("detailsLink");
-    link.state = () => {
-      return (state = { myState: "myStateValue" });
-    };
+    link.href = link.href + this.props.data.patient_ID;
+
     link.click();
     //this.props.clicked(this.props.value);
   }
@@ -118,7 +116,7 @@ export default function Patient() {
         style={{ display: "none" }}
         id="detailsLink"
       >
-        test
+        hidden
       </NavLink>
     </Row>
   );

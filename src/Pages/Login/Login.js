@@ -35,7 +35,7 @@ export default function Login({ setUser }) {
           {toggleLogin ? (
             <SignIn setLoginUser={setUser} />
           ) : (
-            <SignUp setUser={setUser} />
+            <SignUp setLoginUser={setUser} />
           )}
         </Card.Body>
         <Card.Footer>

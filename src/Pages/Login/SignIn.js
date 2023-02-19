@@ -35,6 +35,7 @@ export default function SignIn({ setLoginUser }) {
   };
   return (
     <div>
+      <div className="login-header">Sign in</div>
       <FloatingLabel
         controlId="floatingInput"
         label="Email address"
