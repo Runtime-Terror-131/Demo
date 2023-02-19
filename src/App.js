@@ -23,10 +23,9 @@ import { checkIfUserStillLoggedIn } from "./Config/Firebase-Config";
 function App() {
   const [user, setUser] = useState(null);
   const { userType } = useContextValues();
+  checkIfUserStillLoggedIn(user, setUser);
 
-  useEffect(() => {
-    checkIfUserStillLoggedIn(user, setUser);
-  }, []);
+  useEffect(() => {}, []);
   return (
     <div>
       {!user ? (

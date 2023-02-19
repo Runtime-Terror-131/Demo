@@ -7,7 +7,7 @@ import { AgGridReact } from "ag-grid-react";
 export default function Patient() {
   return (
     <Row>
-      <Col lg={8}>
+      <Col lg={10}>
         <Card>
           {/* <Row> */}
           <Card.Header className="border-bottom-0">Patient Search</Card.Header>

@@ -18,11 +18,12 @@ export default function Login({ setUser }) {
         alignItems: "center",
         alignContent: "center",
         flexDirection: "column",
+        height: "100vh",
       }}
     >
-      <Card className="text-center" style={{ width: "50vw" }}>
-        <Card.Header style={{ background: "teal" }}>
-          Please Login First
+      <Card className="text-center" style={{ width: "40vw" }}>
+        <Card.Header style={{ background: "#343a40", color: "white" }}>
+          <h1>RunTime Terror</h1>
         </Card.Header>
         <Card.Body
           style={{

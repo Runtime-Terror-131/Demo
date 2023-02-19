@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Form, Button, FloatingLabel } from "react-bootstrap";
 import {
   auth,
   register,
@@ -30,37 +31,27 @@ export default function SignIn({ setLoginUser }) {
     }
   };
   return (
-    <div>
-      <div>Sign In section</div>
+    <>
+      <FloatingLabel
+        controlId="floatingInput"
+        label="Email address"
+        className="mb-3"
+      >
+        <Form.Control type="email" onChange={(e) => setEmail(e.target.value)} />
+        {showUserError && <span style={{ color: "red" }}>{userError}</span>}
+      </FloatingLabel>
+      <FloatingLabel controlId="floatingPassword" label="Password">
+        <Form.Control
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {showPassError && <span style={{ color: "red" }}>{PassError}</span>}
+      </FloatingLabel>
       <div>
-        <div>
-          <input
-            value={email}
-            placeholder=" Email"
-            type="email"
-            name="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <br />
-          {showUserError && <span style={{ color: "red" }}>{userError}</span>}
-        </div>
-        <div>
-          <input
-            value={password}
-            placeholder="password"
-            type="password"
-            name="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
-          {showPassError && <span style={{ color: "red" }}>{PassError}</span>}
-        </div>
-        <div>
-          <button className="button" onClick={submitForm}>
-            Submit
-          </button>
-        </div>
+        <button className="button" onClick={submitForm}>
+          Submit
+        </button>
       </div>
-    </div>
+    </>
   );
 }

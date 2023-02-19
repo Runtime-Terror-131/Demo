@@ -6,7 +6,7 @@ import {
   onAuthStateChanged,
   getAuth,
 } from "firebase/auth";
-console.log(process.env.REACT_APP_TEST);
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
