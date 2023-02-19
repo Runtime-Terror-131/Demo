@@ -38,10 +38,10 @@ export default function Login({ setUser }) {
           )}
         </Card.Body>
         <Card.Footer>
-          <Button variant="outline-dark" onClick={SignInButtonClick}>
+          <Button variant="outline-primary" onClick={SignInButtonClick}>
             SignIn
           </Button>
-          <Button variant="outline-dark" onClick={SignUpButtonClick}>
+          <Button variant="outline-primary" onClick={SignUpButtonClick}>
             SignUp
           </Button>
         </Card.Footer>

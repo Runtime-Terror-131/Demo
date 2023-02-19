@@ -8,6 +8,7 @@ export function ContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [userType, setUserType] = useState(1);
   const [portalNamePath, setPortalNamePath] = useState("/hopkins");
+  const [loginErrorMessage, setLoginErrorMessage] = useState(null);
   const updateUserType = (value) => {
     setUserType(value);
   };
@@ -20,6 +21,8 @@ export function ContextProvider({ children }) {
         setCurrentUser,
         portalNamePath,
         setPortalNamePath,
+        loginErrorMessage,
+        setLoginErrorMessage,
       }}
     >
       {children}

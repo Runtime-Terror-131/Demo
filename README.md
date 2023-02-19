@@ -61,3 +61,7 @@ TODO:
 
 ##Notes##
 there might be a bug related to context's portalNamePath initial value----keep that in mind for later
+
+breadcrumbs
+login issue
+logout button

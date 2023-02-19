@@ -6,17 +6,20 @@ import {
   loginUser,
   logout,
 } from "../../Config/Firebase-Config";
+import { useContextValues } from "../../Context/Context";
 export default function SignIn({ setLoginUser }) {
+  const { loginErrorMessage, setLoginErrorMessage } = useContextValues();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showUserError, setShowUserError] = useState(false);
   const [showPassError, setShowPassError] = useState(false);
+
   const userError = " Email Required";
   const PassError = "Password Required";
 
   const submitForm = () => {
     if (email && email.length > 0 && password && password.length > 0) {
-      loginUser(email, password, setLoginUser);
+      loginUser(email, password, setLoginUser, setLoginErrorMessage);
     } else {
       if ((email && email.length <= 0) || !email) {
         setShowUserError(true);
@@ -47,10 +50,19 @@ export default function SignIn({ setLoginUser }) {
         />
         {showPassError && <span style={{ color: "red" }}>{PassError}</span>}
       </FloatingLabel>
+      <br />
+      <br />
+      {loginErrorMessage && (
+        <span style={{ color: "red" }}>{loginErrorMessage}</span>
+      )}
       <div>
-        <button className="button" onClick={submitForm}>
+        <Button
+          variant="outline-primary"
+          className="button"
+          onClick={submitForm}
+        >
           Submit
-        </button>
+        </Button>
       </div>
     </>
   );
