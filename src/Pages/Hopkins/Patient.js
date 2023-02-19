@@ -6,9 +6,10 @@ import { AgGridReact } from "ag-grid-react";
 
 export default function Patient() {
   return (
-    <div>
-      <Card>
-        <Row>
+    <Row>
+      <Col lg={8}>
+        <Card>
+          {/* <Row> */}
           <Card.Header className="border-bottom-0">Patient Search</Card.Header>
           <Card.Body>
             <Form>
@@ -39,29 +40,36 @@ export default function Patient() {
                   label="Exclude DOB greater than 1/1/2005"
                 />
               </Form.Group>
-              <Col lg={8}>
-                <div className="float-end">
-                  <Button variant="primary" type="button">
-                    Search
-                  </Button>
-                  <Button className="m-2" variant="secondary" type="button">
-                    Undo
-                  </Button>
-                  <Button variant="primary" type="button">
-                    Download Result
-                  </Button>
-                </div>
-              </Col>
             </Form>
           </Card.Body>
-        </Row>
-        <div className="ag-theme-alpine" style={{ height: 400 }}>
-          <AgGridReact
-            rowData={patients}
-            columnDefs={patientHeaders}
-          ></AgGridReact>
-        </div>
-      </Card>
-    </div>
+          <Card.Footer>
+            <Col>
+              <div className="float-end">
+                <Button variant="primary" type="button">
+                  Search
+                </Button>
+                <Button className="m-2" variant="secondary" type="button">
+                  Undo
+                </Button>
+                <Button variant="primary" type="button">
+                  Download Result
+                </Button>
+              </div>
+            </Col>
+          </Card.Footer>
+          {/* </Row> */}
+        </Card>
+      </Col>
+
+      <div
+        className="ag-theme-alpine"
+        style={{ height: 400, marginTop: "5px" }}
+      >
+        <AgGridReact
+          rowData={patients}
+          columnDefs={patientHeaders}
+        ></AgGridReact>
+      </div>
+    </Row>
   );
 }

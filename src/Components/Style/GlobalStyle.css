@@ -20,6 +20,8 @@
   --header-icon-text-color: white;
   --sidenav-text-color: var(--hopkins-sidenav-text-color);
   --sidenav-background-color: var(--hopkins-sidenav-background-color);
+  --footer-text-color: var(--hopkins-sidenav-text-color);
+  --footer-background-color: var(--hopkins-sidenav-background-color);
 }
 
 .header-text-color {
@@ -56,4 +58,8 @@
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   margin-top: 5px;
+  color: var(--footer-text-color);
+  background-color: var(--footer-background-color);
+  display: flex;
+  justify-content: center;
 }
