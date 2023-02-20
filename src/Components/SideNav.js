@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import { NavLink } from "react-router-dom";
 export default function SideNav() {
   return (
-    <Nav fill variant="tabs" defaultActiveKey="/home" className="flex-column">
+    <Nav variant="tabs" defaultActiveKey="/home" className="flex-column , nav-height">
       <Nav.Link to={"/"} as={NavLink} className="header-text-color">
         Home
       </Nav.Link>

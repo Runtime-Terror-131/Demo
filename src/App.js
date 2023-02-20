@@ -25,7 +25,7 @@ function App() {
           <Header />
           <Container fluid>
             <Row>
-              <Col lg={2} className="sidenav-style , nav-height">
+              <Col lg={2} className="sidenav-style" >
                 <SideNav />
               </Col>
               <Col lg={10}>
