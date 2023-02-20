@@ -19,6 +19,14 @@ export const updateColor = (type) => {
       "--sidenav-text-color",
       "var(--hopkins-sidenav-text-color)"
     );
+    document.documentElement.style.setProperty(
+      "--footer-text-color",
+      "var(--hopkins-header-text-color)"
+    );
+    document.documentElement.style.setProperty(
+      "--footer-background-color",
+      "var(--hopkins-sidenav-background-color)"
+    );
   } else if (type === UserTypeConst.bavaria) {
     document.documentElement.style.setProperty(
       "--header-text-color",
@@ -36,6 +44,14 @@ export const updateColor = (type) => {
       "--sidenav-text-color",
       "var(--bavaria-sidenav-text-color)"
     );
+    document.documentElement.style.setProperty(
+      "--footer-text-color",
+      "var(--bavaria-sidenav-text-color)"
+    );
+    document.documentElement.style.setProperty(
+      "--footer-background-color",
+      "var(--bavaria-sidenav-background-color)"
+    );
   } else if (type === UserTypeConst.fda) {
     document.documentElement.style.setProperty(
       "--header-text-color",
@@ -52,6 +68,14 @@ export const updateColor = (type) => {
     document.documentElement.style.setProperty(
       "--sidenav-text-color",
       "var(--fda-sidenav-text-color)"
+    );
+    document.documentElement.style.setProperty(
+      "--footer-text-color",
+      "var(--fda-sidenav-text-color)"
+    );
+    document.documentElement.style.setProperty(
+      "--footer-background-color",
+      "var(--fda-sidenav-background-color)"
     );
   }
 };

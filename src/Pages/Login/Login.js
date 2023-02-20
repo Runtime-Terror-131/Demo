@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
@@ -10,6 +10,7 @@ export default function Login({ setUser }) {
   const SignUpButtonClick = () => {
     setToggleLogin(false);
   };
+
   return (
     <div
       style={{
@@ -18,11 +19,12 @@ export default function Login({ setUser }) {
         alignItems: "center",
         alignContent: "center",
         flexDirection: "column",
+        height: "100vh",
       }}
     >
-      <Card className="text-center" style={{ width: "50vw" }}>
-        <Card.Header style={{ background: "teal" }}>
-          Please Login First
+      <Card className="text-center login-view" style={{ width: "40vw" }}>
+        <Card.Header style={{ background: "#343a40", color: "white" }}>
+          <h1>RunTime Terror</h1>
         </Card.Header>
         <Card.Body
           style={{
@@ -33,14 +35,14 @@ export default function Login({ setUser }) {
           {toggleLogin ? (
             <SignIn setLoginUser={setUser} />
           ) : (
-            <SignUp setUser={setUser} />
+            <SignUp setLoginUser={setUser} />
           )}
         </Card.Body>
         <Card.Footer>
-          <Button variant="outline-dark" onClick={SignInButtonClick}>
+          <Button variant="outline-primary" onClick={SignInButtonClick}>
             SignIn
           </Button>
-          <Button variant="outline-dark" onClick={SignUpButtonClick}>
+          <Button variant="outline-primary" onClick={SignUpButtonClick}>
             SignUp
           </Button>
         </Card.Footer>

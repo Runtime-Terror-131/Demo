@@ -1,10 +1,14 @@
 import React from "react";
-import { Container, Navbar, Nav } from "react-bootstrap";
+import { Container, Navbar, Nav, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useContextValues } from "../Context/Context";
+import { logout } from "../Config/Firebase-Config";
 export default function Header() {
-  const { userType } = useContextValues();
-
+  const { userType, portalNamePath } = useContextValues();
+  const logoutUser = () => {
+    logout();
+    location.reload();
+  };
   return (
     <Navbar
       expand="lg"
@@ -22,26 +26,33 @@ export default function Header() {
           <Navbar.Collapse className="justify-content-end">
             <Nav defaultActiveKey="/home" className="me-auto">
               <Nav.Link
-                to="/hopkins"
+                to="/hopkins/home"
                 as={NavLink}
                 className="header-text-color"
               >
                 Jane Hopkins
               </Nav.Link>
               <Nav.Link
-                to={"/bavaria"}
+                to={"/bavaria/home"}
                 as={NavLink}
                 className="header-text-color"
               >
                 Bavaria
               </Nav.Link>
-              <Nav.Link to={"/fda"} as={NavLink} className="header-text-color">
+              <Nav.Link
+                to={"/fda/home"}
+                as={NavLink}
+                className="header-text-color"
+              >
                 FDA
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </div>
       </Container>
+      <Button variant="outline-warning" onClick={logoutUser}>
+        Logout
+      </Button>
     </Navbar>
   );
 }

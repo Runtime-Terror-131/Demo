@@ -4,10 +4,22 @@ import "./Components/Style/GlobalStyle.css";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { Row, Col, Container } from "react-bootstrap";
-import { Header, SideNav } from "./Components";
+import { Header, SideNav, Footer } from "./Components";
 import { Routes, Route } from "react-router-dom";
 import { useContextValues } from "./Context/Context";
-import { Bavaria, Home, FDA, NoMatch, Hopkins, Patient, Login } from "./Pages";
+import {
+  Bavaria,
+  Home,
+  FDA,
+  NoMatch,
+  Hopkins,
+  Patient,
+  Login,
+  HopkinsHome,
+  BavariaHome,
+  FDAHome,
+  PatientDetails,
+} from "./Pages";
 import { checkIfUserStillLoggedIn } from "./Config/Firebase-Config";
 function App() {
   const [user, setUser] = useState(null);
@@ -23,7 +35,7 @@ function App() {
       ) : (
         <>
           <Header />
-          <Container fluid>
+          <Container fluid className="container-height">
             <Row>
               <Col lg={2} className="sidenav-style" >
                 <SideNav />
@@ -33,13 +45,19 @@ function App() {
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="Hopkins" element={<Hopkins />}>
-                      <Route path="patient" element={<Patient />} />
+                      <Route path="home" element={<HopkinsHome />} />
+                      <Route path="patient" element={<Patient />}></Route>
                     </Route>
                     <Route
-                      path="bavaria"
-                      element={<Bavaria userType={userType} />}
+                      path="hopkins/patient/details"
+                      element={<PatientDetails />}
                     />
-                    <Route path="fda" element={<FDA />} />
+                    <Route path="bavaria" element={<Bavaria />}>
+                      <Route path="home" element={<BavariaHome />} />
+                    </Route>
+                    <Route path="fda" element={<FDA />}>
+                      <Route path="Home" element={<FDAHome />} />
+                    </Route>
                     <Route path="*" element={<NoMatch />} />
                   </Routes>
                 </Row>
@@ -48,6 +66,7 @@ function App() {
           </Container>
         </>
       )}
+      <Footer />
     </div>
   );
 }

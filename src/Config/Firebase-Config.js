@@ -5,8 +5,8 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   getAuth,
+  signOut,
 } from "firebase/auth";
-console.log(process.env.REACT_APP_TEST);
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -29,32 +29,35 @@ const register = async (email, password, setUser) => {
     console.log(e);
   }
 };
-const loginUser = async (email, password, setUser) => {
+const loginUser = async (email, password, setUser, setLoginErrorMessage) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
       setUser(user);
-      console.log(user);
       // ...
     })
     .catch((error) => {
       const errorCode = error.code;
-      const errorMessage = error.message;
+      setLoginErrorMessage(error.message);
     });
 };
-const logout = async (userName, password) => {};
+const logout = () => {
+  signOut(auth)
+    .then(() => {
+      console.log("user signed out");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 const checkIfUserStillLoggedIn = (user, setUser) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
       setUser(user);
       const uid = user.uid;
       // ...
     } else {
-      // User is signed out
-      // ...
-      return null;
+      return false;
     }
   });
 };
