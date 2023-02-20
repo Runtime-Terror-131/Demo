@@ -5,7 +5,11 @@ import { useContextValues } from "../Context/Context";
 export default function SideNav() {
   const { portalNamePath } = useContextValues();
   return (
-    <Nav defaultActiveKey="/home" className="flex-column mt-2 fw-bold">
+    <Nav
+      variant="tabs"
+      defaultActiveKey="/home"
+      className="flex-column mt-2 fw-bold, nav-height"
+    >
       <Nav.Link
         to={`${portalNamePath}/home`}
         as={NavLink}
