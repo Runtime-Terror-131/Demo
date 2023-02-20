@@ -30,12 +30,12 @@
 .header-icon-text-color {
   color: var(--header-icon-text-color);
 }
-.navbar-toggler-icon {
+/* .navbar-toggler-icon {
   background-color: white;
-}
-.navbar-toggler {
+} */
+/* .navbar-toggler {
   border-color: white;
-}
+} */
 .header-background {
   background-color: var(--header-background-color);
 }
@@ -76,8 +76,14 @@
 /* login page view in mobile devices needs to be full width */
 .login-view {
 }
+.container-height {
+  height: 80vh;
+}
 @media (max-width: 700px) {
   .login-view {
     width: 100% !important;
+  }
+  .container-height {
+    height: 100%;
   }
 }
