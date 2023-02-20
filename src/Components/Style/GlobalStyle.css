@@ -77,7 +77,10 @@
 .login-view {
 }
 .container-height {
-  height: 80vh;
+  /* height: 80vh; */
+}
+.nav-height {
+  height: 55vw;
 }
 @media (max-width: 700px) {
   .login-view {
@@ -86,7 +89,4 @@
   .container-height {
     height: 100%;
   }
-}
-.nav-height {
-  height: 55vw;
 }
