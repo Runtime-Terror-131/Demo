@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Button, Card, Col, Form, Nav, Row } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { patients } from "../../Components/Data/patients";
 import { AgGridReact } from "ag-grid-react";
 import { NavLink } from "react-router-dom";
-
+import { Location } from "react-router-dom";
+import { useContextValues } from "../../Context/Context";
 class detailsButton extends React.Component {
   constructor(props) {
     super(props);
@@ -12,8 +13,8 @@ class detailsButton extends React.Component {
   }
   btnClickedHandler(e) {
     let link = document.getElementById("detailsLink");
-    link.href = link.href + this.props.data.patient_ID;
-
+    //localStorage.setItem("patientID", this.props.data.patient_ID);
+    console.log(this.props.data);
     link.click();
     //this.props.clicked(this.props.value);
   }
@@ -21,7 +22,18 @@ class detailsButton extends React.Component {
     return <Button onClick={this.btnClickedHandler}>Details</Button>;
   }
 }
+
 export default function Patient() {
+  const { setPatientDetails } = useContextValues();
+  const defaultColDef = useMemo(() => {
+    return {
+      sortable: true,
+      filter: true,
+    };
+  }, []);
+  const savePatientID = () => {
+    setPatientDetails;
+  };
   const patientHeaders = [
     {
       field: "detials",
@@ -104,17 +116,19 @@ export default function Patient() {
 
       <div
         className="ag-theme-alpine"
-        style={{ height: 400, marginTop: "5px" }}
+        style={{ height: 500, marginTop: "5px" }}
       >
         <AgGridReact
           rowData={patients}
           columnDefs={patientHeaders}
+          defaultColDef={defaultColDef}
         ></AgGridReact>
       </div>
       <NavLink
         to={"/hopkins/patient/details"}
         style={{ display: "none" }}
         id="detailsLink"
+        // onClick={test}
       >
         hidden
       </NavLink>

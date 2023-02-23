@@ -95,7 +95,7 @@ export const patients = [
     ICD_Health_Code: "F00–F99",
   },
   {
-    name: "cuntsuckertest",
+    name: "friendly name",
     age: "34",
     address: "48 Homestead St.",
     insurance_number: "GH953805A",
