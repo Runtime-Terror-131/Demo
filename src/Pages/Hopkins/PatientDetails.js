@@ -18,10 +18,12 @@ export default function PatientDetails() {
         <Row>
           {patientDetails ? (
             Object.entries(patientDetails).map((item, i) => (
-              <Col lg={4}>
-                <div key={i}>
-                  <span style={{ color: "grey" }}>{item[0]}:</span>
-                  <h4>{item[1]}</h4>
+              <Col lg={4} key={i}>
+                <div>
+                  <span style={{ color: "grey" }} key={item[0].toString()}>
+                    {item[0]}:
+                  </span>
+                  <h4 key={item[1].toString()}>{item[1]}</h4>
                 </div>
               </Col>
             ))
