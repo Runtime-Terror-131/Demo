@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Components/Style/GlobalStyle.css";
 import "ag-grid-community/styles/ag-grid.css";
@@ -25,8 +25,16 @@ function App() {
   const [user, setUser] = useState(null);
   const { userType } = useContextValues();
 
-  useEffect(() => {
-    checkIfUserStillLoggedIn(user, setUser);
+  useLayoutEffect(() => {
+    return () => {
+      if (!localStorage.getItem("userData")) {
+        console.log("inside condition");
+        checkIfUserStillLoggedIn(user, setUser);
+      } else {
+        setUser(localStorage.getItem("userData"));
+      }
+      //Do some cleanup here
+    };
   }, []);
   return (
     <div>
@@ -37,7 +45,7 @@ function App() {
           <Header />
           <Container fluid className="container-height">
             <Row>
-              <Col lg={2} className="sidenav-style" >
+              <Col lg={2} className="sidenav-style">
                 <SideNav />
               </Col>
               <Col lg={10}>

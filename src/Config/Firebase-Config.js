@@ -44,6 +44,7 @@ const loginUser = async (email, password, setUser, setLoginErrorMessage) => {
 const logout = () => {
   signOut(auth)
     .then(() => {
+      localStorage.removeItem("userData");
       console.log("user signed out");
     })
     .catch((error) => {
@@ -54,7 +55,8 @@ const checkIfUserStillLoggedIn = (user, setUser) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setUser(user);
-      const uid = user.uid;
+      localStorage.setItem("userData", user);
+      //const uid = user.uid;
       // ...
     } else {
       return false;
