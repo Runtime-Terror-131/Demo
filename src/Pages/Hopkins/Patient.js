@@ -6,23 +6,34 @@ import { AgGridReact } from "ag-grid-react";
 import { NavLink } from "react-router-dom";
 import { Location } from "react-router-dom";
 import { useContextValues } from "../../Context/Context";
-class detailsButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.btnClickedHandler = this.btnClickedHandler.bind(this);
-  }
-  btnClickedHandler(e) {
+// class detailsButton extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.btnClickedHandler = this.btnClickedHandler.bind(this);
+//   }
+//   btnClickedHandler(e) {
+//     let link = document.getElementById("detailsLink");
+//     //localStorage.setItem("patientID", this.props.data.patient_ID);
+//     console.log(this.props.data);
+//     link.click();
+//     //this.props.clicked(this.props.value);
+//   }
+//   render() {
+//     return <Button onClick={this.btnClickedHandler}>Details</Button>;
+//   }
+// }
+const ButtonCell = (props) => {
+  const { setPatientDetails } = useContextValues();
+  const buttonClicked = () => {
     let link = document.getElementById("detailsLink");
     //localStorage.setItem("patientID", this.props.data.patient_ID);
-    console.log(this.props.data);
+    setPatientDetails(props.data);
     link.click();
     //this.props.clicked(this.props.value);
-  }
-  render() {
-    return <Button onClick={this.btnClickedHandler}>Details</Button>;
-  }
-}
+  };
 
+  return <Button onClick={buttonClicked}>Details</Button>;
+};
 export default function Patient() {
   const { setPatientDetails } = useContextValues();
   const defaultColDef = useMemo(() => {
@@ -31,13 +42,11 @@ export default function Patient() {
       filter: true,
     };
   }, []);
-  const savePatientID = () => {
-    setPatientDetails;
-  };
+
   const patientHeaders = [
     {
       field: "detials",
-      cellRenderer: detailsButton,
+      cellRenderer: ButtonCell,
     },
     { field: "name" },
     { field: "age" },
