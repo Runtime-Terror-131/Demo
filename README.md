@@ -79,6 +79,8 @@ TODO:
 there might be a bug related to context's portalNamePath initial value----keep that in mind for later
 
 route for hopkins/patient/details needs more work later
-breadcrumbs
-login issue
-patient details
+9- breadcrumbs
+10- login issue hamzah/done
+11- patient details hamzah/ working on it
+12 - search function
+13- connect vendia
