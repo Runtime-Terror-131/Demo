@@ -1,31 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Button, Card, Col, Form, Nav, Row } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { patients } from "../../Components/Data/patients";
 import { AgGridReact } from "ag-grid-react";
 import { NavLink } from "react-router-dom";
-
-class detailsButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.btnClickedHandler = this.btnClickedHandler.bind(this);
-  }
-  btnClickedHandler(e) {
+import { Location } from "react-router-dom";
+import { useContextValues } from "../../Context/Context";
+// class detailsButton extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.btnClickedHandler = this.btnClickedHandler.bind(this);
+//   }
+//   btnClickedHandler(e) {
+//     let link = document.getElementById("detailsLink");
+//     //localStorage.setItem("patientID", this.props.data.patient_ID);
+//     console.log(this.props.data);
+//     link.click();
+//     //this.props.clicked(this.props.value);
+//   }
+//   render() {
+//     return <Button onClick={this.btnClickedHandler}>Details</Button>;
+//   }
+// }
+const ButtonCell = (props) => {
+  const { setPatientDetails } = useContextValues();
+  const buttonClicked = () => {
     let link = document.getElementById("detailsLink");
-    link.href = link.href + this.props.data.patient_ID;
-
+    //localStorage.setItem("patientID", this.props.data.patient_ID);
+    setPatientDetails(props.data);
     link.click();
     //this.props.clicked(this.props.value);
-  }
-  render() {
-    return <Button onClick={this.btnClickedHandler}>Details</Button>;
-  }
-}
+  };
+
+  return <Button onClick={buttonClicked}>Details</Button>;
+};
 export default function Patient() {
+  const { setPatientDetails } = useContextValues();
+  const defaultColDef = useMemo(() => {
+    return {
+      sortable: true,
+      filter: true,
+    };
+  }, []);
+
   const patientHeaders = [
     {
       field: "detials",
-      cellRenderer: detailsButton,
+      cellRenderer: ButtonCell,
     },
     { field: "name" },
     { field: "age" },
@@ -104,17 +125,19 @@ export default function Patient() {
 
       <div
         className="ag-theme-alpine"
-        style={{ height: 400, marginTop: "5px" }}
+        style={{ height: 500, marginTop: "5px" }}
       >
         <AgGridReact
           rowData={patients}
           columnDefs={patientHeaders}
+          defaultColDef={defaultColDef}
         ></AgGridReact>
       </div>
       <NavLink
         to={"/hopkins/patient/details"}
         style={{ display: "none" }}
         id="detailsLink"
+        // onClick={test}
       >
         hidden
       </NavLink>
