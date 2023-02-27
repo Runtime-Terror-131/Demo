@@ -3,6 +3,7 @@ import { Row, Col, Card, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { patients } from "../../Components/Data/patients";
 import { useContextValues } from "../../Context/Context";
+import {BackButton} from "../../Components/Util/BackButton";
 export default function PatientDetails() {
   const { patientDetails } = useContextValues();
   useEffect(() => {
@@ -39,8 +40,7 @@ export default function PatientDetails() {
           <Button variant="danger" style={{ margin: "5px" }}>
             Delete
           </Button>
-
-          <Button variant="secondary">Back</Button>
+          <BackButton />
         </div>
       </Card.Footer>
     </Card>

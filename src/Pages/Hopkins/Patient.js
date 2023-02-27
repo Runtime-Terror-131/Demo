@@ -76,19 +76,28 @@ export default function Patient() {
           <Card.Body>
             <Form>
               <Row>
-                <Col lg={4}>
+                <Col lg={3}>
                   <Form.Group className="mb-3" controlId="Name">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="email" placeholder="Enter Name" />
-                    <Form.Text className="text-muted">
-                      Search for Patient Name
-                    </Form.Text>
                   </Form.Group>
                 </Col>
-                <Col lg={4}>
+                <Col lg={3}>
                   <Form.Group className="mb-3" controlId="Age">
                     <Form.Label>Age</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Age" />
+                    <Form.Control type="email" placeholder="Enter Age" />
+                  </Form.Group>
+                </Col>
+                <Col lg={3}>
+                  <Form.Group className="mb-3" controlId="Insurance Number">
+                    <Form.Label>Insurance Number</Form.Label>
+                    <Form.Control type="email" placeholder="Enter Insurance Number" />
+                  </Form.Group>
+                </Col>
+                <Col lg={3}>
+                  <Form.Group className="mb-3" controlId="ICD Health Code">
+                    <Form.Label>ICD Health Code</Form.Label>
+                    <Form.Control type="email" placeholder="Enter ICD Health Code" />
                   </Form.Group>
                 </Col>
               </Row>
