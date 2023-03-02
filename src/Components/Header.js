@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Navbar, Nav, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useContextValues } from "../Context/Context";
 import { logout } from "../Config/Firebase-Config";
+import logo from "../images/logo.gif";
 export default function Header() {
   const { userType, portalNamePath } = useContextValues();
   const logoutUser = () => {
     logout();
-    location.reload();
+    if (window.location) {
+      window.location.reload();
+    }
   };
   return (
     <Navbar
@@ -17,10 +20,16 @@ export default function Header() {
     >
       <Container>
         <Navbar.Brand href="/" className="header-icon-text-color">
-          RunTime Terror
+        <img
+          src={logo}
+          alt="LOGO"
+          style={{
+            width: "auto",
+            height: "10vh",
+          }}
+          />
         </Navbar.Brand>
-        {/* logo should be here */}
-        <h1 style={{ color: "white" }}>LOGO</h1>
+        <h1 style={{ color: "white" }}>RunTime Terror</h1>
         <div>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">

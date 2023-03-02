@@ -140,6 +140,8 @@ export default function Patient() {
           rowData={patients}
           columnDefs={patientHeaders}
           defaultColDef={defaultColDef}
+          pagination={true}                   //paginates the rows
+          paginationPageSize={10}             //setting each page to contain 10 rows
         ></AgGridReact>
       </div>
       <NavLink
