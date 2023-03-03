@@ -76,19 +76,28 @@ export default function Patient() {
           <Card.Body>
             <Form>
               <Row>
-                <Col lg={4}>
+                <Col lg={3}>
                   <Form.Group className="mb-3" controlId="Name">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="email" placeholder="Enter Name" />
-                    <Form.Text className="text-muted">
-                      Search for Patient Name
-                    </Form.Text>
+                    <Form.Control type="email"/>
                   </Form.Group>
                 </Col>
-                <Col lg={4}>
+                <Col lg={3}>
                   <Form.Group className="mb-3" controlId="Age">
                     <Form.Label>Age</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Age" />
+                    <Form.Control type="email"/>
+                  </Form.Group>
+                </Col>
+                <Col lg={3}>
+                  <Form.Group className="mb-3" controlId="Insurance Number">
+                    <Form.Label>Insurance Number</Form.Label>
+                    <Form.Control type="email"/>
+                  </Form.Group>
+                </Col>
+                <Col lg={3}>
+                  <Form.Group className="mb-3" controlId="ICD Health Code">
+                    <Form.Label>ICD Health Code</Form.Label>
+                    <Form.Control type="email"/>
                   </Form.Group>
                 </Col>
               </Row>
@@ -131,6 +140,8 @@ export default function Patient() {
           rowData={patients}
           columnDefs={patientHeaders}
           defaultColDef={defaultColDef}
+          pagination={true}                   //paginates the rows
+          paginationPageSize={10}             //setting each page to contain 10 rows
         ></AgGridReact>
       </div>
       <NavLink
