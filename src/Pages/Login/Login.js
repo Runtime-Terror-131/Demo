@@ -33,14 +33,17 @@ export default function Login({ setUser }) {
           }}
         >
           <h1>RunTime Terror</h1>
+          <div style={{textAlign:"center"}}>
+          <h4>Good to See you!</h4>
+          </div>
+          
         </div>
-        <Card className="text-center login-view" style={{ width: "45vw", borderColor: "#2B223D", marginLeft: "5vw"}}>
+        <Card className="text-center login-view shadow-sm " style={{ width: "45vw", borderColor: "#2B223D", marginLeft: "5vw"}}>
           <Card.Body
             style={{
               background: "#2B223D",
               //marginLeft: "auto !important",
               //marginRight: "auto !important",
-              //border: `2px solid red`,
               
             }}
           >

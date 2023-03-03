@@ -8,7 +8,7 @@ export default function SideNav() {
     <Nav
       variant="tabs"
       defaultActiveKey="/home"
-      className="flex-column mt-2 fw-bold, nav-height"
+      className="flex-column mt-2 fw-bold nav-height"
     >
       <Nav.Link
         to={`${portalNamePath}/home`}
