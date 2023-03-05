@@ -9,16 +9,23 @@ import { useContextValues } from "../../Context/Context";
 import { useJaneHopkins } from "../../Config/Hopkins-Config";
 const ButtonCell = (props) => {
   const { setPatientDetails } = useContextValues();
-
   const buttonClicked = () => {
-    let link = document.getElementById("detailsLink");
+    let link = document.getElementById(`detailsLink-${props.data.name}`);
     //localStorage.setItem("patientID", this.props.data.patient_ID);
     setPatientDetails(props.data);
     link.click();
     //this.props.clicked(this.props.value);
   };
-
-  return <Button onClick={buttonClicked}>Details</Button>;
+  return (
+    <Button onClick={buttonClicked}>
+      <NavLink
+        to={"/hopkins/patient/details" + "?id=" + props.data._id}
+        style={{ display: "none" }}
+        id={`detailsLink-${props.data.name}`}
+      ></NavLink>
+      Details
+    </Button>
+  );
 };
 export default function Patient() {
   const { setPatientDetails } = useContextValues();
@@ -41,7 +48,7 @@ export default function Patient() {
     },
     { field: "name" },
     { field: "age" },
-    { field: "DOB" },
+    { field: "dob" },
     { field: "address" },
     { field: "insurance_number" },
     { field: "height" },
@@ -66,7 +73,6 @@ export default function Patient() {
           return result.items.flat();
         })
         .then((flattedResult) => {
-          console.log(flattedResult);
           setPatientList(flattedResult);
         });
     }

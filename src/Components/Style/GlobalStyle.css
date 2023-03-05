@@ -36,6 +36,13 @@
 /* .navbar-toggler {
   border-color: white;
 } */
+.sidenav-navlink {
+  text-align: center;
+  color: white;
+  background-color: #1d3263;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
 .header-background {
   background-color: var(--header-background-color);
 }
@@ -95,13 +102,17 @@
   /* height: 80vh; */
 }
 .nav-height {
-  height: 55vw;
 }
-@media (max-width: 700px) {
+@media only screen and(max-width: 700px) {
   .login-view {
     width: 100% !important;
   }
   .container-height {
+    height: 100%;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .nav-height {
     height: 100%;
   }
 }

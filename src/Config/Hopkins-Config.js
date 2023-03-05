@@ -5,7 +5,7 @@ const client = createVendiaClient({
     https://sbdvivo3e2.execute-api.us-west-2.amazonaws.com/graphql/`,
   websocketUrl: `
     wss://hkfgp9zyq9.execute-api.us-west-2.amazonaws.com/graphql`,
-  apiKey: `GgUY5tapGJCWo6gT8Luwc3YMc1VxJVCqcwW7XNEcwoPc`,
+  apiKey: process.env.REACT_APP_HOPKINS_API,
 });
 
 const { entities } = client;
@@ -17,9 +17,16 @@ const getAll = async () => {
     return e;
   }
 };
-
+const getByID = async (uuid) => {
+  try {
+    const patient = await entities.patient.get(uuid);
+    return patient;
+  } catch (e) {
+    return e;
+  }
+};
 const useJaneHopkins = () => {
-  return { entities, getAll };
+  return { entities, getAll, getByID };
 };
 
 export { useJaneHopkins };

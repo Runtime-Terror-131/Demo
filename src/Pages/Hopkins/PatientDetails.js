@@ -3,31 +3,29 @@ import { Row, Col, Card, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { patients } from "../../Components/Data/patients";
 import { useContextValues } from "../../Context/Context";
-import {BackButton} from "../../Components/Util/BackButton";
+import { BackButton } from "../../Components/Util/BackButton";
+import EditForm from "./EditForm";
+import { useJaneHopkins } from "../../Config/Hopkins-Config";
 export default function PatientDetails() {
   const { patientDetails } = useContextValues();
+  const { getByID } = useJaneHopkins();
+  const [patientData, setPatientData] = useState();
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (patientDetails) {
-      console.log(typeof patientDetails);
-    }
+    let queryString = window.location.search;
+    let urlParams = new URLSearchParams(queryString);
+    let opportunity_id = urlParams.get("id");
+    getByID(opportunity_id).then((result) => {
+      setPatientData(result);
+    });
   }, []);
   return (
     <Card>
       <Card.Header>PatientDetails</Card.Header>
       <Card.Body>
         <Row>
-          {patientDetails ? (
-            Object.entries(patientDetails).map((item, i) => (
-              <Col lg={4} key={i}>
-                <div>
-                  <span style={{ color: "grey" }} key={item[0].toString()}>
-                    {item[0]}:
-                  </span>
-                  <h4 key={item[1].toString()}>{item[1]}</h4>
-                </div>
-              </Col>
-            ))
+          {patientData ? (
+            <EditForm data={patientData} />
           ) : (
             <div>Sorry something went wrong</div>
           )}
