@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { Button, Card, Col, Form, Nav, Row } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { patients } from "../../Components/Data/patients";
@@ -6,24 +6,10 @@ import { AgGridReact } from "ag-grid-react";
 import { NavLink } from "react-router-dom";
 import { Location } from "react-router-dom";
 import { useContextValues } from "../../Context/Context";
-// class detailsButton extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.btnClickedHandler = this.btnClickedHandler.bind(this);
-//   }
-//   btnClickedHandler(e) {
-//     let link = document.getElementById("detailsLink");
-//     //localStorage.setItem("patientID", this.props.data.patient_ID);
-//     console.log(this.props.data);
-//     link.click();
-//     //this.props.clicked(this.props.value);
-//   }
-//   render() {
-//     return <Button onClick={this.btnClickedHandler}>Details</Button>;
-//   }
-// }
+import { useJaneHopkins } from "../../Config/Hopkins-Config";
 const ButtonCell = (props) => {
   const { setPatientDetails } = useContextValues();
+
   const buttonClicked = () => {
     let link = document.getElementById("detailsLink");
     //localStorage.setItem("patientID", this.props.data.patient_ID);
@@ -36,12 +22,17 @@ const ButtonCell = (props) => {
 };
 export default function Patient() {
   const { setPatientDetails } = useContextValues();
+  const [patientList, setPatientList] = useState(null);
+  const gridRef = useRef();
   const defaultColDef = useMemo(() => {
     return {
       sortable: true,
       filter: true,
     };
   }, []);
+  const downloadResult = () => {
+    gridRef.current.api.exportDataAsCsv();
+  };
 
   const patientHeaders = [
     {
@@ -50,6 +41,7 @@ export default function Patient() {
     },
     { field: "name" },
     { field: "age" },
+    { field: "DOB" },
     { field: "address" },
     { field: "insurance_number" },
     { field: "height" },
@@ -66,7 +58,19 @@ export default function Patient() {
     { field: "currently_insured" },
     { field: "ICD_Health_Code" },
   ];
-
+  const { getAll } = useJaneHopkins();
+  useEffect(() => {
+    if (getAll) {
+      getAll()
+        .then((result) => {
+          return result.items.flat();
+        })
+        .then((flattedResult) => {
+          console.log(flattedResult);
+          setPatientList(flattedResult);
+        });
+    }
+  }, []);
   return (
     <Row>
       <Col lg={10}>
@@ -79,25 +83,25 @@ export default function Patient() {
                 <Col lg={3}>
                   <Form.Group className="mb-3" controlId="Name">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="email"/>
+                    <Form.Control type="email" />
                   </Form.Group>
                 </Col>
                 <Col lg={3}>
                   <Form.Group className="mb-3" controlId="Age">
                     <Form.Label>Age</Form.Label>
-                    <Form.Control type="email"/>
+                    <Form.Control type="email" />
                   </Form.Group>
                 </Col>
                 <Col lg={3}>
                   <Form.Group className="mb-3" controlId="Insurance Number">
                     <Form.Label>Insurance Number</Form.Label>
-                    <Form.Control type="email"/>
+                    <Form.Control type="email" />
                   </Form.Group>
                 </Col>
                 <Col lg={3}>
                   <Form.Group className="mb-3" controlId="ICD Health Code">
                     <Form.Label>ICD Health Code</Form.Label>
-                    <Form.Control type="email"/>
+                    <Form.Control type="email" />
                   </Form.Group>
                 </Col>
               </Row>
@@ -115,6 +119,11 @@ export default function Patient() {
           </Card.Body>
           <Card.Footer>
             <Col>
+              <div className="float-start">
+                <Button variant="warning" type="button" className="m-2">
+                  Create New Patient
+                </Button>
+              </div>
               <div className="float-end">
                 <Button variant="primary" type="button">
                   Search
@@ -122,7 +131,11 @@ export default function Patient() {
                 <Button className="m-2" variant="secondary" type="button">
                   Undo
                 </Button>
-                <Button variant="primary" type="button">
+                <Button
+                  variant="primary"
+                  type="button"
+                  onClick={downloadResult}
+                >
                   Download Result
                 </Button>
               </div>
@@ -137,11 +150,13 @@ export default function Patient() {
         style={{ height: 500, marginTop: "5px" }}
       >
         <AgGridReact
-          rowData={patients}
+          ref={gridRef}
+          rowData={patientList ? patientList : patients}
           columnDefs={patientHeaders}
           defaultColDef={defaultColDef}
-          pagination={true}                   //paginates the rows
-          paginationPageSize={10}             //setting each page to contain 10 rows
+          pagination={true} //paginates the rows
+          paginationPageSize={10} //setting each page to contain 10 rows
+          domLayout="autoHeight"
         ></AgGridReact>
       </div>
       <NavLink
