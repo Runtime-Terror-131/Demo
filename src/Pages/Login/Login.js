@@ -15,36 +15,21 @@ export default function Login({ setUser }) {
 
   return (
     <div className="row login-bg-color">
-      <div
-        className="col-md-6"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          alignContent: "center",
-          flexDirection: "column",
-          height: "100vh",
-          width: "50%",
-        }}
-      >
+      <div className="col-md-6 login-panel ">
         <div
           style={{
             color: "white",
           }}
         >
           <h1>RunTime Terror</h1>
-          <div style={{textAlign:"center"}}>
-          <h4>Good to See you!</h4>
+          <div style={{ textAlign: "center" }}>
+            <h4>Good to See you!</h4>
           </div>
-          
         </div>
-        <Card className="text-center login-view shadow-sm " style={{ width: "45vw", borderColor: "#2B223D", marginLeft: "5vw"}}>
+        <Card className="text-center login-card shadow-sm ">
           <Card.Body
             style={{
               background: "#2B223D",
-              //marginLeft: "auto !important",
-              //marginRight: "auto !important",
-              
             }}
           >
             {toggleLogin ? (
@@ -53,7 +38,7 @@ export default function Login({ setUser }) {
               <SignUp setLoginUser={setUser} />
             )}
           </Card.Body>
-          <Card.Footer style={{background: "#2B223D"}}>
+          <Card.Footer style={{ background: "#2B223D" }}>
             <Button variant="outline-primary" onClick={SignInButtonClick}>
               SignIn
             </Button>
@@ -63,18 +48,8 @@ export default function Login({ setUser }) {
           </Card.Footer>
         </Card>
       </div>
-      <div className="col-md-6">
-        <img
-          src={logo}
-          alt="LOGO"
-          style={{
-            width: "40vw",
-            height: "auto",
-            marginTop: "14vh",
-            marginRight: "auto",
-            marginLeft: "5vw",
-          }}
-        />
+      <div className="col-md-6" id="login-logo">
+        <img src={logo} alt="LOGO" className="login-logo-img" />
       </div>
     </div>
   );
