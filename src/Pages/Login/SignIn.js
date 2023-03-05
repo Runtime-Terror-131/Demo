@@ -8,7 +8,8 @@ import {
 } from "../../Config/Firebase-Config";
 import { useContextValues } from "../../Context/Context";
 export default function SignIn({ setLoginUser }) {
-  const { loginErrorMessage, setLoginErrorMessage } = useContextValues();
+  const { loginErrorMessage, setLoginErrorMessage, setShowSpinner } =
+    useContextValues();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showUserError, setShowUserError] = useState(false);
@@ -18,8 +19,16 @@ export default function SignIn({ setLoginUser }) {
   const PassError = "Password Required";
 
   const submitForm = () => {
+    setShowSpinner(true);
+
     if (email && email.length > 0 && password && password.length > 0) {
-      loginUser(email, password, setLoginUser, setLoginErrorMessage);
+      loginUser(
+        email,
+        password,
+        setLoginUser,
+        setLoginErrorMessage,
+        setShowSpinner
+      );
     } else {
       if ((email && email.length <= 0) || !email) {
         setShowUserError(true);

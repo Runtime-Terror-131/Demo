@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { register } from "../../Config/Firebase-Config";
 import { FloatingLabel, Form, Button } from "react-bootstrap";
+import { useContextValues } from "../../Context/Context";
 export default function SignUp({ setLoginUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showUserError, setShowUserError] = useState(false);
   const [showPassError, setShowPassError] = useState(false);
-
-  const userError = " Email Required";
-  const PassError = "Password Required";
+  const { setShowSpinner } = useContextValues();
+  const userError = "Issue with Email";
+  const PassError = "Issue with Password";
 
   const submitForm = () => {
+    setShowSpinner(true);
     if (email && email.length > 0 && password && password.length > 0) {
-      register(email, password, setLoginUser);
+      register(email, password, setLoginUser, setShowUserError, setShowSpinner);
     } else {
       if ((email && email.length <= 0) || !email) {
         setShowUserError(true);

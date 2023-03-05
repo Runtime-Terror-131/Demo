@@ -20,25 +20,40 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const register = async (email, password, setUser) => {
+const register = async (
+  email,
+  password,
+  setUser,
+  setShowUserError,
+  setShowSpinner
+) => {
   try {
     let user = await createUserWithEmailAndPassword(auth, email, password);
     setUser(user);
-    console.log(user);
-  } catch (e) {
-    console.log(e);
+    setShowSpinner(false);
+  } catch (error) {
+    setShowUserError(error.message);
+    setShowSpinner(false);
   }
 };
-const loginUser = async (email, password, setUser, setLoginErrorMessage) => {
+const loginUser = async (
+  email,
+  password,
+  setUser,
+  setLoginErrorMessage,
+  setShowSpinner
+) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
       setUser(user);
       // ...
+      setShowSpinner(false);
     })
     .catch((error) => {
       const errorCode = error.code;
       setLoginErrorMessage(error.message);
+      setShowSpinner(false);
     });
 };
 const logout = () => {
