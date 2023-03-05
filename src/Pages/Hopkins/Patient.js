@@ -17,14 +17,14 @@ const ButtonCell = (props) => {
     //this.props.clicked(this.props.value);
   };
   return (
-    <Button onClick={buttonClicked}>
-      <NavLink
-        to={"/hopkins/patient/details" + "?id=" + props.data._id}
-        style={{ display: "none" }}
-        id={`detailsLink-${props.data.name}`}
-      ></NavLink>
+    <NavLink
+      to={"/hopkins/patient/details" + "?id=" + props.data._id}
+      id={`detailsLink-${props.data.name}`}
+      style={{ textDecoration: "none" }}
+    >
+      {" "}
       Details
-    </Button>
+    </NavLink>
   );
 };
 export default function Patient() {
@@ -40,7 +40,7 @@ export default function Patient() {
   const downloadResult = () => {
     gridRef.current.api.exportDataAsCsv();
   };
-
+  const goToCreatePatient = () => {};
   const patientHeaders = [
     {
       field: "detials",
@@ -126,8 +126,22 @@ export default function Patient() {
           <Card.Footer>
             <Col>
               <div className="float-start">
-                <Button variant="warning" type="button" className="m-2">
-                  Create New Patient
+                <Button
+                  variant="warning"
+                  type="button"
+                  className="m-2"
+                  onClick={goToCreatePatient}
+                >
+                  <NavLink
+                    to={"/hopkins/createpatient"}
+                    style={{
+                      textDecoration: "none",
+                      color: "white",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Create New Patient
+                  </NavLink>
                 </Button>
               </div>
               <div className="float-end">

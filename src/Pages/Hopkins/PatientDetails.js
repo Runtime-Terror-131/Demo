@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { patients } from "../../Components/Data/patients";
 import { useContextValues } from "../../Context/Context";
 import { BackButton } from "../../Components/Util/BackButton";
-import EditForm from "./EditForm";
+import FormTemplate from "./FormTemplate";
 import { useJaneHopkins } from "../../Config/Hopkins-Config";
 export default function PatientDetails() {
   const { patientDetails } = useContextValues();
@@ -19,13 +19,25 @@ export default function PatientDetails() {
       setPatientData(result);
     });
   }, []);
+
   return (
     <Card>
       <Card.Header>PatientDetails</Card.Header>
       <Card.Body>
         <Row>
           {patientData ? (
-            <EditForm data={patientData} />
+            Object.entries(patientData).map((item, i) => (
+              <Col lg={4} key={i}>
+                <div>
+                  <span style={{ color: "grey" }} key={item[0].toString()}>
+                    {item[0]}:
+                  </span>
+                  <h4 key={JSON.stringify(item[1])}>
+                    {JSON.stringify(item[1])}
+                  </h4>
+                </div>
+              </Col>
+            ))
           ) : (
             <div>Sorry something went wrong</div>
           )}

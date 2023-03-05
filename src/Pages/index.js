@@ -9,6 +9,7 @@ import HopkinsHome from "./Hopkins/HopkinsHome";
 import Patient from "./Hopkins/Patient";
 import PatientDetails from "./Hopkins/PatientDetails";
 import Login from "./Login/Login";
+import CreatePatient from "./Hopkins/CreatePatient";
 export {
   Bavaria,
   FDA,
@@ -21,4 +22,5 @@ export {
   BavariaHome,
   FDAHome,
   PatientDetails,
+  CreatePatient,
 };

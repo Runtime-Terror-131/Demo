@@ -19,6 +19,7 @@ import {
   BavariaHome,
   FDAHome,
   PatientDetails,
+  CreatePatient,
 } from "./Pages";
 import { checkIfUserStillLoggedIn } from "./Config/Firebase-Config";
 function App() {
@@ -55,6 +56,7 @@ function App() {
                     <Route path="Hopkins" element={<Hopkins />}>
                       <Route path="home" element={<HopkinsHome />} />
                       <Route path="patient" element={<Patient />}></Route>
+                      <Route path="createPatient" element={<CreatePatient />} />
                     </Route>
                     <Route
                       path="hopkins/patient/details"
