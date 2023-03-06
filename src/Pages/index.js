@@ -10,6 +10,10 @@ import Patient from "./Hopkins/Patient";
 import PatientDetails from "./Hopkins/PatientDetails";
 import Login from "./Login/Login";
 import CreatePatient from "./Hopkins/CreatePatient";
+import EditPatient from "./Hopkins/EditPatient";
+import Reports from "./Hopkins/Reports";
+import StudyInfo from "./FDA/StudyInfo";
+import DrugInfo from "./Bavaria/DrugInfo";
 export {
   Bavaria,
   FDA,
@@ -23,4 +27,8 @@ export {
   FDAHome,
   PatientDetails,
   CreatePatient,
+  EditPatient,
+  Reports,
+  StudyInfo,
+  DrugInfo,
 };

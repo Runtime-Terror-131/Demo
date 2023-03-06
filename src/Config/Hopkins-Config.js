@@ -25,8 +25,43 @@ const getByID = async (uuid) => {
     return e;
   }
 };
+const createNewPatient = async (patient) => {
+  try {
+    await entities.patient.add(patient);
+    return true;
+  } catch (error) {
+    return error.message;
+  }
+};
+const updatePatientData = async (patient) => {
+  try {
+    await entities.patient.update({
+      _id: patient._id,
+      name: patient.name,
+      dob: patient.dob,
+    });
+    return true;
+  } catch (error) {
+    return error.message;
+  }
+};
+const deletePatient = async (id) => {
+  try {
+    await entities.patient.remove(id);
+    return true;
+  } catch (error) {
+    return error.message;
+  }
+};
 const useJaneHopkins = () => {
-  return { entities, getAll, getByID };
+  return {
+    entities,
+    getAll,
+    getByID,
+    createNewPatient,
+    updatePatientData,
+    deletePatient,
+  };
 };
 
 export { useJaneHopkins };

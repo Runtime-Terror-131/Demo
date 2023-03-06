@@ -4,4 +4,13 @@ import { updateColor } from "./Util/UpdateColor";
 import Footer from "./Footer";
 import { BackButton } from "./Util/BackButton";
 import LoadingSpinner from "./Util/LoadingSpinner";
-export { Header, SideNav, updateColor, Footer, BackButton, LoadingSpinner };
+import DeleteModel from "./DeleteModel";
+export {
+  Header,
+  SideNav,
+  updateColor,
+  Footer,
+  BackButton,
+  LoadingSpinner,
+  DeleteModel,
+};

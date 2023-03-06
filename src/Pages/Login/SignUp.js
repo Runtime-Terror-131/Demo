@@ -68,7 +68,7 @@ export default function SignUp({ setLoginUser }) {
             className="button"
             onClick={submitForm}
           >
-            Register
+            Create Account
           </Button>
         </div>
       </div>

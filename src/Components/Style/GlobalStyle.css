@@ -100,6 +100,9 @@
 }
 #login-logo {
 }
+.edit-field {
+  margin: 5px;
+}
 /* login page view in mobile devices needs to be full width */
 .login-card {
   width: 45vw;
@@ -143,12 +146,16 @@
   }
 }
 @media only screen and (max-width: 1000px) {
+  /* .row > * {
+    padding-right: 0 !important;
+  } */
   .login-card {
     width: 100%;
-    margin-left: 0;
+    margin: 0;
   }
   .login-panel {
     width: 100%;
+    margin-right: 0 !important;
   }
   #login-logo {
     display: none;
