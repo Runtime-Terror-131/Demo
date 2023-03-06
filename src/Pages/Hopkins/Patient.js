@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { Button, Card, Col, Form, Nav, Row } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { patients } from "../../Components/Data/patients";
@@ -6,43 +6,110 @@ import { AgGridReact } from "ag-grid-react";
 import { NavLink } from "react-router-dom";
 import { Location } from "react-router-dom";
 import { useContextValues } from "../../Context/Context";
-// class detailsButton extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.btnClickedHandler = this.btnClickedHandler.bind(this);
-//   }
-//   btnClickedHandler(e) {
-//     let link = document.getElementById("detailsLink");
-//     //localStorage.setItem("patientID", this.props.data.patient_ID);
-//     console.log(this.props.data);
-//     link.click();
-//     //this.props.clicked(this.props.value);
-//   }
-//   render() {
-//     return <Button onClick={this.btnClickedHandler}>Details</Button>;
-//   }
-// }
+import { useJaneHopkins } from "../../Config/Hopkins-Config";
 const ButtonCell = (props) => {
   const { setPatientDetails } = useContextValues();
   const buttonClicked = () => {
-    let link = document.getElementById("detailsLink");
+    let link = document.getElementById(`detailsLink-${props.data.name}`);
     //localStorage.setItem("patientID", this.props.data.patient_ID);
     setPatientDetails(props.data);
     link.click();
     //this.props.clicked(this.props.value);
   };
-
-  return <Button onClick={buttonClicked}>Details</Button>;
+  return (
+    <NavLink
+      to={"/hopkins/patient/details" + "?id=" + props.data._id}
+      id={`detailsLink-${props.data.name}`}
+      style={{ textDecoration: "none" }}
+    >
+      {" "}
+      Details
+    </NavLink>
+  );
 };
 export default function Patient() {
-  const { setPatientDetails } = useContextValues();
+  const [isPageRendered, setIsPageRendered] = useState(false);
+  const { setPatientDetails, setShowSpinner } = useContextValues();
+  const [patientList, setPatientList] = useState(null);
+  const { getAll } = useJaneHopkins();
+  const gridRef = useRef();
   const defaultColDef = useMemo(() => {
     return {
       sortable: true,
       filter: true,
     };
   }, []);
+  const undo = () => {
+    setShowSpinner(true);
+    document.getElementById("Name").value = "";
+    document.getElementById("Age").value = "";
+    document.getElementById("Insurance Number").value = "";
+    document.getElementById("ICD Health Code").value = "";
+    document.getElementById("formBasicCheckbox").checked = false;
+    document.getElementById("formBasicCheckbox2").checked = false;
+    if (getAll) {
+      getAll()
+        .then((result) => {
+          return result.items.flat();
+        })
+        .then((flattedResult) => {
+          setPatientList(flattedResult);
+          setShowSpinner(false);
+          setIsPageRendered(true);
+        });
+    }
+  };
+  const filter = () => {
+    if (patientList) {
+      let nameValue = document.getElementById("Name").value;
+      let ageValue = document.getElementById("Age").value;
+      let insuranceValue = document.getElementById("Insurance Number").value;
+      let ICDValue = document.getElementById("ICD Health Code").value;
+      let excludePregnencyValue =
+        document.getElementById("formBasicCheckbox").checked;
+      let excludeBirthDayValue =
+        document.getElementById("formBasicCheckbox2").checked;
+      let values = patientList;
+      let checkName = nameValue.length > 0 ? true : false;
+      let checkAge = ageValue.length > 0 ? true : false;
+      let checkInsurance = insuranceValue.length > 0 ? true : false;
+      let checkICD = ICDValue.length > 0 ? true : false;
 
+      if (checkName) {
+        values = values.filter((item, index) => {
+          return item.name.includes(nameValue);
+        });
+      }
+      if (checkAge) {
+        values = values.filter((item, index) => {
+          return item.age.includes(ageValue);
+        });
+      }
+      if (checkInsurance) {
+        values = values.filter((item, index) => {
+          return item.insuranceNumber.includes(insuranceValue.toUpperCase());
+        });
+      }
+      if (checkICD) {
+        values = values.filter((item, index) => {
+          return item.icdHealthCodes.includes(ICDValue);
+        });
+      }
+      if (excludePregnencyValue) {
+        // will implement this part once we implement ICD code types
+      }
+      if (excludeBirthDayValue) {
+        values = values.filter((item, index) => {
+          return new Date(item.dob) < new Date("1/1/2005");
+        });
+      }
+      setPatientList(values);
+    }
+  };
+  const downloadResult = () => {
+    gridRef.current.api.exportDataAsCsv();
+  };
+  const goToCreatePatient = () => {};
   const patientHeaders = [
     {
       field: "detials",
@@ -50,22 +117,37 @@ export default function Patient() {
     },
     { field: "name" },
     { field: "age" },
+    { field: "dob" },
     { field: "address" },
-    { field: "insurance_number" },
+    { field: "insuranceNumber" },
     { field: "height" },
     { field: "weight" },
-    { field: "blood_pressure" },
-    { field: "blood_type" },
+    { field: "bloodPressure" },
+    // { field: "bloodType" },
     { field: "temperature" },
-    { field: "oxygen_saturation" },
+    { field: "oxygenSaturation" },
     { field: "patient_ID" },
     { field: "allergies" },
-    { field: "current_medications" },
-    { field: "family_history" },
-    { field: "currently_employed" },
-    { field: "currently_insured" },
-    { field: "ICD_Health_Code" },
+    { field: "currentMedications" },
+    { field: "familyHistory" },
+    { field: "currentlyEmployed" },
+    { field: "currentlyInsured" },
+    { field: "icdHealthCodes" },
   ];
+  useEffect(() => {
+    setShowSpinner(true);
+    if (getAll) {
+      getAll()
+        .then((result) => {
+          return result.items.flat();
+        })
+        .then((flattedResult) => {
+          setPatientList(flattedResult);
+          setShowSpinner(false);
+          setIsPageRendered(true);
+        });
+    }
+  }, []);
 
   return (
     <Row>
@@ -79,50 +161,86 @@ export default function Patient() {
                 <Col lg={3}>
                   <Form.Group className="mb-3" controlId="Name">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="email"/>
+                    <Form.Control type="email" />
                   </Form.Group>
                 </Col>
                 <Col lg={3}>
                   <Form.Group className="mb-3" controlId="Age">
                     <Form.Label>Age</Form.Label>
-                    <Form.Control type="email"/>
+                    <Form.Control type="email" />
                   </Form.Group>
                 </Col>
                 <Col lg={3}>
                   <Form.Group className="mb-3" controlId="Insurance Number">
                     <Form.Label>Insurance Number</Form.Label>
-                    <Form.Control type="email"/>
+                    <Form.Control type="email" />
                   </Form.Group>
                 </Col>
                 <Col lg={3}>
                   <Form.Group className="mb-3" controlId="ICD Health Code">
                     <Form.Label>ICD Health Code</Form.Label>
-                    <Form.Control type="email"/>
+                    <Form.Control type="email" />
                   </Form.Group>
                 </Col>
               </Row>
-              <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check
-                  type="checkbox"
-                  label="Exclude ICD-10 Pregnancy codes"
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Exclude DOB greater than 1/1/2005"
-                />
-              </Form.Group>
+              <Row>
+                <Col lg={6}>
+                  <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Check
+                      type="checkbox"
+                      label="Exclude ICD-10 Pregnancy codes"
+                    />
+                  </Form.Group>
+                </Col>
+                <Col lg={6}>
+                  <Form.Group className="mb-3" controlId="formBasicCheckbox2">
+                    <Form.Check
+                      type="checkbox"
+                      label="Exclude DOB greater than 1/1/2005"
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
             </Form>
           </Card.Body>
           <Card.Footer>
             <Col>
+              <div className="float-start">
+                <Button
+                  variant="warning"
+                  type="button"
+                  className="m-2"
+                  onClick={goToCreatePatient}
+                >
+                  <NavLink
+                    to={"/hopkins/createpatient"}
+                    style={{
+                      textDecoration: "none",
+                      color: "white",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Create New Patient
+                  </NavLink>
+                </Button>
+              </div>
               <div className="float-end">
-                <Button variant="primary" type="button">
+                <Button variant="primary" type="button" onClick={filter}>
                   Search
                 </Button>
-                <Button className="m-2" variant="secondary" type="button">
+                <Button
+                  className="m-2"
+                  variant="secondary"
+                  type="button"
+                  onClick={undo}
+                >
                   Undo
                 </Button>
-                <Button variant="primary" type="button">
+                <Button
+                  variant="primary"
+                  type="button"
+                  onClick={downloadResult}
+                >
                   Download Result
                 </Button>
               </div>
@@ -134,14 +252,16 @@ export default function Patient() {
 
       <div
         className="ag-theme-alpine"
-        style={{ height: 500, marginTop: "5px" }}
+        style={{ marginTop: "5px", marginBottom: "5px" }}
       >
         <AgGridReact
-          rowData={patients}
+          ref={gridRef}
+          rowData={patientList ? patientList : ""}
           columnDefs={patientHeaders}
           defaultColDef={defaultColDef}
-          pagination={true}                   //paginates the rows
-          paginationPageSize={10}             //setting each page to contain 10 rows
+          pagination={true} //paginates the rows
+          paginationPageSize={10} //setting each page to contain 10 rows
+          domLayout="autoHeight"
         ></AgGridReact>
       </div>
       <NavLink

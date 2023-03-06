@@ -1,48 +1,101 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Card, Button } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
-import { patients } from "../../Components/Data/patients";
+import { Row, Col, Card, Button, Spinner } from "react-bootstrap";
+import { useNavigate, NavLink } from "react-router-dom";
 import { useContextValues } from "../../Context/Context";
-import {BackButton} from "../../Components/Util/BackButton";
+import { BackButton } from "../../Components/Util/BackButton";
+import FormTemplate from "./FormTemplate";
+import { useJaneHopkins } from "../../Config/Hopkins-Config";
+import { DeleteModel } from "../../Components";
 export default function PatientDetails() {
-  const { patientDetails } = useContextValues();
+  const navigate = useNavigate();
+  const {
+    patientDetails,
+    setShowSpinner,
+    setShowDeleteWarning,
+    confirmDeletePatient,
+    setConfirmDeletePatient,
+  } = useContextValues();
+  const { getByID, deletePatient } = useJaneHopkins();
+  const [patientData, setPatientData] = useState();
+  const deletePatientValue = () => {
+    setShowDeleteWarning(true);
+  };
+  useEffect(() => {
+    if (confirmDeletePatient) {
+      console.log("delete now");
+      setShowSpinner(true);
+      deletePatient(patientData._id).then((result) => {
+        setConfirmDeletePatient(false);
+        setTimeout(() => {
+          setShowSpinner(false);
+          navigate("/hopkins/patient");
+        }, 5000);
+      });
+    }
+  }, [confirmDeletePatient]);
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (patientDetails) {
-      console.log(typeof patientDetails);
-    }
+    let queryString = window.location.search;
+    let urlParams = new URLSearchParams(queryString);
+    let opportunity_id = urlParams.get("id");
+    getByID(opportunity_id).then((result) => {
+      setPatientData(result);
+    });
   }, []);
-  return (
-    <Card>
-      <Card.Header>PatientDetails</Card.Header>
-      <Card.Body>
-        <Row>
-          {patientDetails ? (
-            Object.entries(patientDetails).map((item, i) => (
-              <Col lg={4} key={i}>
-                <div>
-                  <span style={{ color: "grey" }} key={item[0].toString()}>
-                    {item[0]}:
-                  </span>
-                  <h4 key={item[1].toString()}>{item[1]}</h4>
-                </div>
-              </Col>
-            ))
-          ) : (
-            <div>Sorry something went wrong</div>
-          )}
-        </Row>
-      </Card.Body>
-      <Card.Footer>
-        <div className="float-end">
-          <Button>Edit</Button>
 
-          <Button variant="danger" style={{ margin: "5px" }}>
-            Delete
-          </Button>
-          <BackButton />
-        </div>
-      </Card.Footer>
-    </Card>
+  return (
+    <>
+      <DeleteModel />
+      <Card>
+        <Card.Header>PatientDetails</Card.Header>
+        <Card.Body>
+          <Row>
+            {patientData ? (
+              Object.entries(patientData).map((item, i) => (
+                <Col lg={4} key={i}>
+                  <div>
+                    <span style={{ color: "grey" }} key={item[0].toString()}>
+                      {item[0]}:
+                    </span>
+                    <h4 key={JSON.stringify(item[1])}>
+                      {JSON.stringify(item[1])}
+                    </h4>
+                  </div>
+                </Col>
+              ))
+            ) : (
+              <Spinner />
+            )}
+          </Row>
+        </Card.Body>
+        <Card.Footer>
+          <div className="float-end">
+            <Button>
+              <NavLink
+                to={`/hopkins/EditPatient?id=${
+                  patientData ? patientData._id : -1
+                }`}
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  fontWeight: "600",
+                }}
+              >
+                Edit
+              </NavLink>
+            </Button>
+
+            <Button
+              variant="danger"
+              style={{ margin: "5px" }}
+              onClick={deletePatientValue}
+            >
+              Delete
+            </Button>
+            <BackButton />
+          </div>
+        </Card.Footer>
+      </Card>
+    </>
   );
 }

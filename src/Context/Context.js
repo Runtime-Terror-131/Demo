@@ -10,6 +10,9 @@ export function ContextProvider({ children }) {
   const [portalNamePath, setPortalNamePath] = useState("/hopkins");
   const [loginErrorMessage, setLoginErrorMessage] = useState(null);
   const [patientDetails, setPatientDetails] = useState(null);
+  const [showSpinner, setShowSpinner] = useState(false);
+  const [showDeleteWarning, setShowDeleteWarning] = useState(false);
+  const [confirmDeletePatient, setConfirmDeletePatient] = useState(false);
   const updateUserType = (value) => {
     setUserType(value);
   };
@@ -26,6 +29,12 @@ export function ContextProvider({ children }) {
         setLoginErrorMessage,
         patientDetails,
         setPatientDetails,
+        showSpinner,
+        setShowSpinner,
+        showDeleteWarning,
+        setShowDeleteWarning,
+        confirmDeletePatient,
+        setConfirmDeletePatient,
       }}
     >
       {children}

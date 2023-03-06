@@ -13,20 +13,16 @@ export default function Header() {
     }
   };
   return (
-    <Navbar
-      expand="lg"
-      sticky="top"
-      className=" shadow-sm mb-3 header-background "
-    >
+    <Navbar expand="lg" sticky="top" className="shadow p-3 header-background ">
       <Container>
         <Navbar.Brand href="/" className="header-icon-text-color">
-        <img
-          src={logo}
-          alt="LOGO"
-          style={{
-            width: "auto",
-            height: "10vh",
-          }}
+          <img
+            src={logo}
+            alt="LOGO"
+            style={{
+              width: "auto",
+              height: "10vh",
+            }}
           />
         </Navbar.Brand>
         <h1 style={{ color: "white" }}>RunTime Terror</h1>
