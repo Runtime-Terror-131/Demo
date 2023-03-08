@@ -18,37 +18,29 @@ This program aims to develop a distributed information system to develop a safe 
 Visual Representation of the program:
 
 Welcome to our web app! 
-
-Please authenticate and authorize yourself using Firebase:
 - Click the 'login' button if you already have an account with us.
 - Click the 'sign up' button if you're new here and need to create an account.
 - Click 'forgot password' if you need help resetting your password.
 
-______________________________________________________
-|                         LOGO                       |
-|                  ____________________              |
-|                 |    your email      |             |
-|                 |    |__________|    |             |
-|                 |                    |             |
-|                 |    your password   |             |
-|                 |    |___________|   |             |
-|                 |                    |             |
-|                 |   |login|sign up|  |             |
-|                 |                    |             |
-|                 |   forgot password  |             |
-|____________________________________________________|
+                        LOGO             
 
-Now that you're logged in, let's take a look at the different views available depending on whether you're from FDA, Pharma, or Doc:
+                        Email     
+
+                       Password   
+
+                     Login|Sign up 
+
+                    Forgot Password 
+
+Now that you're logged in, let's take a look at the different views available depending on whether you're from FDA, Pharma, or Doctor:
 
 For example, let's view the 'Doctor' view:
-_____________________________________________
-|               GENERAL TAB                 |
-|__________________________________________ |
-| View    |     Create a New Patient        |
-| patients|                                 |
-|         |                                 |       
-|         |                                 |        
-|         |                                 |
+
+                    GENERAL TAB HEADER       
+
+                   Create a New Patient   
+         
+                   View Patient Records        
 
 That's it! Please select the appropriate view for you and enjoy the web app.
 Note: There are three different views based on the type of user logged in.  
