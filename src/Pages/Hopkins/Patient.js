@@ -116,7 +116,7 @@ export default function Patient() {
       cellRenderer: ButtonCell,
     },
     { field: "name" },
-    { field: "age" },
+    { field: "Age" },
     { field: "dob" },
     { field: "address" },
     { field: "insuranceNumber" },

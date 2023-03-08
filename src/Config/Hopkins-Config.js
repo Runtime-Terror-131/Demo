@@ -35,11 +35,9 @@ const createNewPatient = async (patient) => {
 };
 const updatePatientData = async (patient) => {
   try {
-    await entities.patient.update({
-      _id: patient._id,
-      name: patient.name,
-      dob: patient.dob,
-    });
+    await entities.patient.update(
+      patient
+    );
     return true;
   } catch (error) {
     return error.message;
