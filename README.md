@@ -1,86 +1,60 @@
-# ToLogIn-UseThisEmail:
+                                                                           Runtime Terror 
 
-email: Terror@Runtime.com
+This is a readme file for the Vendia group project for the CSC131 class at California State University, Sacramento. This file is designed to give an overview of our software, its contributors and description, and instructions on how it works. 
 
-pass: CSC131
+Contributors: 
 
-# DoesntMatterForNow
+1. Zhen Zhao 
+2. Mohammad Imrose 
+3. Hamzah Aldolaay 
+4. Ekjyot Singh Shinh 
+5. Connor Yep 
+6. Surmeet Singh 
+7. Pratyush Mehra 
 
----
+Program Description: 
+This program aims to develop a distributed information system to develop a safe and effective drug that enables auditable exchange of study data between three different firms. These three different firms are the Federal Drug Administration, a pharmaceutical company called Bavaria, and a group of researchers at an institute called Jane Hopkins. This program is equipped with user-friendly and distinctive interfaces for the FDA, Bavaria, and researchers at Jane Hopkins. To achieve this goal, we will leverage the Vendia Share platform to build the system, which ensures immutable, cryptographically verified, and distributed data exchange while providing the necessary data flow control mechanisms for the whole program. 
 
-Instructions for installing various things required for the project
+Visual Representation of the program:
 
-install node from node.js(https://nodejs.org/en/), make sure it's the recommended verson
-install git
-clone the repository
-install the liabrary by typing npm install on the terminal
+Welcome to our web app! 
 
----
+Please authenticate and authorize yourself using Firebase:
+- Click the 'login' button if you already have an account with us.
+- Click the 'sign up' button if you're new here and need to create an account.
+- Click 'forgot password' if you need help resetting your password.
 
-Geneal format of the web app
+______________________________________________________
+|                         LOGO                       |
+|                  ____________________              |
+|                 |    your email      |             |
+|                 |    |__________|    |             |
+|                 |                    |             |
+|                 |    your password   |             |
+|                 |    |___________|   |             |
+|                 |                    |             |
+|                 |   |login|sign up|  |             |
+|                 |                    |             |
+|                 |   forgot password  |             |
+|____________________________________________________|
 
-          User
-           |
-           |
-          \ /
-      |login|sign up|     (also forgot password)
+Now that you're logged in, let's take a look at the different views available depending on whether you're from FDA, Pharma, or Doc:
 
+For example, let's view the 'Doctor' view:
+_____________________________________________
+|               GENERAL TAB                 |
+|__________________________________________ |
+| View    |     Create a New Patient        |
+| patients|                                 |
+|         |                                 |       
+|         |                                 |        
+|         |                                 |
 
+That's it! Please select the appropriate view for you and enjoy the web app.
+Note: There are three different views based on the type of user logged in.  
 
-       ______________________________________________________
-      |                       LOGO/APP NAME                 |
-      |                    ____________________             |
-      |                   |  your email        |            |
-      |                   |  |__________|      |            |
-      |                   |                    |            |
-      |                   |  your password     |            |
-      |                   |  |___________|     |            |
-      |                   |                    |            |
-      |                   |   |login|sign up|  |            |
-      |                   |                    |            |
-      |                   |__________forgot pas|            |
-      |_____________________________________________________|
+Required Technology: 
+This program uses React for front-end, whereas Vendia Client SDK for back-end development. We have also used Firebase to authenticate any type of user who tries to log into the program. Also, it is important to know that to run this program locally on your machine for testing purposes, you will need to install node from node.js(https://nodejs.org/en/). 
 
-      Three Different views depending on weather they are from FDA, Pharma or doc
-
-      **Doc view**
-      _____________________________________________
-      |     **GENERAL TAB**                         |
-      |____________________________________________ |
-      | View    |                                   |
-      | patients|                                 --|----->this changes depending on the thing the person selects from the side tab
-      | etc     |                                   |       && general tab and side tab remains the same
-      |         |                                   |        // plan on using bootstrap for the layout
-      |         |                                   |
-
----
-
----
-
-TODO:
-
-1- Update Design
-
-2-fix login page showing up on refresh
-
-3- add patient details view
-
-4- add button to bavaria
-
-5- add button to FDA
-
-6- pick Portal colors for each entity ( FDA, Bavaria, Hopkins)
-
-7- finish up Vendia set up
-
-8- Important fix login page design and finish SignUp function-View
-
-##Notes##
-there might be a bug related to context's portalNamePath initial value----keep that in mind for later
-
-route for hopkins/patient/details needs more work later
-9- breadcrumbs
-10- login issue hamzah/done
-11- patient details hamzah/ working on it
-12 - search function
-13- connect vendia
+Usage: 
+The primary usability of this program is that Bavaria, Jane Hopkins Hospital, and the FDA are collaborating on a phase 3 medical trial for a new antiviral medication involving approximately 100 patients. This trial requires a smart contract to verify patient eligibility criteria, allowing Jane Hopkins to share anonymized patient records with Bavaria and the FDA. Each entity has their different respective roles, for example, the FDA assigns patients to the treatment and control groups, Jane Hopkins tracks treatment and viral loads. Moreover, the FDA shares the group assignment with Bavaria and Jane Hopkins, and complete anonymized patient records are shared for further investigation.
