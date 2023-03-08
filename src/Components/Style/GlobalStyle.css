@@ -132,6 +132,23 @@
   height: 55vw;
   margin-bottom: 13px !important;
 }
+.show-logo{
+
+}
+/* breadcrumbs */
+.breadcrumbs > *{
+  display: inline-block;
+  margin-right: 2px;
+}
+.breadcrumbs .crumb:after {
+  content: ' ->';
+}
+.breadcrumbs .crumb:last-child:after {
+  display: none;
+}
+.breadcrumbs .crumb a {
+  color: rgb(9, 9, 9);
+}
 @media only screen and(max-width: 700px) {
   #login-logo {
     display: none;
@@ -146,6 +163,7 @@
   }
 }
 @media only screen and (max-width: 1000px) {
+  .show-logo{display: none}
   /* .row > * {
     padding-right: 0 !important;
   } */

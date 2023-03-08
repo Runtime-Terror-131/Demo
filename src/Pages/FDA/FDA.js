@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { updateColor } from "../../Components";
+import { updateColor, Breadcrumbs  } from "../../Components";
 import { Card } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import { useContextValues } from "../../Context/Context";
@@ -12,6 +12,7 @@ export default function FDA() {
   return (
     <div>
       <h1>FDA</h1>
+      <Breadcrumbs />
       <Outlet />
     </div>
   );
