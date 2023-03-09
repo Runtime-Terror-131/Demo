@@ -132,6 +132,51 @@
   height: 55vw;
   margin-bottom: 13px !important;
 }
+.show-logo {
+}
+/* breadcrumbs */
+.breadcrumbs > * {
+  display: inline-block;
+  margin-right: 2px;
+  margin-bottom: 2px;
+}
+.breadcrumbs .crumb:after {
+  content: " ->";
+}
+.breadcrumbs .crumb:last-child:after {
+  display: none;
+}
+.breadcrumbs .crumb a {
+  color: rgb(9, 9, 9);
+}
+/*.Spinner-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.Spinner {
+  width: 5vh;
+  height: auto;
+  animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}*/
+.box-shadow {
+  box-shadow: 7px 7px 15px 1px rgba(0, 0, 0, 0.38);
+  -webkit-box-shadow: 7px 7px 15px 1px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 7px 7px 15px 1px rgba(0, 0, 0, 0.38);
+}
 @media only screen and(max-width: 700px) {
   #login-logo {
     display: none;
@@ -146,9 +191,9 @@
   }
 }
 @media only screen and (max-width: 1000px) {
-  /* .row > * {
-    padding-right: 0 !important;
-  } */
+  .show-logo {
+    display: none;
+  }
   .login-card {
     width: 100%;
     margin: 0;

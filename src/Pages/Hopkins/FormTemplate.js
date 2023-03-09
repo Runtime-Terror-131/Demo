@@ -4,21 +4,22 @@ import { BackButton } from "../../Components";
 import { useJaneHopkins } from "../../Config/Hopkins-Config";
 import { useContextValues } from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
+import DeleteModel from "../../Components";
 export default function FormTemplate({ data }) {
   const { createNewPatient, updatePatientData } = useJaneHopkins();
-  const { setShowSpinner } = useContextValues();
+  const { setShowSpinner, setShowDeleteWarning } = useContextValues();
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState();
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [dob, setDob] = useState("");
-  const [address, setAddress] = useState("");
-  const [insuranceNumber, setInsuranceNumber] = useState("");
-  const [height, setHeight] = useState("");
-  const [weight, setWeight] = useState("");
-  const [bloodPressure, setBloodPressure] = useState("");
-  const [temperature, setTemperature] = useState("");
-  const [oxygen, setOxygen] = useState("");
+  const [name, setName] = useState();
+  const [age, setAge] = useState();
+  const [dob, setDob] = useState();
+  const [address, setAddress] = useState();
+  const [insuranceNumber, setInsuranceNumber] = useState();
+  const [height, setHeight] = useState();
+  const [weight, setWeight] = useState();
+  const [bloodPressure, setBloodPressure] = useState();
+  const [temperature, setTemperature] = useState();
+  const [oxygen, setOxygen] = useState();
   // const [familyHistory, setFamilyHistory] = useState("");
   const [employed, setEmployed] = useState(false);
   const [insured, setInsured] = useState(false);
@@ -32,7 +33,16 @@ export default function FormTemplate({ data }) {
     } else {
       setIsEdit(true);
       setName(data.name);
-      setDob(data.dob);
+      let date = new Date(data.dob);
+      let month = date.getMonth();
+      let day = date.getDay();
+      date =
+        date.getFullYear() +
+        "-" +
+        (month < 10 ? "0" + month : month) +
+        "-" +
+        (day < 10 ? "0" + day : day);
+      setDob(date);
       setAddress(data.address);
       setInsuranceNumber(data.insuranceNumber);
       setHeight(data.height);
@@ -49,7 +59,7 @@ export default function FormTemplate({ data }) {
   const savePatient = () => {
     const patient = {};
 
-    patient.Name = name;
+    patient.name = name;
     patient.address = address;
     patient.insuranceNumber = insuranceNumber;
     patient.height = height;
@@ -57,15 +67,15 @@ export default function FormTemplate({ data }) {
     patient.bloodPressure = bloodPressure;
     patient.temperature = temperature;
     patient.oxygenSaturation = oxygen;
+    patient.dob = dob;
     patient.currentlyEmployed = employed ? "Yes" : "No";
     patient.currentlyInsured = insured ? "Yes" : "No";
     setShowSpinner(true);
-    if (data._id != null) {
+    if (data && data._id != null) {
       // meaning it's an edit page
       patient._id = data._id;
       updatePatientData(patient).then((result) => {
         setShowSpinner(false);
-        console.log(result);
         if (result == true) {
           navigate("/hopkins/patient");
         }
@@ -104,7 +114,7 @@ export default function FormTemplate({ data }) {
                 type="text"
                 value={name}
                 onChange={(e) => {
-                  handleChange(setName, e.value);
+                  handleChange(setName, e.target.value);
                 }}
               />
             </Form.Group>
@@ -116,7 +126,7 @@ export default function FormTemplate({ data }) {
                 type="date"
                 value={dob}
                 onChange={(e) => {
-                  handleChange(setDob, e.value);
+                  handleChange(setDob, e.target.value);
                 }}
               />
             </Form.Group>
@@ -128,7 +138,7 @@ export default function FormTemplate({ data }) {
                 type="text"
                 value={address}
                 onChange={(e) => {
-                  handleChange(setAddress, e.value);
+                  handleChange(setAddress, e.target.value);
                 }}
               />
             </Form.Group>
@@ -143,7 +153,7 @@ export default function FormTemplate({ data }) {
                 type="text"
                 value={insuranceNumber}
                 onChange={(e) => {
-                  handleChange(setInsuranceNumber, e.value);
+                  handleChange(setInsuranceNumber, e.target.value);
                 }}
               />
             </Form.Group>
@@ -155,7 +165,7 @@ export default function FormTemplate({ data }) {
                 type="text"
                 value={height}
                 onChange={(e) => {
-                  handleChange(setHeight, e.value);
+                  handleChange(setHeight, e.target.value);
                 }}
               />
             </Form.Group>
@@ -167,7 +177,7 @@ export default function FormTemplate({ data }) {
                 type="text"
                 value={weight}
                 onChange={(e) => {
-                  handleChange(setWeight, e.value);
+                  handleChange(setWeight, e.target.value);
                 }}
               />
             </Form.Group>
@@ -182,7 +192,7 @@ export default function FormTemplate({ data }) {
                 type="text"
                 value={bloodPressure}
                 onChange={(e) => {
-                  handleChange(setBloodPressure, e.value);
+                  handleChange(setBloodPressure, e.target.value);
                 }}
               />
             </Form.Group>
@@ -194,7 +204,7 @@ export default function FormTemplate({ data }) {
                 type="text"
                 value={temperature}
                 onChange={(e) => {
-                  handleChange(setTemperature, e.value);
+                  handleChange(setTemperature, e.target.value);
                 }}
               />
             </Form.Group>
@@ -206,7 +216,7 @@ export default function FormTemplate({ data }) {
                 type="text"
                 value={oxygen}
                 onChange={(e) => {
-                  handleChange(setOxygen, e.value);
+                  handleChange(setOxygen, e.target.value);
                 }}
               />
             </Form.Group>

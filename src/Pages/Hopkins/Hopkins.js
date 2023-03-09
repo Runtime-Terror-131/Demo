@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { updateColor } from "../../Components";
+import { updateColor, Breadcrumbs  } from "../../Components";
 import { useContextValues } from "../../Context/Context";
 export default function Hopkins() {
   const { setPortalNamePath } = useContextValues();
@@ -11,6 +11,7 @@ export default function Hopkins() {
   return (
     <div>
       <h1>Hopkins</h1>
+      <Breadcrumbs />
       <Outlet />
     </div>
   );

@@ -77,12 +77,12 @@ export default function Patient() {
 
       if (checkName) {
         values = values.filter((item, index) => {
-          return item.name.includes(nameValue);
+          return item.name.toLowerCase().includes(nameValue.toLowerCase());
         });
       }
       if (checkAge) {
         values = values.filter((item, index) => {
-          return item.age.includes(ageValue);
+          return (item.Age*1) === (ageValue*1);
         });
       }
       if (checkInsurance) {
@@ -116,7 +116,7 @@ export default function Patient() {
       cellRenderer: ButtonCell,
     },
     { field: "name" },
-    { field: "age" },
+    { field: "Age" },
     { field: "dob" },
     { field: "address" },
     { field: "insuranceNumber" },
@@ -152,7 +152,7 @@ export default function Patient() {
   return (
     <Row>
       <Col lg={10}>
-        <Card>
+        <Card className="box-shadow">
           {/* <Row> */}
           <Card.Header className="border-bottom-0">Patient Search</Card.Header>
           <Card.Body>
@@ -254,7 +254,7 @@ export default function Patient() {
         className="ag-theme-alpine"
         style={{ marginTop: "5px", marginBottom: "5px" }}
       >
-        <AgGridReact
+        <AgGridReact className="box-shadow"
           ref={gridRef}
           rowData={patientList ? patientList : ""}
           columnDefs={patientHeaders}

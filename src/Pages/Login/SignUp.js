@@ -26,6 +26,7 @@ export default function SignUp({ setLoginUser }) {
       } else {
         setShowPassError(false);
       }
+       setShowSpinner(false);
     }
   };
   return (

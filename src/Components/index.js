@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import { BackButton } from "./Util/BackButton";
 import LoadingSpinner from "./Util/LoadingSpinner";
 import DeleteModel from "./DeleteModel";
+import Breadcrumbs from "./Util/Breadcrumbs";
 export {
   Header,
   SideNav,
@@ -13,4 +14,5 @@ export {
   BackButton,
   LoadingSpinner,
   DeleteModel,
+  Breadcrumbs,
 };

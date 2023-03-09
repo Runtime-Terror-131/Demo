@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Row, Col, Card, Button, Spinner } from "react-bootstrap";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useContextValues } from "../../Context/Context";
-import { BackButton } from "../../Components/Util/BackButton";
+import { Breadcrumbs, BackButton } from "../../Components";
 import FormTemplate from "./FormTemplate";
 import { useJaneHopkins } from "../../Config/Hopkins-Config";
 import { DeleteModel } from "../../Components";
@@ -47,6 +47,7 @@ export default function PatientDetails() {
     <>
       <DeleteModel />
       <Card>
+      <Breadcrumbs/>
         <Card.Header>PatientDetails</Card.Header>
         <Card.Body>
           <Row>

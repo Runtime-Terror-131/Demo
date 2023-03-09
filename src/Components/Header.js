@@ -13,9 +13,9 @@ export default function Header() {
     }
   };
   return (
-    <Navbar expand="lg" sticky="top" className="shadow p-3 header-background ">
+    <Navbar expand="lg" sticky="top" className="box-shadow p-3 header-background ">
       <Container>
-        <Navbar.Brand href="/" className="header-icon-text-color">
+        <Navbar.Brand href="/" className="header-icon-text-color show-logo">
           <img
             src={logo}
             alt="LOGO"
@@ -51,13 +51,13 @@ export default function Header() {
               >
                 FDA
               </Nav.Link>
+              <Button variant="outline-warning" onClick={logoutUser}>
+                Logout
+              </Button>
             </Nav>
           </Navbar.Collapse>
         </div>
       </Container>
-      <Button variant="outline-warning" onClick={logoutUser}>
-        Logout
-      </Button>
     </Navbar>
   );
 }
