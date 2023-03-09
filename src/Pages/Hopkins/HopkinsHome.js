@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 export default function HopkinsHome() {
   return (
-    <Card className="shadow p-3">
+    <Card className="box-shadow">
       <Card.Body>
         <Card.Title>Hopkins Portal</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">Intruduction</Card.Subtitle>

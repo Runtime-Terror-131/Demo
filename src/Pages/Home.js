@@ -2,7 +2,7 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 export default function Home() {
   return (
-    <Card>
+    <Card className="box-shadow" style={{ marginTop: "5px" }}>
       <Card.Header>
         Vendia Home Page{" "}
         <Card.Subtitle className="mb-2 text-muted">

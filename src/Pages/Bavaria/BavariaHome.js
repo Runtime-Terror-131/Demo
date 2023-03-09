@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 export default function BavariaHome() {
   return (
-    <Card>
+    <Card className="box-shadow">
       <Card.Body>
         <Card.Title>Pharma Study</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">Intruduction</Card.Subtitle>

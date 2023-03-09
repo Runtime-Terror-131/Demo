@@ -13,7 +13,7 @@ export default function Header() {
     }
   };
   return (
-    <Navbar expand="lg" sticky="top" className="shadow p-3 header-background ">
+    <Navbar expand="lg" sticky="top" className="box-shadow p-3 header-background ">
       <Container>
         <Navbar.Brand href="/" className="header-icon-text-color show-logo">
           <img

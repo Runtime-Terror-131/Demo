@@ -35,12 +35,13 @@ export default function FormTemplate({ data }) {
       setName(data.name);
       let date = new Date(data.dob);
       let month = date.getMonth();
+      let day = date.getDay();
       date =
         date.getFullYear() +
         "-" +
         (month < 10 ? "0" + month : month) +
         "-" +
-        date.getDate();
+        (day < 10 ? "0" + day : day);
       setDob(date);
       setAddress(data.address);
       setInsuranceNumber(data.insuranceNumber);
@@ -66,6 +67,7 @@ export default function FormTemplate({ data }) {
     patient.bloodPressure = bloodPressure;
     patient.temperature = temperature;
     patient.oxygenSaturation = oxygen;
+    patient.dob = dob;
     patient.currentlyEmployed = employed ? "Yes" : "No";
     patient.currentlyInsured = insured ? "Yes" : "No";
     setShowSpinner(true);
