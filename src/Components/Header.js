@@ -9,11 +9,11 @@ export default function Header() {
   const logoutUser = () => {
     logout();
     if (window.location) {
-      window.location.reload();
+      window.location.href = '/';     //window.location.reload(); 
     }
   };
   return (
-    <Navbar expand="lg" sticky="top" className="box-shadow p-3 header-background ">
+    <Navbar expand="lg" sticky="top" className="box-shadow header-background ">
       <Container>
         <Navbar.Brand href="/" className="header-icon-text-color show-logo">
           <img

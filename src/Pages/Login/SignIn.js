@@ -72,7 +72,7 @@ export default function SignIn({ setLoginUser }) {
           className="button"
           onClick={submitForm}
         >
-          Submit
+          Login
         </Button>
       </div>
     </div>
