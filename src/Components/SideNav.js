@@ -8,10 +8,7 @@ export default function SideNav() {
   //   setShowSpinner(true);
   // };
   return (
-    <Nav
-      defaultActiveKey="/home"
-      className="fw-bold nav-height side-nav"
-    >
+    <Nav defaultActiveKey="/home" className="fw-bold nav-height side-nav">
       <Nav.Link
         to={`${portalNamePath}/home`}
         as={NavLink}
@@ -19,8 +16,8 @@ export default function SideNav() {
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
+          width="25"
+          height="25"
           fill="currentColor"
           class="bi bi-house"
           viewBox="0 0 16 16"
@@ -39,8 +36,8 @@ export default function SideNav() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
+              width="25"
+              height="25"
               fill="currentColor"
               class="bi bi-file-person"
               viewBox="0 0 16 16"
@@ -58,8 +55,8 @@ export default function SideNav() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
+              width="25"
+              height="25"
               fill="currentColor"
               class="bi bi-clipboard"
               viewBox="0 0 16 16"
@@ -81,8 +78,8 @@ export default function SideNav() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
+              width="25"
+              height="25"
               fill="currentColor"
               class="bi bi-capsule"
               viewBox="0 0 16 16"
@@ -103,8 +100,8 @@ export default function SideNav() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
+              width="25"
+              height="25"
               fill="currentColor"
               class="bi bi-clipboard-check"
               viewBox="0 0 16 16"

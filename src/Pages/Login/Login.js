@@ -49,12 +49,6 @@ export default function Login({ setUser }) {
                 </a>
               </div>
             ) : (
-              <a className="d-none" onClick={SignUpButtonClick}>
-                Signup
-              </a>
-            )}
-
-            {!toggleLogin ? (
               <div>
                 <span style={{ color: "white" }}>
                   Already have an account? Click{" "}
@@ -64,10 +58,6 @@ export default function Login({ setUser }) {
                   Here
                 </a>
               </div>
-            ) : (
-              <a className="d-none" onClick={SignInButtonClick}>
-                SignIn
-              </a>
             )}
           </Card.Footer>
         </Card>
@@ -78,7 +68,6 @@ export default function Login({ setUser }) {
     </div>
   );
 }
-
 
 /*Button one if we need
 <Card.Footer style={{ background: "#2B223D" }}>
