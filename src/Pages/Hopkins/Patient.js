@@ -127,13 +127,24 @@ export default function Patient() {
     { field: "temperature" },
     { field: "oxygenSaturation" },
     { field: "patient_ID" },
-    { field: "allergies" },
-    { field: "currentMedications" },
+    { field: "allergies",
+    valueGetter: (params) => {
+      return JSON.stringify(params.data.allergies);
+    }, },
+    { field: "currentMedications",
+    valueGetter: (params) => {
+      return JSON.stringify(params.data.currentMedications);
+    }, },
     { field: "familyHistory" },
     { field: "currentlyEmployed" },
     { field: "currentlyInsured" },
-    { field: "icdHealthCodes" },
-  ];
+    { 
+      field: "icdHealthCodes", 
+      valueGetter: (params) => {
+        return JSON.stringify(params.data.icdHealthCodes);
+      },
+    },
+  ];  
   useEffect(() => {
     setShowSpinner(true);
     if (getAll) {

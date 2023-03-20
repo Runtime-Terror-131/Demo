@@ -468,6 +468,98 @@ input Self_Patient_PartialInput_ {
   weight: String
 }
 
+input Self_Study_ConditionInput_ {
+  agreedByBavaria: Vendia_ModelBooleanInput_
+  agreedByFDA: Vendia_ModelBooleanInput_
+  endDate: Vendia_ModelStringInput_
+  startDate: Vendia_ModelStringInput_
+  studyName: Vendia_ModelStringInput_
+  _and: [Self_Study_ConditionInput_]
+  _or: [Self_Study_ConditionInput_]
+  _not: Self_Study_ConditionInput_
+}
+
+input Self_Study_FilterInput_ {
+  _owner: Vendia_ModelStringInput_
+  agreedByBavaria: Vendia_ModelBooleanInput_
+  agreedByFDA: Vendia_ModelBooleanInput_
+  endDate: Vendia_ModelStringInput_
+  startDate: Vendia_ModelStringInput_
+  studyName: Vendia_ModelStringInput_
+  _and: [Self_Study_FilterInput_]
+  _or: [Self_Study_FilterInput_]
+  _not: Self_Study_FilterInput_
+}
+
+input Self_Study_OrderInput_ {
+  _id: Vendia_ModelSortDirection
+}
+
+type Self_Study {
+  _id: ID!
+  agreedByBavaria: Boolean
+  agreedByFDA: Boolean
+  endDate: String
+  startDate: String
+  studyName: String
+  _owner: String
+}
+
+type Self_Study_Partial_ {
+  _id: ID!
+  agreedByBavaria: Boolean
+  agreedByFDA: Boolean
+  endDate: String
+  startDate: String
+  studyName: String
+  _owner: String
+}
+
+union Self_Study_PartialUnion_ = Self_Study | Self_Study_Partial_
+
+type Self_Study_Result_ {
+  error: String
+  result: Self_Study
+}
+
+type Self_Study_Transaction_Result_ {
+  transaction: Vendia_Transaction!
+  result: Self_Study
+}
+
+type Self_Study_Delete_Transaction_Result_ {
+  transaction: Vendia_Transaction!
+}
+
+type Self_Study_Connection_ {
+  _StudyItems: [Self_Study]
+  nextToken: String
+}
+
+input Self_Study_Input_ {
+  agreedByBavaria: Boolean
+  agreedByFDA: Boolean
+  endDate: String
+  startDate: String
+  studyName: String
+}
+
+input Self_Study_UpdateInput_ {
+  agreedByBavaria: Boolean
+  agreedByFDA: Boolean
+  endDate: String
+  startDate: String
+  studyName: String
+}
+
+input Self_Study_PartialInput_ {
+  agreedByBavaria: Boolean
+  agreedByFDA: Boolean
+  endDate: String
+  startDate: String
+  studyName: String
+}
+
 input Self_Patient_allergies_allergiesItem_ConditionInput_ {
   allergy: Vendia_ModelStringInput_
   _and: [Self_Patient_allergies_allergiesItem_ConditionInput_]
@@ -3149,6 +3241,9 @@ type Query {
   get_Patient(id: ID!, version: Int, readMode: Vendia_ReadMode = NODE_COMMITTED): Self_Patient_PartialUnion_
   list_PatientItems(filter: Self_Patient_FilterInput_, readMode: Vendia_ReadMode = NODE_COMMITTED, order: [Self_Patient_OrderInput_!], limit: Int, nextToken: String): Self_Patient_Connection_
   list_PatientVersions(id: ID!, limit: Int, nextToken: String): Vendia_Version_Connection_
+  get_Study(id: ID!, version: Int, readMode: Vendia_ReadMode = NODE_COMMITTED): Self_Study
+  list_StudyItems(filter: Self_Study_FilterInput_, readMode: Vendia_ReadMode = NODE_COMMITTED, order: [Self_Study_OrderInput_!], limit: Int, nextToken: String): Self_Study_Connection_
+  list_StudyVersions(id: ID!, limit: Int, nextToken: String): Vendia_Version_Connection_
   listVendia_SubscriptionItems(filter: Vendia_Subscription_FilterInput_, order: [Vendia_Subscription_OrderInput_!], limit: Int, nextToken: String): Vendia_Subscription_Connection_
   getVendia_Block(id: ID!): Vendia_Block
   listVendia_BlockItems(filter: Vendia_Block_FilterInput_, order: [Vendia_Block_OrderInput_!], limit: Int, nextToken: String): Vendia_Block_Connection_
@@ -3183,6 +3278,10 @@ type Mutation {
   put_Patient(id: ID!, input: Self_Patient_Input_!, condition: Self_Patient_ConditionInput_, aclInput: Vendia_Acls_Input_!, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Patient_Transaction_Result_
   update_Patient(id: ID!, input: Self_Patient_UpdateInput_!, condition: Self_Patient_ConditionInput_, aclInput: Vendia_Acls_Input_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Patient_Transaction_Result_
   remove_Patient(id: ID!, condition: Self_Patient_ConditionInput_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Patient_Delete_Transaction_Result_
+  add_Study(input: Self_Study_Input_!, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Study_Transaction_Result_
+  put_Study(id: ID!, input: Self_Study_Input_!, condition: Self_Study_ConditionInput_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Study_Transaction_Result_
+  update_Study(id: ID!, input: Self_Study_UpdateInput_!, condition: Self_Study_ConditionInput_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Study_Transaction_Result_
+  remove_Study(id: ID!, condition: Self_Study_ConditionInput_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Study_Delete_Transaction_Result_
   addVendia_File(input: Vendia_File_Input_!, syncMode: Vendia_SyncMode!): Vendia_File_Transaction_Result_
   putVendia_File(id: ID!, input: Vendia_File_Input_!, condition: Vendia_File_ConditionInput_, syncMode: Vendia_SyncMode!): Vendia_File_Transaction_Result_
   updateVendia_File(id: ID!, input: Vendia_File_UpdateInput_!, condition: Vendia_File_ConditionInput_, syncMode: Vendia_SyncMode!): Vendia_File_Transaction_Result_
@@ -3211,6 +3310,10 @@ type Subscription {
   onUpdate_Patient: Self_Patient_Result_
   onPut_Patient: Self_Patient_Result_
   onRemove_Patient: Self_Patient_Result_
+  onAdd_Study: Self_Study_Result_
+  onUpdate_Study: Self_Study_Result_
+  onPut_Study: Self_Study_Result_
+  onRemove_Study: Self_Study_Result_
   onAddVendia_Block: Vendia_Block_Result_
   onAddVendia_File: Vendia_File_Result_
   onUpdateVendia_File: Vendia_File_Result_
