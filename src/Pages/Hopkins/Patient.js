@@ -82,7 +82,7 @@ export default function Patient() {
       }
       if (checkAge) {
         values = values.filter((item, index) => {
-          return (item.Age*1) === (ageValue*1);
+          return item.Age * 1 === ageValue * 1;
         });
       }
       if (checkInsurance) {
@@ -127,24 +127,28 @@ export default function Patient() {
     { field: "temperature" },
     { field: "oxygenSaturation" },
     { field: "patient_ID" },
-    { field: "allergies",
-    valueGetter: (params) => {
-      return JSON.stringify(params.data.allergies);
-    }, },
-    { field: "currentMedications",
-    valueGetter: (params) => {
-      return JSON.stringify(params.data.currentMedications);
-    }, },
+    {
+      field: "allergies",
+      valueGetter: (params) => {
+        return JSON.stringify(params.data.allergies);
+      },
+    },
+    {
+      field: "currentMedications",
+      valueGetter: (params) => {
+        return JSON.stringify(params.data.currentMedications);
+      },
+    },
     { field: "familyHistory" },
     { field: "currentlyEmployed" },
     { field: "currentlyInsured" },
-    { 
-      field: "icdHealthCodes", 
+    {
+      field: "icdHealthCodes",
       valueGetter: (params) => {
         return JSON.stringify(params.data.icdHealthCodes);
       },
     },
-  ];  
+  ];
   useEffect(() => {
     setShowSpinner(true);
     if (getAll) {
@@ -265,7 +269,8 @@ export default function Patient() {
         className="ag-theme-alpine"
         style={{ marginTop: "5px", marginBottom: "5px" }}
       >
-        <AgGridReact className="box-shadow"
+        <AgGridReact
+          className="box-shadow"
           ref={gridRef}
           rowData={patientList ? patientList : ""}
           columnDefs={patientHeaders}
