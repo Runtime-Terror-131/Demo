@@ -39,12 +39,26 @@ export default function Login({ setUser }) {
             )}
           </Card.Body>
           <Card.Footer style={{ background: "#2B223D" }}>
-            <Button variant="outline-light" onClick={SignInButtonClick}>
-              SignIn
-            </Button>
-            <Button variant="outline-light" onClick={SignUpButtonClick}>
-              SignUp
-            </Button>
+            {toggleLogin ? (
+              <div>
+                <span style={{ color: "white" }}>
+                  Dont have an account? Click{" "}
+                </span>
+                <a className="active" onClick={SignUpButtonClick}>
+                  Here
+                </a>
+              </div>
+            ) : (
+              <div>
+                <span style={{ color: "white" }}>
+                  Already have an account? Click{" "}
+                </span>
+
+                <a className="active" onClick={SignInButtonClick}>
+                  Here
+                </a>
+              </div>
+            )}
           </Card.Footer>
         </Card>
       </div>
@@ -54,3 +68,13 @@ export default function Login({ setUser }) {
     </div>
   );
 }
+
+/*Button one if we need
+<Card.Footer style={{ background: "#2B223D" }}>
+            <Button variant="outline-light" onClick={SignInButtonClick}>
+              SignIn
+            </Button>
+            <Button variant="outline-light" onClick={SignUpButtonClick}>
+              SignUp
+            </Button>
+          </Card.Footer> */

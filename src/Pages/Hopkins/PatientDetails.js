@@ -8,6 +8,7 @@ import { useJaneHopkins } from "../../Config/Hopkins-Config";
 import { DeleteModel } from "../../Components";
 export default function PatientDetails() {
   const navigate = useNavigate();
+  const excludeFields = ["_id", "_owner", "uuid"];
   const {
     patientDetails,
     setShowSpinner,
@@ -47,23 +48,35 @@ export default function PatientDetails() {
     <>
       <DeleteModel />
       <Card>
-      <Breadcrumbs/>
+        <Breadcrumbs />
         <Card.Header>PatientDetails</Card.Header>
         <Card.Body>
           <Row>
             {patientData ? (
-              Object.entries(patientData).map((item, i) => (
-                <Col lg={4} key={i}>
-                  <div>
-                    <span style={{ color: "grey" }} key={item[0].toString()}>
-                      {item[0]}:
-                    </span>
-                    <h4 key={JSON.stringify(item[1])}>
-                      {JSON.stringify(item[1])}
-                    </h4>
-                  </div>
-                </Col>
-              ))
+              Object.entries(patientData)
+                .filter(([key, value]) => !excludeFields.includes(key))
+                .map((item, i) => (
+                  <Col lg={4} key={i}>
+                    <div>
+                      <span style={{ color: "grey" }} key={item[0].toString()}>
+                        {item[0]}:
+                      </span>
+                      {Array.isArray(item[1]) ? (
+                        <ul>
+                          {item[1].map((arrayItem, j) => (
+                            <li key={`${i}-${j}`}>
+                              {JSON.stringify(arrayItem)}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <h4 key={JSON.stringify(item[1])}>
+                          {JSON.stringify(item[1])}
+                        </h4>
+                      )}
+                    </div>
+                  </Col>
+                ))
             ) : (
               <Spinner />
             )}

@@ -133,6 +133,29 @@
           }
         }
       }
+    },
+    "Study": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "studyName": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string"
+          },
+          "endDate": {
+            "type": "string"
+          },
+          "agreedByBavaria": {
+            "type": "boolean"
+          },
+          "agreedByFDA": {
+            "type": "boolean"
+          }
+        }
+      }
     }
   }
 }
