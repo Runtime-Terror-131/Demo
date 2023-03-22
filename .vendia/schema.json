@@ -7,6 +7,9 @@
     },
     "drugACL": {
       "type": "Drug"
+    },
+    "studyACL": {
+      "type": "Study"
     }
   },
   "type": "object",
@@ -46,10 +49,19 @@
           "oxygenSaturation": {
             "type": "string"
           },
-          "uuid": {
+          "studyID": {
             "type": "string"
           },
           "address": {
+            "type": "string"
+          },
+          "isEligible": {
+            "type": "boolean"
+          },
+          "showPII": {
+            "type": "boolean"
+          },
+          "bloodType": {
             "type": "string"
           },
           "currentMedications": {
@@ -64,6 +76,12 @@
             }
           },
           "familyHistory": {
+            "type": "string"
+          },
+          "placebo": {
+            "type": "boolean"
+          },
+          "drugID": {
             "type": "string"
           },
           "currentlyEmployed": {
@@ -92,6 +110,12 @@
                   "type": "string"
                 }
               }
+            }
+          },
+          "doses": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
           "visits": {
@@ -153,6 +177,15 @@
           },
           "agreedByFDA": {
             "type": "boolean"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "PIIRequest": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string"
           }
         }
       }
