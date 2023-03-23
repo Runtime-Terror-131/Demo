@@ -2,10 +2,10 @@ import { createVendiaClient } from "@vendia/client";
 
 const client = createVendiaClient({
   apiUrl: `
-    https://sbdvivo3e2.execute-api.us-west-2.amazonaws.com/graphql/`,
+  https://sbdvivo3e2.execute-api.us-west-2.amazonaws.com/graphql/`,
   websocketUrl: `
     wss://hkfgp9zyq9.execute-api.us-west-2.amazonaws.com/graphql`,
-  apiKey: process.env.REACT_APP_HOPKINS_API,
+  apiKey: "DK8mnXv4GeHAFw47KHwCNzJArxD4JBVAGRcENk884nQK",
 });
 
 const { entities } = client;
@@ -35,9 +35,7 @@ const createNewPatient = async (patient) => {
 };
 const updatePatientData = async (patient) => {
   try {
-    await entities.patient.update(
-      patient
-    );
+    await entities.patient.update(patient);
     return true;
   } catch (error) {
     return error.message;

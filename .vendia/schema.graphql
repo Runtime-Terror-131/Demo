@@ -281,19 +281,25 @@ input Self_Patient_ConditionInput_ {
   address: Vendia_ModelStringInput_
   _allergiesItem: Self_Patient_allergies_allergiesItem_ConditionInput_
   bloodPressure: Vendia_ModelStringInput_
+  bloodType: Vendia_ModelStringInput_
   _currentMedicationsItem: Self_Patient_currentMedications_currentMedicationsItem_ConditionInput_
   currentlyEmployed: Vendia_ModelStringInput_
   currentlyInsured: Vendia_ModelStringInput_
   dob: Vendia_ModelStringInput_
+  doses: Vendia_ModelStringInput_
+  drugID: Vendia_ModelStringInput_
   familyHistory: Vendia_ModelStringInput_
   height: Vendia_ModelStringInput_
   _icdHealthCodesItem: Self_Patient_icdHealthCodes_icdHealthCodesItem_ConditionInput_
   insuranceNumber: Vendia_ModelStringInput_
+  isEligible: Vendia_ModelBooleanInput_
   name: Vendia_ModelStringInput_
   oxygenSaturation: Vendia_ModelStringInput_
   patientPicture: Vendia_ModelStringInput_
+  placebo: Vendia_ModelBooleanInput_
+  showPII: Vendia_ModelBooleanInput_
+  studyID: Vendia_ModelStringInput_
   temperature: Vendia_ModelStringInput_
-  uuid: Vendia_ModelStringInput_
   _visitsItem: Self_Patient_visits_visitsItem_ConditionInput_
   weight: Vendia_ModelStringInput_
   _and: [Self_Patient_ConditionInput_]
@@ -307,19 +313,25 @@ input Self_Patient_FilterInput_ {
   address: Vendia_ModelStringInput_
   _allergiesItem: Self_Patient_allergies_allergiesItem_FilterInput_
   bloodPressure: Vendia_ModelStringInput_
+  bloodType: Vendia_ModelStringInput_
   _currentMedicationsItem: Self_Patient_currentMedications_currentMedicationsItem_FilterInput_
   currentlyEmployed: Vendia_ModelStringInput_
   currentlyInsured: Vendia_ModelStringInput_
   dob: Vendia_ModelStringInput_
+  doses: Vendia_ModelStringInput_
+  drugID: Vendia_ModelStringInput_
   familyHistory: Vendia_ModelStringInput_
   height: Vendia_ModelStringInput_
   _icdHealthCodesItem: Self_Patient_icdHealthCodes_icdHealthCodesItem_FilterInput_
   insuranceNumber: Vendia_ModelStringInput_
+  isEligible: Vendia_ModelBooleanInput_
   name: Vendia_ModelStringInput_
   oxygenSaturation: Vendia_ModelStringInput_
   patientPicture: Vendia_ModelStringInput_
+  placebo: Vendia_ModelBooleanInput_
+  showPII: Vendia_ModelBooleanInput_
+  studyID: Vendia_ModelStringInput_
   temperature: Vendia_ModelStringInput_
-  uuid: Vendia_ModelStringInput_
   _visitsItem: Self_Patient_visits_visitsItem_FilterInput_
   weight: Vendia_ModelStringInput_
   _and: [Self_Patient_FilterInput_]
@@ -337,19 +349,25 @@ type Self_Patient {
   address: String
   allergies: [Self_Patient_allergies_allergiesItem]
   bloodPressure: String
+  bloodType: String
   currentMedications: [Self_Patient_currentMedications_currentMedicationsItem]
   currentlyEmployed: String
   currentlyInsured: String
   dob: String
+  doses: [String]
+  drugID: String
   familyHistory: String
   height: String
   icdHealthCodes: [Self_Patient_icdHealthCodes_icdHealthCodesItem]
   insuranceNumber: String
+  isEligible: Boolean
   name: String
   oxygenSaturation: String
   patientPicture: String
+  placebo: Boolean
+  showPII: Boolean
+  studyID: String
   temperature: String
-  uuid: String
   visits: [Self_Patient_visits_visitsItem]
   weight: String
   _acl: [Vendia_Acl!]
@@ -362,19 +380,25 @@ type Self_Patient_Partial_ {
   address: String
   allergies: [Self_Patient_allergies_allergiesItem_Partial_]
   bloodPressure: String
+  bloodType: String
   currentMedications: [Self_Patient_currentMedications_currentMedicationsItem_Partial_]
   currentlyEmployed: String
   currentlyInsured: String
   dob: String
+  doses: [String]
+  drugID: String
   familyHistory: String
   height: String
   icdHealthCodes: [Self_Patient_icdHealthCodes_icdHealthCodesItem_Partial_]
   insuranceNumber: String
+  isEligible: Boolean
   name: String
   oxygenSaturation: String
   patientPicture: String
+  placebo: Boolean
+  showPII: Boolean
+  studyID: String
   temperature: String
-  uuid: String
   visits: [Self_Patient_visits_visitsItem_Partial_]
   weight: String
   _acl: [Vendia_Acl!]
@@ -407,19 +431,25 @@ input Self_Patient_Input_ {
   address: String
   allergies: [Self_Patient_allergies_allergiesItem_Input_]
   bloodPressure: String
+  bloodType: String
   currentMedications: [Self_Patient_currentMedications_currentMedicationsItem_Input_]
   currentlyEmployed: String
   currentlyInsured: String
   dob: String
+  doses: [String]
+  drugID: String
   familyHistory: String
   height: String
   icdHealthCodes: [Self_Patient_icdHealthCodes_icdHealthCodesItem_Input_]
   insuranceNumber: String
+  isEligible: Boolean
   name: String
   oxygenSaturation: String
   patientPicture: String
+  placebo: Boolean
+  showPII: Boolean
+  studyID: String
   temperature: String
-  uuid: String
   visits: [Self_Patient_visits_visitsItem_Input_]
   weight: String
 }
@@ -429,19 +459,25 @@ input Self_Patient_UpdateInput_ {
   address: String
   allergies: [Self_Patient_allergies_allergiesItem_UpdateInput_]
   bloodPressure: String
+  bloodType: String
   currentMedications: [Self_Patient_currentMedications_currentMedicationsItem_UpdateInput_]
   currentlyEmployed: String
   currentlyInsured: String
   dob: String
+  doses: [String]
+  drugID: String
   familyHistory: String
   height: String
   icdHealthCodes: [Self_Patient_icdHealthCodes_icdHealthCodesItem_UpdateInput_]
   insuranceNumber: String
+  isEligible: Boolean
   name: String
   oxygenSaturation: String
   patientPicture: String
+  placebo: Boolean
+  showPII: Boolean
+  studyID: String
   temperature: String
-  uuid: String
   visits: [Self_Patient_visits_visitsItem_UpdateInput_]
   weight: String
 }
@@ -451,28 +487,39 @@ input Self_Patient_PartialInput_ {
   address: String
   allergies: [Self_Patient_allergies_allergiesItem_PartialInput_]
   bloodPressure: String
+  bloodType: String
   currentMedications: [Self_Patient_currentMedications_currentMedicationsItem_PartialInput_]
   currentlyEmployed: String
   currentlyInsured: String
   dob: String
+  doses: [String]
+  drugID: String
   familyHistory: String
   height: String
   icdHealthCodes: [Self_Patient_icdHealthCodes_icdHealthCodesItem_PartialInput_]
   insuranceNumber: String
+  isEligible: Boolean
   name: String
   oxygenSaturation: String
   patientPicture: String
+  placebo: Boolean
+  showPII: Boolean
+  studyID: String
   temperature: String
-  uuid: String
   visits: [Self_Patient_visits_visitsItem_PartialInput_]
   weight: String
 }
 
 input Self_Study_ConditionInput_ {
+  MaxNumberOfParticipants: Vendia_ModelStringInput_
+  PIIRequest: Vendia_ModelBooleanInput_
   agreedByBavaria: Vendia_ModelBooleanInput_
   agreedByFDA: Vendia_ModelBooleanInput_
+  currentNumberOfParticipants: Vendia_ModelStringInput_
   endDate: Vendia_ModelStringInput_
+  notes: Vendia_ModelStringInput_
   startDate: Vendia_ModelStringInput_
+  status: Vendia_ModelStringInput_
   studyName: Vendia_ModelStringInput_
   _and: [Self_Study_ConditionInput_]
   _or: [Self_Study_ConditionInput_]
@@ -481,10 +528,15 @@ input Self_Study_ConditionInput_ {
 
 input Self_Study_FilterInput_ {
   _owner: Vendia_ModelStringInput_
+  MaxNumberOfParticipants: Vendia_ModelStringInput_
+  PIIRequest: Vendia_ModelBooleanInput_
   agreedByBavaria: Vendia_ModelBooleanInput_
   agreedByFDA: Vendia_ModelBooleanInput_
+  currentNumberOfParticipants: Vendia_ModelStringInput_
   endDate: Vendia_ModelStringInput_
+  notes: Vendia_ModelStringInput_
   startDate: Vendia_ModelStringInput_
+  status: Vendia_ModelStringInput_
   studyName: Vendia_ModelStringInput_
   _and: [Self_Study_FilterInput_]
   _or: [Self_Study_FilterInput_]
@@ -497,21 +549,33 @@ input Self_Study_OrderInput_ {
 
 type Self_Study {
   _id: ID!
+  MaxNumberOfParticipants: String
+  PIIRequest: Boolean
   agreedByBavaria: Boolean
   agreedByFDA: Boolean
+  currentNumberOfParticipants: String
   endDate: String
+  notes: String
   startDate: String
+  status: String
   studyName: String
+  _acl: [Vendia_Acl!]
   _owner: String
 }
 
 type Self_Study_Partial_ {
   _id: ID!
+  MaxNumberOfParticipants: String
+  PIIRequest: Boolean
   agreedByBavaria: Boolean
   agreedByFDA: Boolean
+  currentNumberOfParticipants: String
   endDate: String
+  notes: String
   startDate: String
+  status: String
   studyName: String
+  _acl: [Vendia_Acl!]
   _owner: String
 }
 
@@ -524,7 +588,7 @@ type Self_Study_Result_ {
 
 type Self_Study_Transaction_Result_ {
   transaction: Vendia_Transaction!
-  result: Self_Study
+  result: Self_Study_PartialUnion_
 }
 
 type Self_Study_Delete_Transaction_Result_ {
@@ -532,32 +596,132 @@ type Self_Study_Delete_Transaction_Result_ {
 }
 
 type Self_Study_Connection_ {
-  _StudyItems: [Self_Study]
+  _StudyItems: [Self_Study_PartialUnion_]
   nextToken: String
 }
 
 input Self_Study_Input_ {
+  MaxNumberOfParticipants: String
+  PIIRequest: Boolean
   agreedByBavaria: Boolean
   agreedByFDA: Boolean
+  currentNumberOfParticipants: String
   endDate: String
+  notes: String
   startDate: String
+  status: String
   studyName: String
 }
 
 input Self_Study_UpdateInput_ {
+  MaxNumberOfParticipants: String
+  PIIRequest: Boolean
   agreedByBavaria: Boolean
   agreedByFDA: Boolean
+  currentNumberOfParticipants: String
   endDate: String
+  notes: String
   startDate: String
+  status: String
   studyName: String
 }
 
 input Self_Study_PartialInput_ {
+  MaxNumberOfParticipants: String
+  PIIRequest: Boolean
   agreedByBavaria: Boolean
   agreedByFDA: Boolean
+  currentNumberOfParticipants: String
   endDate: String
+  notes: String
   startDate: String
+  status: String
   studyName: String
+}
+
+input Self_User_ConditionInput_ {
+  UserUID: Vendia_ModelStringInput_
+  name: Vendia_ModelStringInput_
+  profilePicture: Vendia_ModelStringInput_
+  userType: Vendia_ModelStringInput_
+  _and: [Self_User_ConditionInput_]
+  _or: [Self_User_ConditionInput_]
+  _not: Self_User_ConditionInput_
+}
+
+input Self_User_FilterInput_ {
+  _owner: Vendia_ModelStringInput_
+  UserUID: Vendia_ModelStringInput_
+  name: Vendia_ModelStringInput_
+  profilePicture: Vendia_ModelStringInput_
+  userType: Vendia_ModelStringInput_
+  _and: [Self_User_FilterInput_]
+  _or: [Self_User_FilterInput_]
+  _not: Self_User_FilterInput_
+}
+
+input Self_User_OrderInput_ {
+  _id: Vendia_ModelSortDirection
+}
+
+type Self_User {
+  _id: ID!
+  UserUID: String
+  name: String
+  profilePicture: String
+  userType: String
+  _owner: String
+}
+
+type Self_User_Partial_ {
+  _id: ID!
+  UserUID: String
+  name: String
+  profilePicture: String
+  userType: String
+  _owner: String
+}
+
+union Self_User_PartialUnion_ = Self_User | Self_User_Partial_
+
+type Self_User_Result_ {
+  error: String
+  result: Self_User
+}
+
+type Self_User_Transaction_Result_ {
+  transaction: Vendia_Transaction!
+  result: Self_User
+}
+
+type Self_User_Delete_Transaction_Result_ {
+  transaction: Vendia_Transaction!
+}
+
+type Self_User_Connection_ {
+  _UserItems: [Self_User]
+  nextToken: String
+}
+
+input Self_User_Input_ {
+  UserUID: String
+  name: String
+  profilePicture: String
+  userType: String
+}
+
+input Self_User_UpdateInput_ {
+  UserUID: String
+  name: String
+  profilePicture: String
+  userType: String
+}
+
+input Self_User_PartialInput_ {
+  UserUID: String
+  name: String
+  profilePicture: String
+  userType: String
 }
 
 input Self_Patient_allergies_allergiesItem_ConditionInput_ {
@@ -3241,9 +3405,12 @@ type Query {
   get_Patient(id: ID!, version: Int, readMode: Vendia_ReadMode = NODE_COMMITTED): Self_Patient_PartialUnion_
   list_PatientItems(filter: Self_Patient_FilterInput_, readMode: Vendia_ReadMode = NODE_COMMITTED, order: [Self_Patient_OrderInput_!], limit: Int, nextToken: String): Self_Patient_Connection_
   list_PatientVersions(id: ID!, limit: Int, nextToken: String): Vendia_Version_Connection_
-  get_Study(id: ID!, version: Int, readMode: Vendia_ReadMode = NODE_COMMITTED): Self_Study
+  get_Study(id: ID!, version: Int, readMode: Vendia_ReadMode = NODE_COMMITTED): Self_Study_PartialUnion_
   list_StudyItems(filter: Self_Study_FilterInput_, readMode: Vendia_ReadMode = NODE_COMMITTED, order: [Self_Study_OrderInput_!], limit: Int, nextToken: String): Self_Study_Connection_
   list_StudyVersions(id: ID!, limit: Int, nextToken: String): Vendia_Version_Connection_
+  get_User(id: ID!, version: Int, readMode: Vendia_ReadMode = NODE_COMMITTED): Self_User
+  list_UserItems(filter: Self_User_FilterInput_, readMode: Vendia_ReadMode = NODE_COMMITTED, order: [Self_User_OrderInput_!], limit: Int, nextToken: String): Self_User_Connection_
+  list_UserVersions(id: ID!, limit: Int, nextToken: String): Vendia_Version_Connection_
   listVendia_SubscriptionItems(filter: Vendia_Subscription_FilterInput_, order: [Vendia_Subscription_OrderInput_!], limit: Int, nextToken: String): Vendia_Subscription_Connection_
   getVendia_Block(id: ID!): Vendia_Block
   listVendia_BlockItems(filter: Vendia_Block_FilterInput_, order: [Vendia_Block_OrderInput_!], limit: Int, nextToken: String): Vendia_Block_Connection_
@@ -3278,10 +3445,14 @@ type Mutation {
   put_Patient(id: ID!, input: Self_Patient_Input_!, condition: Self_Patient_ConditionInput_, aclInput: Vendia_Acls_Input_!, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Patient_Transaction_Result_
   update_Patient(id: ID!, input: Self_Patient_UpdateInput_!, condition: Self_Patient_ConditionInput_, aclInput: Vendia_Acls_Input_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Patient_Transaction_Result_
   remove_Patient(id: ID!, condition: Self_Patient_ConditionInput_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Patient_Delete_Transaction_Result_
-  add_Study(input: Self_Study_Input_!, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Study_Transaction_Result_
-  put_Study(id: ID!, input: Self_Study_Input_!, condition: Self_Study_ConditionInput_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Study_Transaction_Result_
-  update_Study(id: ID!, input: Self_Study_UpdateInput_!, condition: Self_Study_ConditionInput_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Study_Transaction_Result_
+  add_Study(input: Self_Study_Input_!, aclInput: Vendia_Acls_Input_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Study_Transaction_Result_
+  put_Study(id: ID!, input: Self_Study_Input_!, condition: Self_Study_ConditionInput_, aclInput: Vendia_Acls_Input_!, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Study_Transaction_Result_
+  update_Study(id: ID!, input: Self_Study_UpdateInput_!, condition: Self_Study_ConditionInput_, aclInput: Vendia_Acls_Input_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Study_Transaction_Result_
   remove_Study(id: ID!, condition: Self_Study_ConditionInput_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Study_Delete_Transaction_Result_
+  add_User(input: Self_User_Input_!, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_User_Transaction_Result_
+  put_User(id: ID!, input: Self_User_Input_!, condition: Self_User_ConditionInput_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_User_Transaction_Result_
+  update_User(id: ID!, input: Self_User_UpdateInput_!, condition: Self_User_ConditionInput_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_User_Transaction_Result_
+  remove_User(id: ID!, condition: Self_User_ConditionInput_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_User_Delete_Transaction_Result_
   addVendia_File(input: Vendia_File_Input_!, syncMode: Vendia_SyncMode!): Vendia_File_Transaction_Result_
   putVendia_File(id: ID!, input: Vendia_File_Input_!, condition: Vendia_File_ConditionInput_, syncMode: Vendia_SyncMode!): Vendia_File_Transaction_Result_
   updateVendia_File(id: ID!, input: Vendia_File_UpdateInput_!, condition: Vendia_File_ConditionInput_, syncMode: Vendia_SyncMode!): Vendia_File_Transaction_Result_
@@ -3314,6 +3485,10 @@ type Subscription {
   onUpdate_Study: Self_Study_Result_
   onPut_Study: Self_Study_Result_
   onRemove_Study: Self_Study_Result_
+  onAdd_User: Self_User_Result_
+  onUpdate_User: Self_User_Result_
+  onPut_User: Self_User_Result_
+  onRemove_User: Self_User_Result_
   onAddVendia_Block: Vendia_Block_Result_
   onAddVendia_File: Vendia_File_Result_
   onUpdateVendia_File: Vendia_File_Result_
