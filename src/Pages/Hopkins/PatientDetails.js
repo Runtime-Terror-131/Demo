@@ -8,7 +8,7 @@ import { useJaneHopkins } from "../../Config/Hopkins-Config";
 import { DeleteModel } from "../../Components";
 export default function PatientDetails() {
   const navigate = useNavigate();
-  const excludeFields = ["_id", "_owner", "uuid"];
+  const excludeFields = ["_id", "_owner", "uuid","isEligible","showPII","studyID","drugID","placebo"];
   const {
     patientDetails,
     setShowSpinner,
