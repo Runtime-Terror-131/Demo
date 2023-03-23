@@ -186,6 +186,32 @@
           },
           "status": {
             "type": "string"
+          },
+          "MaxNumberOfParticipants": {
+            "type": "string"
+          },
+          "currentNumberOfParticipants": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "User": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "UserUID": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "userType": {
+            "type": "string"
+          },
+          "profilePicture": {
+            "type": "string"
           }
         }
       }
