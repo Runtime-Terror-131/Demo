@@ -47,7 +47,13 @@ const loginUser = async (
     .then((userCredential) => {
       const user = userCredential.user;
       setUser(user);
+      return user;
       // ...
+    })
+    .then(async (user) => {
+      await user.getIdToken(true).then((result) => {
+        console.log(result.claims);
+      });
       setShowSpinner(false);
     })
     .catch((error) => {

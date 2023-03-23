@@ -14,6 +14,7 @@ const getAll = async () => {
     const patients = await entities.patient.list();
     return patients;
   } catch (e) {
+    console.log(e);
     return e;
   }
 };

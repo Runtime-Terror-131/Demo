@@ -9,7 +9,7 @@ export default function Header() {
   const logoutUser = () => {
     logout();
     if (window.location) {
-      window.location.href = '/';     //window.location.reload(); 
+      window.location.href = "/"; //window.location.reload();
     }
   };
   return (
@@ -21,11 +21,12 @@ export default function Header() {
             alt="LOGO"
             style={{
               width: "auto",
-              height: "10vh",
+              height: "50px",
+              float: "left",
             }}
           />
+          <h1 style={{ color: "white" }}>RunTime Terror</h1>
         </Navbar.Brand>
-        <h1 style={{ color: "white" }}>RunTime Terror</h1>
         <div>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
