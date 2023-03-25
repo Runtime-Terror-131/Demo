@@ -38,6 +38,7 @@ const register = async (
     return user;
   } catch (error) {
     setShowUserError(error.message);
+    setShowSpinner(false);
   }
 };
 const loginUser = async (
