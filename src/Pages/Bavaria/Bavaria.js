@@ -6,7 +6,7 @@ import { useContextValues } from "../../Context/Context";
 export default function Bavaria() {
   const { setPortalNamePath } = useContextValues();
   useEffect(() => {
-    updateColor(2);
+    updateColor(3);
     setPortalNamePath("/bavaria");
   }, []);
   return (

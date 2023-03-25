@@ -6,6 +6,7 @@ import {
   onAuthStateChanged,
   getAuth,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -28,12 +29,15 @@ const register = async (
   setShowSpinner
 ) => {
   try {
-    let user = await createUserWithEmailAndPassword(auth, email, password);
-    setUser(user);
-    setShowSpinner(false);
+    let userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+    return user;
   } catch (error) {
     setShowUserError(error.message);
-    setShowSpinner(false);
   }
 };
 const loginUser = async (
@@ -47,15 +51,15 @@ const loginUser = async (
     .then((userCredential) => {
       const user = userCredential.user;
       setUser(user);
+      setShowSpinner(false);
       return user;
       // ...
     })
-    .then(async (user) => {
-      await user.getIdToken(true).then((result) => {
-        console.log(result.claims);
-      });
-      setShowSpinner(false);
-    })
+    // .then(async (user) => {
+    //   await user.getIdToken(true).then((result) => {
+    //     console.log(result);
+    //   });
+    // })
     .catch((error) => {
       const errorCode = error.code;
       setLoginErrorMessage(error.message);
@@ -76,7 +80,8 @@ const checkIfUserStillLoggedIn = (user, setUser) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setUser(user);
-      localStorage.setItem("userData", user);
+      console.log(user);
+      localStorage.setItem("userData", JSON.stringify(user));
       //const uid = user.uid;
       // ...
     } else {

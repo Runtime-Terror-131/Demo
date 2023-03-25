@@ -50,7 +50,11 @@ export default function Patient() {
     if (getAll) {
       getAll()
         .then((result) => {
-          return result.items.flat();
+          if (result.items.length > 0) {
+            return result.items.flat();
+          } else {
+            console.log(result);
+          }
         })
         .then((flattedResult) => {
           setPatientList(flattedResult);
@@ -118,15 +122,15 @@ export default function Patient() {
     { field: "name" },
     { field: "Age" },
     { field: "dob" },
-    { field: "address" },
+    // { field: "address" },
     { field: "insuranceNumber" },
-    { field: "height" },
-    { field: "weight" },
-    { field: "bloodPressure" },
+    // { field: "height" },
+    // { field: "weight" },
+    // { field: "bloodPressure" },
     // { field: "bloodType" },
-    { field: "temperature" },
-    { field: "oxygenSaturation" },
-    { field: "patient_ID" },
+    // { field: "temperature" },
+    // { field: "oxygenSaturation" },
+    // { field: "patient_ID" },
     {
       field: "allergies",
       valueGetter: (params) => {
@@ -139,22 +143,26 @@ export default function Patient() {
         return JSON.stringify(params.data.currentMedications);
       },
     },
-    { field: "familyHistory" },
-    { field: "currentlyEmployed" },
-    { field: "currentlyInsured" },
-    {
-      field: "icdHealthCodes",
-      valueGetter: (params) => {
-        return JSON.stringify(params.data.icdHealthCodes);
-      },
-    },
+    // { field: "familyHistory" },
+    // { field: "currentlyEmployed" },
+    // { field: "currentlyInsured" },
+    // {
+    //   field: "icdHealthCodes",
+    //   valueGetter: (params) => {
+    //     return JSON.stringify(params.data.icdHealthCodes);
+    //   },
+    // },
   ];
   useEffect(() => {
     setShowSpinner(true);
     if (getAll) {
       getAll()
         .then((result) => {
-          return result.items.flat();
+          if (result.items.length > 0) {
+            return result.items.flat();
+          } else {
+            console.log(result);
+          }
         })
         .then((flattedResult) => {
           setPatientList(flattedResult);

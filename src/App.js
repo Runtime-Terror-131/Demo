@@ -9,9 +9,18 @@ import { useContextValues } from "./Context/Context";
 import { Login } from "./Pages";
 import AllRoutes from "./Routes/AllRoutes";
 import { checkIfUserStillLoggedIn } from "./Config/Firebase-Config";
+import { useJaneHopkins } from "./Config/Hopkins-Config";
 function App() {
+  const { getUserData } = useJaneHopkins();
+
   const [user, setUser] = useState(null);
-  const { userType, showSpinner, setShowSpinner } = useContextValues();
+  const {
+    userType,
+    setUserType,
+    showSpinner,
+    setLoginUserType,
+    setLoginUserName,
+  } = useContextValues();
 
   useLayoutEffect(() => {
     return () => {
@@ -23,11 +32,20 @@ function App() {
       //Do some cleanup here
     };
   }, []);
+  useEffect(() => {
+    if (user) {
+      getUserData(
+        JSON.parse(localStorage.getItem("userData")).uid,
+        setLoginUserType,
+        setLoginUserName
+      );
+    }
+  }, [user]);
   return (
     <div>
       {showSpinner && <LoadingSpinner />}
       {!user ? (
-        <Login setUser={setUser} />
+        <Login user={user} setUser={setUser} />
       ) : (
         <>
           <Header />

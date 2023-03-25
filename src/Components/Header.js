@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Container, Navbar, Nav, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import { useContextValues } from "../Context/Context";
 import { logout } from "../Config/Firebase-Config";
 import logo from "../images/logo.gif";
+import Avatar from "./Avatar";
 export default function Header() {
-  const { userType, portalNamePath } = useContextValues();
-  const logoutUser = () => {
-    logout();
-    if (window.location) {
-      window.location.href = "/"; //window.location.reload();
-    }
-  };
+  // const { userType, portalNamePath } = useContextValues();
+  // const logoutUser = () => {
+  //   logout();
+  //   if (window.location) {
+  //     window.location.href = "/"; //window.location.reload();
+  //   }
+  // };
   return (
     <Navbar expand="lg" sticky="top" className="box-shadow header-background ">
       <Container>
-        <Navbar.Brand href="/" className="header-icon-text-color show-logo">
+        <Navbar.Brand href="/" className="header-icon-text-color ">
           <img
             src={logo}
             alt="LOGO"
@@ -31,30 +31,7 @@ export default function Header() {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Nav defaultActiveKey="/home" className="me-auto">
-              <Nav.Link
-                to="/hopkins/home"
-                as={NavLink}
-                className="header-text-color"
-              >
-                Jane Hopkins
-              </Nav.Link>
-              <Nav.Link
-                to={"/bavaria/home"}
-                as={NavLink}
-                className="header-text-color"
-              >
-                Bavaria
-              </Nav.Link>
-              <Nav.Link
-                to={"/fda/home"}
-                as={NavLink}
-                className="header-text-color"
-              >
-                FDA
-              </Nav.Link>
-              <Button variant="outline-warning" onClick={logoutUser}>
-                Logout
-              </Button>
+              <Avatar />
             </Nav>
           </Navbar.Collapse>
         </div>

@@ -4,7 +4,7 @@ import { logout } from "../../Config/Firebase-Config";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import logo from "../../images/logo.gif";
-export default function Login({ setUser }) {
+export default function Login({ user, setUser }) {
   const [toggleLogin, setToggleLogin] = useState(true);
   const SignInButtonClick = () => {
     setToggleLogin(true);
@@ -35,7 +35,7 @@ export default function Login({ setUser }) {
             {toggleLogin ? (
               <SignIn setLoginUser={setUser} />
             ) : (
-              <SignUp setLoginUser={setUser} />
+              <SignUp LoginUser={user} setLoginUser={setUser} />
             )}
           </Card.Body>
           <Card.Footer style={{ background: "#2B223D" }}>
@@ -44,7 +44,10 @@ export default function Login({ setUser }) {
                 <span style={{ color: "white" }}>
                   Dont have an account? Click{" "}
                 </span>
-                <a className="active" onClick={SignUpButtonClick}>
+                <a
+                  className="active login-switch-link"
+                  onClick={SignUpButtonClick}
+                >
                   Here
                 </a>
               </div>
@@ -54,7 +57,10 @@ export default function Login({ setUser }) {
                   Already have an account? Click{" "}
                 </span>
 
-                <a className="active" onClick={SignInButtonClick}>
+                <a
+                  className="active login-switch-link"
+                  onClick={SignInButtonClick}
+                >
                   Here
                 </a>
               </div>

@@ -2,7 +2,10 @@ import { UserTypeConst } from "./StaticConst";
 // those if statements needs another nested if statement to check user type, once we start using userType context, we don't
 // need to reassign the colors every time we click
 export const updateColor = (type) => {
-  if (type === UserTypeConst.hopkins) {
+  if (
+    type === UserTypeConst.hopkinsAdmin ||
+    type === UserTypeConst.hopkinsDoctor
+  ) {
     document.documentElement.style.setProperty(
       "--header-text-color",
       "var(--hopkins-header-text-color)"

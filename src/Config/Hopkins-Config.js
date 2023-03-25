@@ -50,6 +50,55 @@ const deletePatient = async (id) => {
     return error.message;
   }
 };
+const setUserType = async (UID, type, name) => {
+  let uidUser = { UserUID: UID, name: name, userType: type };
+  try {
+    await entities.user.add(uidUser);
+    return true;
+  } catch (error) {
+    return error.message;
+  }
+};
+// const getUserData = (UID, setLoginUserType, setLoginUserName) => {
+//   try {
+//     // there is an issue here when registering a new email, user sometimes is a promise stil even inside
+//     entities.user
+//       .list()
+//       .then((result) => {
+//         let user = result.items.filter((item) => item.UserUID == UID)[0];
+//         return user;
+//       })
+//       .then((user) => {
+//         if (user != null) {
+//           setLoginUserType(user.UserUID);
+//           setLoginUserName(user.name);
+//         } else {
+//           console.log("user promise is not resolved");
+//           console.log(user);
+//         }
+//       });
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
+const getUserData = async (UID, setLoginUserType, setLoginUserName) => {
+  try {
+    // Wait for 2 seconds before getting user data
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    const result = await entities.user.list();
+    const user = result.items.filter((item) => item.UserUID === UID)[0];
+
+    if (user) {
+      setLoginUserType(user.userType);
+      setLoginUserName(user.name);
+    } else {
+      console.log("User not found.");
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
 const useJaneHopkins = () => {
   return {
     entities,
@@ -58,6 +107,8 @@ const useJaneHopkins = () => {
     createNewPatient,
     updatePatientData,
     deletePatient,
+    setUserType,
+    getUserData,
   };
 };
 
