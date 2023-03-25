@@ -4,7 +4,13 @@ import "./Components/Style/GlobalStyle.css";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { Row, Col, Container } from "react-bootstrap";
-import { Header, SideNav, Footer, LoadingSpinner } from "./Components";
+import {
+  Header,
+  SideNav,
+  Footer,
+  LoadingSpinner,
+  updateColor,
+} from "./Components";
 import { useContextValues } from "./Context/Context";
 import { Login } from "./Pages";
 import AllRoutes from "./Routes/AllRoutes";
@@ -18,8 +24,10 @@ function App() {
     userType,
     setUserType,
     showSpinner,
+    setShowSpinner,
     setLoginUserType,
     setLoginUserName,
+    loginUserType,
   } = useContextValues();
 
   useLayoutEffect(() => {
@@ -34,13 +42,24 @@ function App() {
   }, []);
   useEffect(() => {
     if (user) {
-      getUserData(
-        JSON.parse(localStorage.getItem("userData")).uid,
-        setLoginUserType,
-        setLoginUserName
-      );
+      try {
+        getUserData(
+          JSON.parse(localStorage.getItem("userData")).uid,
+          setLoginUserType,
+          setLoginUserName,
+          setShowSpinner
+        );
+      } catch (e) {
+        console.log(e);
+      }
     }
   }, [user]);
+  useEffect(() => {
+    if (loginUserType) {
+      updateColor(loginUserType);
+      setShowSpinner(false);
+    }
+  }, [loginUserType]);
   return (
     <div>
       {showSpinner && <LoadingSpinner />}

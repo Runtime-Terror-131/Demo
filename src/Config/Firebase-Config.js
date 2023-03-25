@@ -38,7 +38,7 @@ const register = async (
     return user;
   } catch (error) {
     setShowUserError(error.message);
-    setShowSpinner(false);
+    //setShowSpinner(false);
   }
 };
 const loginUser = async (
@@ -52,15 +52,11 @@ const loginUser = async (
     .then((userCredential) => {
       const user = userCredential.user;
       setUser(user);
-      setShowSpinner(false);
+      //setShowSpinner(false);
       return user;
       // ...
     })
-    // .then(async (user) => {
-    //   await user.getIdToken(true).then((result) => {
-    //     console.log(result);
-    //   });
-    // })
+
     .catch((error) => {
       const errorCode = error.code;
       setLoginErrorMessage(error.message);

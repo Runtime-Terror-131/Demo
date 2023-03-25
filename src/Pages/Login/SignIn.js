@@ -32,15 +32,16 @@ export default function SignIn({ setLoginUser }) {
     } else {
       if ((email && email.length <= 0) || !email) {
         setShowUserError(true);
+        setShowSpinner(false);
       } else {
         setShowUserError(false);
       }
       if ((password && password.length <= 0) || !password) {
         setShowPassError(true);
+        setShowSpinner(false);
       } else {
         setShowPassError(false);
       }
-      setShowSpinner(false);
     }
   };
   return (

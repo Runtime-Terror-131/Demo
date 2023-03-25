@@ -81,7 +81,12 @@ const setUserType = async (UID, type, name) => {
 //     console.log(e);
 //   }
 // };
-const getUserData = async (UID, setLoginUserType, setLoginUserName) => {
+const getUserData = async (
+  UID,
+  setLoginUserType,
+  setLoginUserName,
+  setShowSpinner
+) => {
   try {
     // Wait for 2 seconds before getting user data
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -93,10 +98,12 @@ const getUserData = async (UID, setLoginUserType, setLoginUserName) => {
       setLoginUserType(user.userType);
       setLoginUserName(user.name);
     } else {
-      console.log("User not found.");
+      throw "User not found. this could be related to old emails that are not available in our User Schema in vendia";
     }
   } catch (e) {
     console.log(e);
+    setShowSpinner(false);
+    return e;
   }
 };
 const useJaneHopkins = () => {

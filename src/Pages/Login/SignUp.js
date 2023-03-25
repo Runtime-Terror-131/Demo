@@ -53,7 +53,7 @@ export default function SignUp({ loginUser, setLoginUser }) {
         if (result === true) {
           console.log("working correctly");
           setLoginUser(user);
-          setShowSpinner(false);
+          // setShowSpinner(false);
         }
       }
     } else {

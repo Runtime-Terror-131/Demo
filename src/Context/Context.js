@@ -15,6 +15,7 @@ export function ContextProvider({ children }) {
   const [showSpinner, setShowSpinner] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
   const [confirmDeletePatient, setConfirmDeletePatient] = useState(false);
+  const [userReadyToSeeApp, setUserReadyToSeeApp] = useState(false);
   const updateUserType = (value) => {
     setUserType(value);
   };

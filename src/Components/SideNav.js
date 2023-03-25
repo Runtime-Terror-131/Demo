@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import { NavLink } from "react-router-dom";
 import { useContextValues } from "../Context/Context";
+import { UserTypeConst } from "./Util/StaticConst";
 export default function SideNav() {
   const { portalNamePath, setShowSpinner, loginUserType } = useContextValues();
-  // const patientTabClicked = () => {
-  //   setShowSpinner(true);
-  // };
+  const [portalUserType, setPortalUserType] = useState();
+
+  useEffect(() => {
+    if (loginUserType) {
+      setPortalUserType(loginUserType);
+    }
+  }, [loginUserType]);
   return (
     <Nav defaultActiveKey="/home" className="fw-bold nav-height side-nav">
       <Nav.Link
@@ -26,7 +31,8 @@ export default function SideNav() {
         </svg>
         <span>Home</span>
       </Nav.Link>
-      {portalNamePath == "/hopkins" && (
+      {(portalUserType == UserTypeConst.hopkinsAdmin ||
+        portalUserType == UserTypeConst.hopkinsDoctor) && (
         <>
           <Nav.Link
             to={"/hopkins/patient"}
@@ -87,7 +93,7 @@ export default function SideNav() {
           </Nav.Link>
         </>
       )}
-      {portalNamePath == "/bavaria" && (
+      {portalUserType == UserTypeConst.bavaria && (
         <>
           <Nav.Link
             to={"/bavaria/drugInfo"}
@@ -109,7 +115,7 @@ export default function SideNav() {
           </Nav.Link>
         </>
       )}
-      {portalNamePath == "/fda" && (
+      {portalUserType == UserTypeConst.fda && (
         <>
           <Nav.Link
             to={"/fda/studyInfo"}

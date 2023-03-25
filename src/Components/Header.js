@@ -1,17 +1,15 @@
+import { UserComponentFactory } from "ag-grid-community";
 import React, { useEffect, useState } from "react";
 import { Container, Navbar, Nav, Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import { logout } from "../Config/Firebase-Config";
+import { useContextValues } from "../Context/Context";
 import logo from "../images/logo.gif";
 import Avatar from "./Avatar";
 export default function Header() {
-  // const { userType, portalNamePath } = useContextValues();
-  // const logoutUser = () => {
-  //   logout();
-  //   if (window.location) {
-  //     window.location.href = "/"; //window.location.reload();
-  //   }
-  // };
+  const { loginUserType } = useContextValues();
+  useEffect(() => {
+    console.log(loginUserType);
+  }, [loginUserType]);
+
   return (
     <Navbar expand="lg" sticky="top" className="box-shadow header-background ">
       <Container>

@@ -2,6 +2,7 @@ import { UserTypeConst } from "./StaticConst";
 // those if statements needs another nested if statement to check user type, once we start using userType context, we don't
 // need to reassign the colors every time we click
 export const updateColor = (type) => {
+  type = parseInt(type);
   if (
     type === UserTypeConst.hopkinsAdmin ||
     type === UserTypeConst.hopkinsDoctor
