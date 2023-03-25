@@ -28,6 +28,7 @@ function App() {
     setLoginUserType,
     setLoginUserName,
     loginUserType,
+    setHideBackground,
   } = useContextValues();
 
   useLayoutEffect(() => {
@@ -58,6 +59,7 @@ function App() {
     if (loginUserType) {
       updateColor(loginUserType);
       setShowSpinner(false);
+      setHideBackground(false);
     }
   }, [loginUserType]);
   return (

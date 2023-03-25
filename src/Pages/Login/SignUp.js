@@ -10,37 +10,15 @@ export default function SignUp({ loginUser, setLoginUser }) {
   const [type, setType] = useState("");
   const [showUserError, setShowUserError] = useState(false);
   const [showPassError, setShowPassError] = useState(false);
-  const { setShowSpinner } = useContextValues();
+  const { setShowSpinner, setHideBackground } = useContextValues();
   const { setUserType } = useJaneHopkins();
   const userError = "Issue with Email";
   const PassError = "Issue with Password";
 
   const submitForm = async () => {
+    setHideBackground(true);
     setShowSpinner(true);
     if (email && email.length > 0 && password && password.length > 0) {
-      // register(
-      //   email,
-      //   password,
-      //   setLoginUser,
-      //   setShowUserError,
-      //   setShowSpinner
-      // ).then((user) => {
-      //   console.log("user registered succesfully and the user is  ");
-      //   console.log(user);
-      //   setUserType(user.uid, type, name)
-      //     .then((result) => {
-      //       if (result == true) {
-      //         console.log("user added");
-      //         return user;
-      //       } else {
-      //         console.log(result);
-      //       }
-      //     })
-      //     .then((user) => {
-      //       setLoginUser(user);
-      //       setShowSpinner(false);
-      //     });
-      // });
       let user = await register(
         email,
         password,
@@ -68,6 +46,7 @@ export default function SignUp({ loginUser, setLoginUser }) {
         setShowPassError(false);
       }
       setShowSpinner(false);
+      setHideBackground(false);
     }
   };
   return (

@@ -16,6 +16,7 @@ export function ContextProvider({ children }) {
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
   const [confirmDeletePatient, setConfirmDeletePatient] = useState(false);
   const [userReadyToSeeApp, setUserReadyToSeeApp] = useState(false);
+  const [hideBackground, setHideBackground] = useState(false);
   const updateUserType = (value) => {
     setUserType(value);
   };
@@ -42,6 +43,8 @@ export function ContextProvider({ children }) {
         setShowDeleteWarning,
         confirmDeletePatient,
         setConfirmDeletePatient,
+        hideBackground,
+        setHideBackground,
       }}
     >
       {children}
