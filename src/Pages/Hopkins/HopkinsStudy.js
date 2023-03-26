@@ -66,11 +66,11 @@ export default function Study() {
       field: "detials",
       cellRenderer: ButtonCell,
     },
+    { field: "studyName" },
     {
       field: "status",
       cellRenderer: Legend,
     },
-    { field: "studyName" },
     // { field: "status" },
     { field: "startDate" },
     { field: "endDate" },
@@ -143,7 +143,7 @@ export default function Study() {
           </Card>
         </Col>
         <Col lg={4}>
-          <Notifications />
+          <Notifications studyData={studyData} />
         </Col>
       </Row>
       <Row>
