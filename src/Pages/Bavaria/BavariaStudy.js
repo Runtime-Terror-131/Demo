@@ -3,7 +3,8 @@ import { Row, Col, Card, Alert, Button } from "react-bootstrap";
 import { InfoCards, Notifications } from "../../Components";
 import { AgGridReact } from "ag-grid-react";
 import { useContextValues } from "../../Context/Context";
-import { useFDA } from "../../Config/FDA-Config";
+import { useBavaria } from "../../Config/Bavaria-Config";
+
 import { NavLink } from "react-router-dom";
 const ButtonCell = (props) => {
   const buttonClicked = () => {
@@ -58,10 +59,10 @@ const Legend = (props) => {
     </Alert>
   );
 };
-export default function StudyInfo() {
+export default function BavariaStudy() {
   const [studyData, setStudyData] = useState();
   const { setShowSpinner } = useContextValues();
-  const { getStudyList } = useFDA();
+  const { getStudyList } = useBavaria();
   const [columnDefs] = useState([
     {
       field: "detials",

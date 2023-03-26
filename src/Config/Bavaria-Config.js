@@ -15,8 +15,17 @@ const getDrugList = async () => {
     return e;
   }
 };
+const getStudyList = async () => {
+  try {
+    let studies = entities.study.list();
+    return studies;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
 const useBavaria = () => {
-  return { getDrugList };
+  return { getDrugList, getStudyList };
 };
 
 export { useBavaria };

@@ -17,6 +17,8 @@ import {
   StudyInfo,
   EditPatient,
   HopkinsStudy,
+  BavariaStudy,
+  HopkinsStudyDetails,
 } from "../Pages";
 export default function AllRoutes() {
   return (
@@ -32,9 +34,14 @@ export default function AllRoutes() {
           <Route path="StudyInfo" element={<HopkinsStudy />} />
         </Route>
         <Route path="hopkins/patient/details" element={<PatientDetails />} />
+        <Route
+          path="hopkins/studyinfo/details"
+          element={<HopkinsStudyDetails />}
+        />
         <Route path="bavaria" element={<Bavaria />}>
           <Route path="home" element={<BavariaHome />} />
           <Route path="drugInfo" element={<DrugInfo />} />
+          <Route path="studyInfo" element={<BavariaStudy />} />
         </Route>
         <Route path="fda" element={<FDA />}>
           <Route path="Home" element={<FDAHome />} />

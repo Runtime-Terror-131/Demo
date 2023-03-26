@@ -87,7 +87,7 @@ export default function SignUp({ loginUser, setLoginUser }) {
         >
           <option>Select Account Type</option>
           <option value="1">Hopkins Admin</option>
-          <option value="2">Bavaria Doctor</option>
+          <option value="2">Hopkins Doctor</option>
           <option value="3">Bavaria</option>
           <option value="4">FDA</option>
         </Form.Select>

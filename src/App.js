@@ -29,6 +29,7 @@ function App() {
     setLoginUserName,
     loginUserType,
     setHideBackground,
+    setPortalNamePath,
   } = useContextValues();
 
   useLayoutEffect(() => {
@@ -48,7 +49,8 @@ function App() {
           JSON.parse(localStorage.getItem("userData")).uid,
           setLoginUserType,
           setLoginUserName,
-          setShowSpinner
+          setShowSpinner,
+          setPortalNamePath
         );
       } catch (e) {
         console.log(e);

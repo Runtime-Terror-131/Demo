@@ -39,16 +39,20 @@ export default function DrugInfo() {
           </Card>
         </Col>
       </Row>
-      <div
-        className="ag-theme-alpine"
-        style={{ marginTop: "5px", marginBottom: "5px" }}
-      >
-        <AgGridReact
-          rowData={drugData}
-          columnDefs={columnDefs}
-          domLayout="autoHeight"
-        ></AgGridReact>
-      </div>
+      <Row>
+        <Col lg={5}>
+          <div
+            className="ag-theme-alpine"
+            style={{ marginTop: "5px", marginBottom: "5px" }}
+          >
+            <AgGridReact
+              rowData={drugData}
+              columnDefs={columnDefs}
+              domLayout="autoHeight"
+            ></AgGridReact>
+          </div>
+        </Col>
+      </Row>
     </div>
   );
 }

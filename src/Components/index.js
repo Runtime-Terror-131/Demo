@@ -6,6 +6,8 @@ import { BackButton } from "./Util/BackButton";
 import LoadingSpinner from "./Util/LoadingSpinner";
 import DeleteModel from "./DeleteModel";
 import Breadcrumbs from "./Util/Breadcrumbs";
+import InfoCards from "./InfoCards";
+import Notifications from "./Notifications";
 export {
   Header,
   SideNav,
@@ -15,4 +17,6 @@ export {
   LoadingSpinner,
   DeleteModel,
   Breadcrumbs,
+  InfoCards,
+  Notifications,
 };

@@ -1,5 +1,5 @@
 import { createVendiaClient } from "@vendia/client";
-
+import { UserTypeConst } from "../Components/Util/StaticConst";
 const client = createVendiaClient({
   apiUrl: `
   https://sbdvivo3e2.execute-api.us-west-2.amazonaws.com/graphql/`,
@@ -59,33 +59,13 @@ const setUserType = async (UID, type, name) => {
     return error.message;
   }
 };
-// const getUserData = (UID, setLoginUserType, setLoginUserName) => {
-//   try {
-//     // there is an issue here when registering a new email, user sometimes is a promise stil even inside
-//     entities.user
-//       .list()
-//       .then((result) => {
-//         let user = result.items.filter((item) => item.UserUID == UID)[0];
-//         return user;
-//       })
-//       .then((user) => {
-//         if (user != null) {
-//           setLoginUserType(user.UserUID);
-//           setLoginUserName(user.name);
-//         } else {
-//           console.log("user promise is not resolved");
-//           console.log(user);
-//         }
-//       });
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
+
 const getUserData = async (
   UID,
   setLoginUserType,
   setLoginUserName,
-  setShowSpinner
+  setShowSpinner,
+  setPortalNamePath
 ) => {
   try {
     // Wait for 2 seconds before getting user data
@@ -97,12 +77,39 @@ const getUserData = async (
     if (user) {
       setLoginUserType(user.userType);
       setLoginUserName(user.name);
+      let userPath =
+        user.userType == UserTypeConst.hopkinsAdmin ||
+        user.userType == UserTypeConst.hopkinsDoctor
+          ? "/hopkins"
+          : user.userType == UserTypeConst.bavaria
+          ? "/bavaria"
+          : user.userType == UserTypeConst.fda
+          ? "/fda"
+          : "/hopkins";
+      setPortalNamePath(userPath);
     } else {
       throw "User not found. this could be related to old emails that are not available in our User Schema in vendia";
     }
   } catch (e) {
     console.log(e);
     setShowSpinner(false);
+    return e;
+  }
+};
+const getStudyList = async () => {
+  try {
+    let studies = entities.study.list();
+    return studies;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
+const getStudyByID = async (uuid) => {
+  try {
+    const study = await entities.study.get(uuid);
+    return study;
+  } catch (e) {
     return e;
   }
 };
@@ -116,6 +123,8 @@ const useJaneHopkins = () => {
     deletePatient,
     setUserType,
     getUserData,
+    getStudyList,
+    getStudyByID,
   };
 };
 
