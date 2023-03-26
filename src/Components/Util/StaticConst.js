@@ -5,4 +5,5 @@ const StudyStatusConst = {
   Completed: 3,
   Canceled: 4,
 };
+
 export { UserTypeConst, StudyStatusConst };

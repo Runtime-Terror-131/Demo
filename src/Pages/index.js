@@ -16,7 +16,10 @@ import StudyInfo from "./FDA/StudyInfo";
 import DrugInfo from "./Bavaria/DrugInfo";
 import HopkinsStudy from "./Hopkins/HopkinsStudy";
 import BavariaStudy from "./Bavaria/BavariaStudy";
+import BavariaStudyDetails from "./Bavaria/BavariaStudyDetails";
 import HopkinsStudyDetails from "./Hopkins/HopkinsStudyDetails";
+import FDAPatient from "./FDA/FDAPatient";
+import FDAStudyDetails from "./FDA/FDAStudyDetails";
 export {
   Bavaria,
   FDA,
@@ -36,5 +39,8 @@ export {
   DrugInfo,
   HopkinsStudy,
   BavariaStudy,
+  BavariaStudyDetails,
   HopkinsStudyDetails,
+  FDAPatient,
+  FDAStudyDetails,
 };

@@ -8,6 +8,8 @@ import DeleteModel from "./DeleteModel";
 import Breadcrumbs from "./Util/Breadcrumbs";
 import InfoCards from "./InfoCards";
 import Notifications from "./Notifications";
+import Legends from "./Legends";
+import { StudyStatusConst } from "./Util/StaticConst";
 export {
   Header,
   SideNav,
@@ -19,4 +21,6 @@ export {
   Breadcrumbs,
   InfoCards,
   Notifications,
+  Legends,
+  StudyStatusConst,
 };

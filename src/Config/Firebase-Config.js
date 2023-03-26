@@ -26,7 +26,8 @@ const register = async (
   password,
   setUser,
   setShowUserError,
-  setShowSpinner
+  setShowSpinner,
+  setHideBackground
 ) => {
   try {
     let userCredential = await createUserWithEmailAndPassword(
@@ -38,7 +39,8 @@ const register = async (
     return user;
   } catch (error) {
     setShowUserError(error.message);
-    //setShowSpinner(false);
+    setShowSpinner(false);
+    setHideBackground(false);
   }
 };
 const loginUser = async (
@@ -77,7 +79,6 @@ const checkIfUserStillLoggedIn = (user, setUser) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setUser(user);
-      console.log(user);
       localStorage.setItem("userData", JSON.stringify(user));
       //const uid = user.uid;
       // ...

@@ -113,6 +113,7 @@ const getStudyByID = async (uuid) => {
     return e;
   }
 };
+
 const useJaneHopkins = () => {
   return {
     entities,

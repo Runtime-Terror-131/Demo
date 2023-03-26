@@ -24,7 +24,8 @@ export default function SignUp({ loginUser, setLoginUser }) {
         password,
         setLoginUser,
         setShowUserError,
-        setShowSpinner
+        setShowSpinner,
+        setHideBackground
       );
       if (user) {
         let result = await setUserType(user.uid, type, name);

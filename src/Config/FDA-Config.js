@@ -16,8 +16,41 @@ const getStudyList = async () => {
     return false;
   }
 };
+const getStudyByID = async (uuid) => {
+  try {
+    const study = await entities.study.get(uuid);
+    return study;
+  } catch (e) {
+    return e;
+  }
+};
+const approveStudy = async (studyData) => {
+  try {
+    let study = await entities.study.update({
+      _id: studyData._id,
+      agreedByFDA: true,
+      status: studyData.agreedByBavaria ? "2" : studyData.status,
+    });
+
+    return study;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
+const getPatientList = async () => {
+  try {
+    let patients = await entities.patient.list();
+
+    return patients.items.filter((item) => item.isEligible);
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
+
 const useFDA = () => {
-  return { getStudyList };
+  return { getStudyList, approveStudy, getStudyByID, getPatientList };
 };
 
 export { useFDA };

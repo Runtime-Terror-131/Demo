@@ -15,7 +15,7 @@ const ButtonCell = (props) => {
   };
   return (
     <NavLink
-      to={"/hopkins/studyinfo/details" + "?id=" + props.data._id}
+      to={"/bavaria/studyinfo/details" + "?id=" + props.data._id}
       id={`detailsLink-${props.data.name}`}
       style={{ textDecoration: "none" }}
     >
@@ -105,16 +105,6 @@ export default function BavariaStudy() {
             <Card.Body>
               this is where the new study search stuff should go
             </Card.Body>
-            <Card.Footer>
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <Button variant="primary">
-                  Approve Current Pending Studies
-                </Button>
-                <Button variant="warning">
-                  Decline Current Pending Studies
-                </Button>
-              </div>
-            </Card.Footer>
           </Card>
         </Col>
         <Col lg={4}>

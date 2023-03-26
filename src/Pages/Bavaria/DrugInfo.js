@@ -34,13 +34,16 @@ export default function DrugInfo() {
           <Card className="box-shadow">
             <Card.Header className="border-bottom-0">Drug</Card.Header>
             <Card.Body>
-              <Button variant="info">Create New Drug</Button>
+              <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+                <Button variant="info">Create New Drug</Button>
+                <Button variant="info">Send Drug list to FDA</Button>
+              </div>
             </Card.Body>
           </Card>
         </Col>
       </Row>
       <Row>
-        <Col lg={5}>
+        <Col lg={6}>
           <div
             className="ag-theme-alpine"
             style={{ marginTop: "5px", marginBottom: "5px" }}

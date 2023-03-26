@@ -24,8 +24,36 @@ const getStudyList = async () => {
     return false;
   }
 };
+const getStudyByID = async (uuid) => {
+  try {
+    const study = await entities.study.get(uuid);
+    return study;
+  } catch (e) {
+    return e;
+  }
+};
+const approveStudy = async (studyData) => {
+  try {
+    let study = await entities.study.update({
+      _id: studyData._id,
+      agreedByBavaria: true,
+      status: studyData.agreedByFDA ? "2" : studyData.status,
+    });
+
+    return study;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
 const useBavaria = () => {
-  return { getDrugList, getStudyList };
+  return {
+    getDrugList,
+    getStudyList,
+    getStudyList,
+    getStudyByID,
+    approveStudy,
+  };
 };
 
 export { useBavaria };

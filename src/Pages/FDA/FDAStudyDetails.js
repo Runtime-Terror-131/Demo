@@ -1,11 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Card, Row, Col, Spinner, Button } from "react-bootstrap";
 import { Breadcrumbs } from "../../Components";
-import { useJaneHopkins } from "../../Config/Hopkins-Config";
+import { useFDA } from "../../Config/FDA-Config";
+import { useContextValues } from "../../Context/Context";
 
-export default function HopkinsStudyDetails() {
-  const { getStudyByID } = useJaneHopkins();
+export default function FDAStudyDetails() {
+  const { getStudyByID, approveStudy } = useFDA();
+  const { setShowSpinner } = useContextValues();
   const [studyData, setStudyData] = useState();
+  const approveFDAStudy = () => {
+    try {
+      setShowSpinner(true);
+      approveStudy(studyData).then((result) => {
+        if (!result) {
+        } else {
+          setStudyData(result.result);
+          setShowSpinner(false);
+        }
+      });
+    } catch (e) {
+      setShowSpinner(false);
+      console.log(e);
+    }
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
     let queryString = window.location.search;
@@ -42,8 +59,14 @@ export default function HopkinsStudyDetails() {
         </Card.Body>
         <Card.Footer>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <Button variant="warning" disabled>
-              Send Valid Patient list to FDA for Approvel
+            <Button
+              variant="success"
+              onClick={approveFDAStudy}
+              disabled={studyData && studyData.agreedByFDA ? true : false}
+            >
+              {studyData && studyData.agreedByFDA
+                ? "Study Already Approved"
+                : "Approve Study"}
             </Button>
           </div>
         </Card.Footer>

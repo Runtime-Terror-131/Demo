@@ -14,7 +14,7 @@ const ButtonCell = (props) => {
   };
   return (
     <NavLink
-      to={"/hopkins/studyinfo/details" + "?id=" + props.data._id}
+      to={"/fda/studyinfo/details" + "?id=" + props.data._id}
       id={`detailsLink-${props.data.name}`}
       style={{ textDecoration: "none" }}
     >
@@ -107,10 +107,10 @@ export default function StudyInfo() {
             <Card.Footer>
               <div style={{ display: "flex", justifyContent: "space-around" }}>
                 <Button variant="primary">
-                  Approve Current Pending Studies
+                  Approve All Current Pending Studies
                 </Button>
-                <Button variant="warning">
-                  Decline Current Pending Studies
+                <Button variant="danger">
+                  Decline All Current Pending Studies
                 </Button>
               </div>
             </Card.Footer>

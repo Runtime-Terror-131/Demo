@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Card, Alert, Button } from "react-bootstrap";
-import { InfoCards, Notifications } from "../../Components";
+import { InfoCards, Notifications, StudyStatusConst } from "../../Components";
 import { AgGridReact } from "ag-grid-react";
 import { useContextValues } from "../../Context/Context";
 import { useJaneHopkins } from "../../Config/Hopkins-Config";
@@ -54,6 +54,11 @@ const Legend = (props) => {
 };
 export default function Study() {
   const [studyData, setStudyData] = useState();
+  const [pendingStudies, setPendingStudies] = useState(0);
+  const [activeStudies, setActiveStudies] = useState(0);
+  const [completedStudies, setCompletedStudies] = useState(0);
+  const [canceledStudies, setCanceledStudies] = useState(0);
+
   const { setShowSpinner } = useContextValues();
   const { getStudyList } = useJaneHopkins();
   const [columnDefs] = useState([
@@ -82,6 +87,23 @@ export default function Study() {
         })
         .then((items) => {
           setStudyData(items);
+          let pending = 0,
+            active = 0,
+            complete = 0,
+            canceled = 0;
+          items.forEach((element) => {
+            element.status == StudyStatusConst.Pending
+              ? pending++
+              : element.status == StudyStatusConst.Active
+              ? active++
+              : element.status == StudyStatusConst.Completed
+              ? complete++
+              : canceled++;
+          });
+          setPendingStudies(pending);
+          setActiveStudies(active);
+          setCompletedStudies(complete);
+          setCanceledStudies(canceled);
           setShowSpinner(false);
         });
     } catch (e) {
@@ -90,7 +112,12 @@ export default function Study() {
   }, []);
   return (
     <div>
-      <InfoCards />
+      <InfoCards
+        pending={pendingStudies}
+        active={activeStudies}
+        completed={completedStudies}
+        canceled={canceledStudies}
+      />
       <br />
       <Row>
         <Col lg={8}>
@@ -99,7 +126,20 @@ export default function Study() {
             <Card.Body>
               this is where the new study search stuff should go
             </Card.Body>
-            <Card.Footer></Card.Footer>
+            <Card.Footer>
+              <Button variant="warning" type="button" className="m-2">
+                <NavLink
+                  to={"/hopkins/createstudy"}
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                    fontWeight: "600",
+                  }}
+                >
+                  Create New Study
+                </NavLink>
+              </Button>
+            </Card.Footer>
           </Card>
         </Col>
         <Col lg={4}>

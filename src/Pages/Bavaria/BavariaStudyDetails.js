@@ -1,11 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Card, Row, Col, Spinner, Button } from "react-bootstrap";
 import { Breadcrumbs } from "../../Components";
-import { useJaneHopkins } from "../../Config/Hopkins-Config";
+import { useBavaria } from "../../Config/Bavaria-Config";
+import { useContextValues } from "../../Context/Context";
 
-export default function HopkinsStudyDetails() {
-  const { getStudyByID } = useJaneHopkins();
+export default function BavariaStudyDetails() {
+  const { getStudyByID, approveStudy } = useBavaria();
+  const { setShowSpinner } = useContextValues();
   const [studyData, setStudyData] = useState();
+  const approveBavariaStudy = () => {
+    try {
+      setShowSpinner(true);
+      approveStudy(studyData).then((result) => {
+        if (!result) {
+        } else {
+          setStudyData(result.result);
+          setShowSpinner(false);
+        }
+      });
+    } catch (e) {
+      setShowSpinner(false);
+      console.log(e);
+    }
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
     let queryString = window.location.search;
@@ -42,8 +59,14 @@ export default function HopkinsStudyDetails() {
         </Card.Body>
         <Card.Footer>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <Button variant="warning" disabled>
-              Send Valid Patient list to FDA for Approvel
+            <Button
+              variant="success"
+              onClick={approveBavariaStudy}
+              disabled={studyData && studyData.agreedByBavaria ? true : false}
+            >
+              {studyData && studyData.agreedByBavaria
+                ? "Study already approved"
+                : "Approve Study"}
             </Button>
           </div>
         </Card.Footer>
