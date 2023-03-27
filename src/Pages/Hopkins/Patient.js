@@ -9,13 +9,6 @@ import { useContextValues } from "../../Context/Context";
 import { useJaneHopkins } from "../../Config/Hopkins-Config";
 const ButtonCell = (props) => {
   const { setPatientDetails } = useContextValues();
-  const buttonClicked = () => {
-    let link = document.getElementById(`detailsLink-${props.data.name}`);
-    //localStorage.setItem("patientID", this.props.data.patient_ID);
-    setPatientDetails(props.data);
-    link.click();
-    //this.props.clicked(this.props.value);
-  };
   return (
     <NavLink
       to={"/hopkins/patient/details" + "?id=" + props.data._id}
@@ -50,7 +43,11 @@ export default function Patient() {
     if (getAll) {
       getAll()
         .then((result) => {
-          return result.items.flat();
+          if (result.items.length > 0) {
+            return result.items.flat();
+          } else {
+            console.log(result);
+          }
         })
         .then((flattedResult) => {
           setPatientList(flattedResult);
@@ -118,15 +115,7 @@ export default function Patient() {
     { field: "name" },
     { field: "Age" },
     { field: "dob" },
-    { field: "address" },
     { field: "insuranceNumber" },
-    { field: "height" },
-    { field: "weight" },
-    { field: "bloodPressure" },
-    // { field: "bloodType" },
-    { field: "temperature" },
-    { field: "oxygenSaturation" },
-    { field: "patient_ID" },
     {
       field: "allergies",
       valueGetter: (params) => {
@@ -139,22 +128,17 @@ export default function Patient() {
         return JSON.stringify(params.data.currentMedications);
       },
     },
-    { field: "familyHistory" },
-    { field: "currentlyEmployed" },
-    { field: "currentlyInsured" },
-    {
-      field: "icdHealthCodes",
-      valueGetter: (params) => {
-        return JSON.stringify(params.data.icdHealthCodes);
-      },
-    },
   ];
   useEffect(() => {
     setShowSpinner(true);
     if (getAll) {
       getAll()
         .then((result) => {
-          return result.items.flat();
+          if (result.items.length > 0) {
+            return result.items.flat();
+          } else {
+            console.log(result);
+          }
         })
         .then((flattedResult) => {
           setPatientList(flattedResult);

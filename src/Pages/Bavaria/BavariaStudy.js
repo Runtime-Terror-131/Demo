@@ -3,7 +3,8 @@ import { Row, Col, Card, Alert, Button } from "react-bootstrap";
 import { InfoCards, Notifications } from "../../Components";
 import { AgGridReact } from "ag-grid-react";
 import { useContextValues } from "../../Context/Context";
-import { useFDA } from "../../Config/FDA-Config";
+import { useBavaria } from "../../Config/Bavaria-Config";
+
 import { NavLink } from "react-router-dom";
 const ButtonCell = (props) => {
   const buttonClicked = () => {
@@ -14,7 +15,7 @@ const ButtonCell = (props) => {
   };
   return (
     <NavLink
-      to={"/fda/studyinfo/details" + "?id=" + props.data._id}
+      to={"/bavaria/studyinfo/details" + "?id=" + props.data._id}
       id={`detailsLink-${props.data.name}`}
       style={{ textDecoration: "none" }}
     >
@@ -58,10 +59,10 @@ const Legend = (props) => {
     </Alert>
   );
 };
-export default function StudyInfo() {
+export default function BavariaStudy() {
   const [studyData, setStudyData] = useState();
   const { setShowSpinner } = useContextValues();
-  const { getStudyList } = useFDA();
+  const { getStudyList } = useBavaria();
   const [columnDefs] = useState([
     {
       field: "detials",
@@ -104,16 +105,6 @@ export default function StudyInfo() {
             <Card.Body>
               this is where the new study search stuff should go
             </Card.Body>
-            <Card.Footer>
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <Button variant="primary">
-                  Approve All Current Pending Studies
-                </Button>
-                <Button variant="danger">
-                  Decline All Current Pending Studies
-                </Button>
-              </div>
-            </Card.Footer>
           </Card>
         </Col>
         <Col lg={4}>

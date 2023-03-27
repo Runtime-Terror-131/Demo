@@ -3,13 +3,54 @@ import { createVendiaClient } from "@vendia/client";
 const client = createVendiaClient({
   apiUrl: `https://hrkl2vlns8.execute-api.us-west-2.amazonaws.com/graphql/`,
   websocketUrl: `wss://gpp2p4q229.execute-api.us-west-2.amazonaws.com/graphql`,
-  apiKey: `27SuZcZX8XstCb5jEyXtHdNhjgTgdxecrH8DN3L8V9Bk`,
+  apiKey: `3ZNrSndeQpVvJCEFrSv7U85iNzEm57qnBQ6gfdGJpB4Q`,
 });
 
 const { entities } = client;
+const getStudyList = async () => {
+  try {
+    let studies = entities.study.list();
+    return studies;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
+const getStudyByID = async (uuid) => {
+  try {
+    const study = await entities.study.get(uuid);
+    return study;
+  } catch (e) {
+    return e;
+  }
+};
+const approveStudy = async (studyData) => {
+  try {
+    let study = await entities.study.update({
+      _id: studyData._id,
+      agreedByFDA: true,
+      status: studyData.agreedByBavaria ? "2" : studyData.status,
+    });
+
+    return study;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
+const getPatientList = async () => {
+  try {
+    let patients = await entities.patient.list();
+
+    return patients.items.filter((item) => item.isEligible);
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
 
 const useFDA = () => {
-  return { entities };
+  return { getStudyList, approveStudy, getStudyByID, getPatientList };
 };
 
 export { useFDA };

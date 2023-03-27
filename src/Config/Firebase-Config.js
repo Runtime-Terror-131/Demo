@@ -6,6 +6,7 @@ import {
   onAuthStateChanged,
   getAuth,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -25,15 +26,21 @@ const register = async (
   password,
   setUser,
   setShowUserError,
-  setShowSpinner
+  setShowSpinner,
+  setHideBackground
 ) => {
   try {
-    let user = await createUserWithEmailAndPassword(auth, email, password);
-    setUser(user);
-    setShowSpinner(false);
+    let userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+    return user;
   } catch (error) {
     setShowUserError(error.message);
     setShowSpinner(false);
+    setHideBackground(false);
   }
 };
 const loginUser = async (
@@ -46,10 +53,13 @@ const loginUser = async (
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      console.log(user);
       setUser(user);
+      //setShowSpinner(false);
+      return user;
       // ...
-      setShowSpinner(false);
     })
+
     .catch((error) => {
       const errorCode = error.code;
       setLoginErrorMessage(error.message);
@@ -70,7 +80,7 @@ const checkIfUserStillLoggedIn = (user, setUser) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setUser(user);
-      localStorage.setItem("userData", user);
+      localStorage.setItem("userData", JSON.stringify(user));
       //const uid = user.uid;
       // ...
     } else {

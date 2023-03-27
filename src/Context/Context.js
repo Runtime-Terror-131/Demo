@@ -7,12 +7,16 @@ export function useContextValues() {
 export function ContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [userType, setUserType] = useState(1);
+  const [loginUserType, setLoginUserType] = useState(1);
+  const [loginUserName, setLoginUserName] = useState();
   const [portalNamePath, setPortalNamePath] = useState("/hopkins");
   const [loginErrorMessage, setLoginErrorMessage] = useState(null);
   const [patientDetails, setPatientDetails] = useState(null);
   const [showSpinner, setShowSpinner] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
   const [confirmDeletePatient, setConfirmDeletePatient] = useState(false);
+  const [userReadyToSeeApp, setUserReadyToSeeApp] = useState(false);
+  const [hideBackground, setHideBackground] = useState(false);
   const updateUserType = (value) => {
     setUserType(value);
   };
@@ -23,6 +27,10 @@ export function ContextProvider({ children }) {
         updateUserType,
         currentUser,
         setCurrentUser,
+        loginUserType,
+        setLoginUserType,
+        loginUserName,
+        setLoginUserName,
         portalNamePath,
         setPortalNamePath,
         loginErrorMessage,
@@ -35,6 +43,8 @@ export function ContextProvider({ children }) {
         setShowDeleteWarning,
         confirmDeletePatient,
         setConfirmDeletePatient,
+        hideBackground,
+        setHideBackground,
       }}
     >
       {children}

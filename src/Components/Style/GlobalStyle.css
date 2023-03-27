@@ -36,6 +36,9 @@
 /* .navbar-toggler {
   border-color: white;
 } */
+.login-switch-link:hover {
+  cursor: pointer;
+}
 .sidenav-navlink {
   text-align: center;
   color: white;
@@ -163,6 +166,51 @@
 }
 .breadcrumbs .crumb:last-child:after {
   display: none;
+}
+/*
+avatar section
+*/
+
+.avatar-container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: 5px;
+}
+.avatar-image {
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 50%;
+  margin-right: 5px;
+  background-color: #881288;
+  color: white;
+  font-size: larger;
+  font-weight: 700;
+  text-align: center;
+  padding: 7px;
+}
+.avatar-info {
+  display: flex;
+  align-items: center;
+}
+.avatar-image:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+.avatar-info:hover {
+  cursor: pointer;
+}
+.dropdown-item:hover {
+  background: inherit;
+}
+.avatar-text {
+  color: white;
+  font-weight: 600;
+  margin: 5px;
+}
+.avatar-menu-arrow {
+  margin: 2px;
 }
 
 /*.Spinner-container {
