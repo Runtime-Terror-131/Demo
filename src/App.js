@@ -43,6 +43,8 @@ function App() {
     };
   }, []);
   useEffect(() => {
+    setHideBackground(true);
+    setShowSpinner(true);
     if (user) {
       try {
         getUserData(

@@ -113,7 +113,32 @@ const getStudyByID = async (uuid) => {
     return e;
   }
 };
-
+const SendPatientListToFDA = async (
+  list,
+  setConfirmSendPatientList,
+  setShowSpinner
+) => {
+  try {
+    // list.forEach(async (item) => {
+    //   let patient = await entities.patient.get(item._id);
+    //   patient.isEligible = true;
+    //   delete patient["_owner"];
+    //   await entities.patient.update(patient);
+    // });
+    const promises = list.map(async (item) => {
+      let patient = await entities.patient.get(item._id);
+      patient.isEligible = true;
+      delete patient["_owner"];
+      return entities.patient.update(patient);
+    });
+    setConfirmSendPatientList(false);
+    await Promise.all(promises);
+    setShowSpinner(false);
+  } catch (e) {
+    console.log(e);
+    setConfirmSendPatientList(false);
+  }
+};
 const useJaneHopkins = () => {
   return {
     entities,
@@ -126,6 +151,7 @@ const useJaneHopkins = () => {
     getUserData,
     getStudyList,
     getStudyByID,
+    SendPatientListToFDA,
   };
 };
 

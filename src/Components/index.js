@@ -10,6 +10,8 @@ import InfoCards from "./InfoCards";
 import Notifications from "./Notifications";
 import Legends from "./Legends";
 import { StudyStatusConst } from "./Util/StaticConst";
+import ConfirmationModel from "./ConfirmationModel";
+import StudyConfirmModel from "./StudyConfirmModel";
 export {
   Header,
   SideNav,
@@ -23,4 +25,6 @@ export {
   Notifications,
   Legends,
   StudyStatusConst,
+  ConfirmationModel,
+  StudyConfirmModel,
 };

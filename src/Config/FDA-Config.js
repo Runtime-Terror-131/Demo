@@ -48,7 +48,26 @@ const getPatientList = async () => {
     return false;
   }
 };
-
+// const includePatientsInStudy =  async (
+//   list, studyID
+//   // setConfirmSendPatientList,
+//   setShowSpinner
+// ) => {
+//   try {
+//     const promises = list.map(async (item) => {
+//       let patient = await entities.patient.get(item._id);
+//       patient.studyID = studyID;
+//       delete patient["_owner"];
+//       return entities.patient.update(patient);
+//     });
+//     // setConfirmSendPatientList(false);
+//     await Promise.all(promises);
+//     setShowSpinner(false);
+//   } catch (e) {
+//     console.log(e);
+//     // setConfirmSendPatientList(false);
+//   }
+// };
 const useFDA = () => {
   return { getStudyList, approveStudy, getStudyByID, getPatientList };
 };

@@ -53,7 +53,6 @@ const loginUser = async (
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log(user);
       setUser(user);
       //setShowSpinner(false);
       return user;
