@@ -22,6 +22,7 @@ import {
   FDAPatient,
   FDAStudyDetails,
   BavariaStudyDetails,
+  CreateStudy,
 } from "../Pages";
 export default function AllRoutes() {
   return (
@@ -35,6 +36,7 @@ export default function AllRoutes() {
           <Route path="EditPatient" element={<EditPatient />} />
           <Route path="Reports" element={<Reports />} />
           <Route path="StudyInfo" element={<HopkinsStudy />} />
+          <Route path="CreateStudy" element={<CreateStudy />} />
         </Route>
         <Route path="hopkins/patient/details" element={<PatientDetails />} />
         <Route

@@ -5,16 +5,24 @@ import Form from "react-bootstrap/Form";
 import { useContextValues } from "../Context/Context";
 import { useFDA } from "../Config/FDA-Config";
 
-export default function StudyConfirmModel({ studyList }) {
+export default function StudyConfirmModel({ studyList, patientList }) {
   const {
     showConfirmationStudy,
     setShowConfirmationStudy,
     setConfirmAddStudy,
+    setShowSpinner,
   } = useContextValues();
-
+  const { updatePatientListWithStudyID } = useFDA();
   const handleClose = () => setShowConfirmationStudy(false);
   const handleShow = () => setShowConfirmationStudy(true);
   const updateStudy = () => {
+    setShowSpinner(true);
+    const studyID = document.getElementById("studyConfirmation").value;
+    updatePatientListWithStudyID(studyID, patientList, setShowSpinner).then(
+      (result) => {
+        setShowSpinner(false);
+      }
+    );
     setShowConfirmationStudy(false);
     setConfirmAddStudy(true);
   };
@@ -27,7 +35,10 @@ export default function StudyConfirmModel({ studyList }) {
         </Modal.Header>
         <Modal.Body>Please Pick which active study to use</Modal.Body>
         {studyList ? (
-          <Form.Select aria-label="Default select example">
+          <Form.Select
+            id="studyConfirmation"
+            aria-label="Default select example"
+          >
             {studyList.map((item, i) => {
               return (
                 <option value={item._id} key={i}>

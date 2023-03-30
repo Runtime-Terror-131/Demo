@@ -119,12 +119,6 @@ const SendPatientListToFDA = async (
   setShowSpinner
 ) => {
   try {
-    // list.forEach(async (item) => {
-    //   let patient = await entities.patient.get(item._id);
-    //   patient.isEligible = true;
-    //   delete patient["_owner"];
-    //   await entities.patient.update(patient);
-    // });
     const promises = list.map(async (item) => {
       let patient = await entities.patient.get(item._id);
       patient.isEligible = true;
@@ -137,6 +131,15 @@ const SendPatientListToFDA = async (
   } catch (e) {
     console.log(e);
     setConfirmSendPatientList(false);
+  }
+};
+const createNewStudy = async (study) => {
+  try {
+    await entities.study.add(study);
+    return true;
+  } catch (e) {
+    console.log(e);
+    return false;
   }
 };
 const useJaneHopkins = () => {
@@ -152,6 +155,7 @@ const useJaneHopkins = () => {
     getStudyList,
     getStudyByID,
     SendPatientListToFDA,
+    createNewStudy,
   };
 };
 

@@ -48,7 +48,7 @@ export default function FDAPatient() {
   }, []);
   return (
     <div>
-      <StudyConfirmModel studyList={studyList} />
+      <StudyConfirmModel studyList={studyList} patientList={patientData} />
       <Row>
         <Col lg={6}>
           <Card>

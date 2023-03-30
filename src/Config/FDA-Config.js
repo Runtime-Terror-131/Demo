@@ -68,8 +68,32 @@ const getPatientList = async () => {
 //     // setConfirmSendPatientList(false);
 //   }
 // };
+const updatePatientListWithStudyID = async (studyID, list, setShowSpinner) => {
+  try {
+    console.log(list);
+    const promises = list.map(async (item) => {
+      let patient = await entities.patient.get(item._id);
+      patient.studyID = studyID;
+      delete patient["_owner"];
+      return entities.patient.update(patient);
+    });
+
+    await Promise.all(promises);
+    setShowSpinner(false);
+  } catch (e) {
+    setShowSpinner(false);
+    console.log(e);
+    return e;
+  }
+};
 const useFDA = () => {
-  return { getStudyList, approveStudy, getStudyByID, getPatientList };
+  return {
+    getStudyList,
+    approveStudy,
+    getStudyByID,
+    getPatientList,
+    updatePatientListWithStudyID,
+  };
 };
 
 export { useFDA };
