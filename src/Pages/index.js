@@ -20,6 +20,7 @@ import BavariaStudyDetails from "./Bavaria/BavariaStudyDetails";
 import HopkinsStudyDetails from "./Hopkins/HopkinsStudyDetails";
 import FDAPatient from "./FDA/FDAPatient";
 import FDAStudyDetails from "./FDA/FDAStudyDetails";
+import CreateStudy from "./Hopkins/CreateStudy";
 export {
   Bavaria,
   FDA,
@@ -43,4 +44,5 @@ export {
   HopkinsStudyDetails,
   FDAPatient,
   FDAStudyDetails,
+  CreateStudy,
 };

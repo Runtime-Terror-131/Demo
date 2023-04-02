@@ -113,7 +113,35 @@ const getStudyByID = async (uuid) => {
     return e;
   }
 };
-
+const SendPatientListToFDA = async (
+  list,
+  setConfirmSendPatientList,
+  setShowSpinner
+) => {
+  try {
+    const promises = list.map(async (item) => {
+      let patient = await entities.patient.get(item._id);
+      patient.isEligible = true;
+      delete patient["_owner"];
+      return entities.patient.update(patient);
+    });
+    setConfirmSendPatientList(false);
+    await Promise.all(promises);
+    setShowSpinner(false);
+  } catch (e) {
+    console.log(e);
+    setConfirmSendPatientList(false);
+  }
+};
+const createNewStudy = async (study) => {
+  try {
+    await entities.study.add(study);
+    return true;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
 const useJaneHopkins = () => {
   return {
     entities,
@@ -126,6 +154,8 @@ const useJaneHopkins = () => {
     getUserData,
     getStudyList,
     getStudyByID,
+    SendPatientListToFDA,
+    createNewStudy,
   };
 };
 

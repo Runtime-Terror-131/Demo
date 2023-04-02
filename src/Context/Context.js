@@ -14,6 +14,10 @@ export function ContextProvider({ children }) {
   const [patientDetails, setPatientDetails] = useState(null);
   const [showSpinner, setShowSpinner] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
+  const [showConfirmationWarning, setShowConfirmationWarning] = useState(false);
+  const [ConfirmSendPatientList, setConfirmSendPatientList] = useState(false);
+  const [showConfirmationStudy, setShowConfirmationStudy] = useState(false);
+  const [ConfirmAddStudy, setConfirmAddStudy] = useState(false);
   const [confirmDeletePatient, setConfirmDeletePatient] = useState(false);
   const [userReadyToSeeApp, setUserReadyToSeeApp] = useState(false);
   const [hideBackground, setHideBackground] = useState(false);
@@ -43,6 +47,14 @@ export function ContextProvider({ children }) {
         setShowDeleteWarning,
         confirmDeletePatient,
         setConfirmDeletePatient,
+        showConfirmationWarning,
+        setShowConfirmationWarning,
+        showConfirmationStudy,
+        setShowConfirmationStudy,
+        ConfirmAddStudy,
+        setConfirmAddStudy,
+        ConfirmSendPatientList,
+        setConfirmSendPatientList,
         hideBackground,
         setHideBackground,
       }}

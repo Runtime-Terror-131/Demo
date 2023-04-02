@@ -3,10 +3,15 @@ import { Card, Row, Col, Button } from "react-bootstrap";
 import { AgGridReact } from "ag-grid-react";
 import { useContextValues } from "../../Context/Context";
 import { useFDA } from "../../Config/FDA-Config";
+import { StudyConfirmModel, StudyStatusConst } from "../../Components";
 export default function FDAPatient() {
   const [patientData, setPatientData] = useState();
-  const { setShowSpinner } = useContextValues();
-  const { getPatientList } = useFDA();
+  const [studyList, setStudyList] = useState();
+  const { setShowSpinner, setShowConfirmationStudy } = useContextValues();
+  const { getPatientList, getStudyList } = useFDA();
+  const showPickStudyModel = () => {
+    setShowConfirmationStudy(true);
+  };
   const [columnDefs] = useState([
     { field: "uuid" },
     { field: "_id" },
@@ -29,17 +34,29 @@ export default function FDAPatient() {
     } catch (e) {
       alert(e);
     }
+    try {
+      getStudyList()
+        .then((result) => {
+          return result.items.filter(
+            (item) => item.status == StudyStatusConst.Active
+          );
+        })
+        .then((result) => setStudyList(result));
+    } catch (e) {
+      console.log(e);
+    }
   }, []);
   return (
     <div>
+      <StudyConfirmModel studyList={studyList} patientList={patientData} />
       <Row>
         <Col lg={6}>
           <Card>
             <Card.Header>Eligable Patients</Card.Header>
-            <Card.Body></Card.Body>
+            <Card.Body>Search Fields here</Card.Body>
             <Card.Footer>
               {" "}
-              <Button variant="success" disabled>
+              <Button variant="success" onClick={showPickStudyModel}>
                 Include All participants in Study
               </Button>
             </Card.Footer>

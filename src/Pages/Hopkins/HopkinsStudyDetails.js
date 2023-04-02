@@ -40,13 +40,7 @@ export default function HopkinsStudyDetails() {
             )}
           </Row>
         </Card.Body>
-        <Card.Footer>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <Button variant="warning" disabled>
-              Send Valid Patient list to FDA for Approvel
-            </Button>
-          </div>
-        </Card.Footer>
+        <Card.Footer></Card.Footer>
       </Card>
     </Row>
   );

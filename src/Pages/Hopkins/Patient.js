@@ -7,8 +7,10 @@ import { NavLink } from "react-router-dom";
 import { Location } from "react-router-dom";
 import { useContextValues } from "../../Context/Context";
 import { useJaneHopkins } from "../../Config/Hopkins-Config";
+import { ConfirmationModel } from "../../Components";
 const ButtonCell = (props) => {
   const { setPatientDetails } = useContextValues();
+  const {} = useJaneHopkins();
   return (
     <NavLink
       to={"/hopkins/patient/details" + "?id=" + props.data._id}
@@ -20,11 +22,18 @@ const ButtonCell = (props) => {
     </NavLink>
   );
 };
+
 export default function Patient() {
   const [isPageRendered, setIsPageRendered] = useState(false);
-  const { setPatientDetails, setShowSpinner } = useContextValues();
+  const {
+    setPatientDetails,
+    setShowSpinner,
+    setShowConfirmationWarning,
+    ConfirmSendPatientList,
+    setConfirmSendPatientList,
+  } = useContextValues();
   const [patientList, setPatientList] = useState(null);
-  const { getAll } = useJaneHopkins();
+  const { getAll, SendPatientListToFDA } = useJaneHopkins();
   const gridRef = useRef();
   const defaultColDef = useMemo(() => {
     return {
@@ -32,6 +41,7 @@ export default function Patient() {
       filter: true,
     };
   }, []);
+
   const undo = () => {
     setShowSpinner(true);
     document.getElementById("Name").value = "";
@@ -128,6 +138,7 @@ export default function Patient() {
         return JSON.stringify(params.data.currentMedications);
       },
     },
+    { field: "isEligible" },
   ];
   useEffect(() => {
     setShowSpinner(true);
@@ -147,9 +158,27 @@ export default function Patient() {
         });
     }
   }, []);
-
+  useEffect(() => {
+    if (ConfirmSendPatientList) {
+      setShowSpinner(true);
+      try {
+        let eligiblePatientList = patientList.filter(
+          (item) => item.isEligible == null
+        );
+        SendPatientListToFDA(
+          eligiblePatientList,
+          setConfirmSendPatientList,
+          setShowSpinner
+        );
+      } catch (e) {
+        console.log(e);
+        setShowSpinner(false);
+      }
+    }
+  }, [ConfirmSendPatientList]);
   return (
     <Row>
+      <ConfirmationModel />
       <Col lg={10}>
         <Card className="box-shadow">
           {/* <Row> */}
@@ -221,6 +250,14 @@ export default function Patient() {
                   >
                     Create New Patient
                   </NavLink>
+                </Button>
+                <Button
+                  variant="success"
+                  onClick={() => {
+                    setShowConfirmationWarning(true);
+                  }}
+                >
+                  Send Valid Patient list to FDA for Approvel
                 </Button>
               </div>
               <div className="float-end">

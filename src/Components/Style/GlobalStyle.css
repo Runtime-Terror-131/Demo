@@ -1,14 +1,14 @@
 :root {
   /* Hopkins */
   --hopkins-header-text-color: white;
-  --hopkins-header-background-color: #384e89;
+  --hopkins-header-background-color: #441e5d;
   --hopkins-sidenav-text-color: white;
-  --hopkins-sidenav-background-color: #384e89;
+  --hopkins-sidenav-background-color: #441e5d;
   /* Bavaria */
   --bavaria-header-text-color: white;
-  --bavaria-header-background-color: #825ec0;
+  --bavaria-header-background-color: #543982;
   --bavaria-sidenav-text-color: white;
-  --bavaria-sidenav-background-color: #825ec0;
+  --bavaria-sidenav-background-color: #543982;
   /* FDA  */
   --fda-header-text-color: white;
   --fda-header-background-color: #0a3f73;
@@ -66,7 +66,6 @@
   /*border: 2px solid black;*/
 }
 .footer {
-  font-family: "Regular";
   width: 100%;
   height: 30px;
   border-bottom: 1px solid black;
@@ -291,16 +290,4 @@ avatar section
   .nav-height {
     height: 100%;
   }
-}
-@font-face {
-  font-family: Regular;
-  src: local("../font/MoreSugar-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: Thin;
-  src: local("../font/MoreSugar-Thin.ttf") format("truetype");
-}
-@font-face {
-  font-family: Extras;
-  src: local("../font/MoreSugar-Extras.ttf") format("truetype");
 }
