@@ -16,8 +16,7 @@ const ButtonCell = (props) => {
     <NavLink
       to={"/fda/studyinfo/details" + "?id=" + props.data._id}
       id={`detailsLink-${props.data.name}`}
-      style={{ textDecoration: "none" }}
-    >
+      style={{ textDecoration: "none" }}>
       {" "}
       Details
     </NavLink>
@@ -52,8 +51,7 @@ const Legend = (props) => {
         fontWeight: "bold",
         alignItems: "center",
         flexDirection: "column",
-      }}
-    >
+      }}>
       {status}
     </Alert>
   );
@@ -117,20 +115,18 @@ export default function StudyInfo() {
           </Card>
         </Col>
         <Col lg={4}>
-          <Notifications />
+          <Notifications studyData={studyData} />
         </Col>
       </Row>
       <Row>
         <Col lg={8}>
           <div
             className="ag-theme-alpine"
-            style={{ marginTop: "5px", marginBottom: "5px" }}
-          >
+            style={{ marginTop: "5px", marginBottom: "5px" }}>
             <AgGridReact
               rowData={studyData}
               columnDefs={columnDefs}
-              domLayout="autoHeight"
-            ></AgGridReact>
+              domLayout="autoHeight"></AgGridReact>
           </div>
         </Col>
       </Row>
