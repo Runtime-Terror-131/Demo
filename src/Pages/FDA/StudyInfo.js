@@ -58,7 +58,7 @@ const Legend = (props) => {
 };
 export default function StudyInfo() {
   const [studyData, setStudyData] = useState();
-  const { setShowSpinner } = useContextValues();
+  const { setShowGridSpinner } = useContextValues();
   const { getStudyList } = useFDA();
   const [columnDefs] = useState([
     {
@@ -77,7 +77,7 @@ export default function StudyInfo() {
     { field: "MaxNumberOfParticipants" },
   ]);
   useEffect(() => {
-    setShowSpinner(true);
+    setShowGridSpinner(true);
     try {
       getStudyList()
         .then((result) => {
@@ -85,7 +85,7 @@ export default function StudyInfo() {
         })
         .then((items) => {
           setStudyData(items);
-          setShowSpinner(false);
+          setShowGridSpinner(false);
         });
     } catch (e) {
       alert(e);

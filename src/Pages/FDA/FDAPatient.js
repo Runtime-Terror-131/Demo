@@ -7,7 +7,7 @@ import { StudyConfirmModel, StudyStatusConst } from "../../Components";
 export default function FDAPatient() {
   const [patientData, setPatientData] = useState();
   const [studyList, setStudyList] = useState();
-  const { setShowSpinner, setShowConfirmationStudy } = useContextValues();
+  const { setShowGridSpinner, setShowConfirmationStudy } = useContextValues();
   const { getPatientList, getStudyList } = useFDA();
   const showPickStudyModel = () => {
     setShowConfirmationStudy(true);
@@ -21,7 +21,7 @@ export default function FDAPatient() {
     { field: "currentlyInsured" },
   ]);
   useEffect(() => {
-    setShowSpinner(true);
+    setShowGridSpinner(true);
     try {
       getPatientList()
         .then((result) => {
@@ -29,7 +29,7 @@ export default function FDAPatient() {
         })
         .then((items) => {
           setPatientData(items);
-          setShowSpinner(false);
+          setShowGridSpinner(false);
         });
     } catch (e) {
       alert(e);
@@ -67,13 +67,11 @@ export default function FDAPatient() {
         <Col lg={10}>
           <div
             className="ag-theme-alpine"
-            style={{ marginTop: "5px", marginBottom: "5px" }}
-          >
+            style={{ marginTop: "5px", marginBottom: "5px" }}>
             <AgGridReact
               rowData={patientData}
               columnDefs={columnDefs}
-              domLayout="autoHeight"
-            ></AgGridReact>
+              domLayout="autoHeight"></AgGridReact>
           </div>
         </Col>
       </Row>

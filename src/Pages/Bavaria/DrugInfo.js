@@ -5,7 +5,7 @@ import { AgGridReact } from "ag-grid-react";
 import { useContextValues } from "../../Context/Context";
 export default function DrugInfo() {
   const { getDrugList } = useBavaria();
-  const { setShowSpinner } = useContextValues();
+  const { setShowGridSpinner } = useContextValues();
   const [drugData, setDrugData] = useState();
   const [columnDefs] = useState([
     { field: "id" },
@@ -13,7 +13,7 @@ export default function DrugInfo() {
     { field: "batchNumber" },
   ]);
   useEffect(() => {
-    setShowSpinner(true);
+    setShowGridSpinner(true);
     try {
       getDrugList()
         .then((result) => {
@@ -21,7 +21,7 @@ export default function DrugInfo() {
         })
         .then((items) => {
           setDrugData(items);
-          setShowSpinner(false);
+          setShowGridSpinner(false);
         });
     } catch (e) {
       alert(e);
@@ -46,13 +46,11 @@ export default function DrugInfo() {
         <Col lg={6}>
           <div
             className="ag-theme-alpine"
-            style={{ marginTop: "5px", marginBottom: "5px" }}
-          >
+            style={{ marginTop: "5px", marginBottom: "5px" }}>
             <AgGridReact
               rowData={drugData}
               columnDefs={columnDefs}
-              domLayout="autoHeight"
-            ></AgGridReact>
+              domLayout="autoHeight"></AgGridReact>
           </div>
         </Col>
       </Row>

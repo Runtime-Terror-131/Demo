@@ -59,7 +59,7 @@ const Legend = (props) => {
 };
 export default function BavariaStudy() {
   const [studyData, setStudyData] = useState();
-  const { setShowSpinner } = useContextValues();
+  const { setShowGridSpinner } = useContextValues();
   const { getStudyList } = useBavaria();
   const [columnDefs] = useState([
     {
@@ -78,7 +78,7 @@ export default function BavariaStudy() {
     { field: "MaxNumberOfParticipants" },
   ]);
   useEffect(() => {
-    setShowSpinner(true);
+    setShowGridSpinner(true);
     try {
       getStudyList()
         .then((result) => {
@@ -86,7 +86,7 @@ export default function BavariaStudy() {
         })
         .then((items) => {
           setStudyData(items);
-          setShowSpinner(false);
+          setShowGridSpinner(false);
         });
     } catch (e) {
       alert(e);
