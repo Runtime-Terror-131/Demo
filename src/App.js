@@ -84,7 +84,7 @@ function App() {
               </Col>
               <Col lg={10}>
                 <Row>
-                  <AllRoutes />
+                  <AllRoutes type={loginUserType} />
                 </Row>
               </Col>
             </Row>
