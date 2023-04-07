@@ -178,7 +178,7 @@ export default function Patient() {
   return (
     <Row>
       <ConfirmationModel />
-      <Col lg={10}>
+      <Col lg={12}>
         <Card className="box-shadow">
           {/* <Row> */}
           <Card.Header className="border-bottom-0">Patient Search</Card.Header>
@@ -282,7 +282,7 @@ export default function Patient() {
 
       <div
         className="ag-theme-alpine"
-        style={{ marginTop: "5px", marginBottom: "5px" }}>
+        style={{ marginTop: "10px", marginBottom: "5px" }}>
         <AgGridReact
           className="box-shadow"
           ref={gridRef}

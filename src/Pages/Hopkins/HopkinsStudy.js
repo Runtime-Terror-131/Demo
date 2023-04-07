@@ -118,7 +118,7 @@ export default function Study() {
       />
       <br />
       <Row>
-        <Col lg={8}>
+        <Col lg={9}>
           <Card style={{ height: "370px" }}>
             <Card.Header>Studies</Card.Header>
             <Card.Body>
@@ -139,12 +139,12 @@ export default function Study() {
             </Card.Footer>
           </Card>
         </Col>
-        <Col lg={4}>
+        <Col lg={3}>
           <Notifications studyData={studyData} />
         </Col>
       </Row>
       <Row>
-        <Col lg={10}>
+        <Col lg={12}>
           <div
             className="ag-theme-alpine"
             style={{ marginTop: "5px", marginBottom: "5px" }}>

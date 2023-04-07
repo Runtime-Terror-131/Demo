@@ -64,7 +64,7 @@ export default function FDAPatient() {
         </Col>
       </Row>
       <Row>
-        <Col lg={10}>
+        <Col lg={12}>
           <div
             className="ag-theme-alpine"
             style={{ marginTop: "5px", marginBottom: "5px" }}>
