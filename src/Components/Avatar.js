@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Nav from "react-bootstrap/Nav";
+import { NavLink } from "react-router-dom";
 import { Dropdown, Button } from "react-bootstrap";
 import { logout } from "../Config/Firebase-Config";
 import { useContextValues } from "../Context/Context";
@@ -31,17 +33,21 @@ export default function Avatar() {
         </div>
         <Dropdown>
           <Dropdown.Toggle
-            style={{ background: "inherit", border: "none", color: "black" }}
-          ></Dropdown.Toggle>
+            style={{
+              background: "inherit",
+              border: "none",
+              color: "black",
+            }}></Dropdown.Toggle>
 
           <Dropdown.Menu
             style={{
               background: "var(--header-background-color)",
               color: "white !important",
-            }}
-          >
+            }}>
             <Dropdown.Item href="#/action-2" style={{ color: "white" }}>
-              Profile
+              <Nav.Link to={"/profile"} as={NavLink}>
+                <span>Profile</span>
+              </Nav.Link>
             </Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item href="#/action-3" style={{ color: "white" }}>

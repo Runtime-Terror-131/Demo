@@ -23,6 +23,7 @@ import {
   FDAStudyDetails,
   BavariaStudyDetails,
   CreateStudy,
+  Profile,
 } from "../Pages";
 export default function AllRoutes() {
   return (
@@ -59,6 +60,7 @@ export default function AllRoutes() {
         </Route>
         <Route path="fda/studyinfo/details" element={<FDAStudyDetails />} />
         <Route path="*" element={<NoMatch />} />
+        <Route path="profile" element={<Profile />} />
       </Routes>
     </>
   );
