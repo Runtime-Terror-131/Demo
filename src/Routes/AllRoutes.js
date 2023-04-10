@@ -20,7 +20,7 @@ import {
   HopkinsStudy,
   BavariaStudy,
   HopkinsStudyDetails,
-  FDAPatient,
+  FDAParticipant,
   FDAStudyDetails,
   BavariaStudyDetails,
   CreateStudy,
@@ -55,6 +55,7 @@ export default function AllRoutes({ type }) {
               path="hopkins/studyinfo/details"
               element={<HopkinsStudyDetails />}
             />
+            <Route path="*" element={<NoMatch />} />
           </>
         ) : type === UserTypeConst.bavaria ? (
           <>
@@ -67,15 +68,17 @@ export default function AllRoutes({ type }) {
               path="bavaria/studyinfo/details"
               element={<BavariaStudyDetails />}
             />
+            <Route path="*" element={<NoMatch />} />
           </>
         ) : type === UserTypeConst.fda ? (
           <>
             <Route path="fda" element={<FDA />}>
               <Route path="Home" element={<FDAHome />} />
               <Route path="studyInfo" element={<StudyInfo />} />
-              <Route path="patient" element={<FDAPatient />} />
+              <Route path="participant" element={<FDAParticipant />} />
             </Route>
             <Route path="fda/studyinfo/details" element={<FDAStudyDetails />} />
+            <Route path="*" element={<NoMatch />} />
           </>
         ) : (
           <Route path="*" element={<NoMatch />} />

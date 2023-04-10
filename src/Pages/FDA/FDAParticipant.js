@@ -4,7 +4,7 @@ import { AgGridReact } from "ag-grid-react";
 import { useContextValues } from "../../Context/Context";
 import { useFDA } from "../../Config/FDA-Config";
 import { StudyConfirmModel, StudyStatusConst } from "../../Components";
-export default function FDAPatient() {
+export default function FDAParticipant() {
   const [patientData, setPatientData] = useState();
   const [studyList, setStudyList] = useState();
   const { setShowGridSpinner, setShowConfirmationStudy } = useContextValues();
