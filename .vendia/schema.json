@@ -154,6 +154,9 @@
           },
           "id": {
             "type": "string"
+          },
+          "availableToFDA": {
+            "type": "boolean"
           }
         }
       }
@@ -191,6 +194,12 @@
             "type": "string"
           },
           "currentNumberOfParticipants": {
+            "type": "string"
+          },
+          "drugID": {
+            "type": "string"
+          },
+          "placeboID": {
             "type": "string"
           }
         }
