@@ -14,6 +14,7 @@ export default function FDAStudyDetails() {
     { field: "_id" },
     { field: "currentMedications" },
     { field: "icdHealthCodes" },
+    { field: "drugID" },
     { field: "currentlyEmployed" },
     { field: "currentlyInsured" },
   ]);

@@ -23,6 +23,9 @@
   --footer-text-color: var(--hopkins-sidenav-text-color);
   --footer-background-color: var(--hopkins-sidenav-background-color);
 }
+.modal-dialog {
+  max-width: 800px;
+}
 .button {
   color: white;
   background-color: #811ac5;

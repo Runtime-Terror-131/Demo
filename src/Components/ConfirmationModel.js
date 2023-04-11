@@ -16,7 +16,17 @@ export default function ConfirmationModel({ patientData }) {
     setShowConfirmationWarning(false);
     setConfirmSendPatientList(true);
   };
-  const [columnDefs] = useState([{ field: "name" }, { field: "age" }]);
+  const [columnDefs] = useState([
+    { field: "name" },
+    { field: "age" },
+    {
+      field: "currentMedications",
+      valueGetter: (params) => {
+        return JSON.stringify(params.data.currentMedications);
+      },
+    },
+    { field: "isEligible" },
+  ]);
   return (
     <>
       <Modal show={showConfirmationWarning} onHide={handleClose}>
@@ -24,8 +34,9 @@ export default function ConfirmationModel({ patientData }) {
           <Modal.Title>Send Eligible Patients</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Patient List will be available for FDA to review!
+          This Patient List will be available for FDA to review!
           {patientData && <Grid data={patientData} dataColumns={columnDefs} />}
+          This is irreversable! make sure to review the list please!
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

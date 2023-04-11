@@ -2,13 +2,22 @@ import React, { useEffect, useState } from "react";
 import { Row, Col, Card, Button, Spinner } from "react-bootstrap";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useContextValues } from "../../Context/Context";
-import { Breadcrumbs, BackButton } from "../../Components";
+import { Breadcrumbs, BackButton, Doses } from "../../Components";
 import FormTemplate from "./FormTemplate";
 import { useJaneHopkins } from "../../Config/Hopkins-Config";
 import { DeleteModel } from "../../Components";
 export default function PatientDetails() {
   const navigate = useNavigate();
-  const excludeFields = ["_id", "_owner", "uuid","isEligible","showPII","studyID","drugID","placebo"];
+  const excludeFields = [
+    "_id",
+    "_owner",
+    "uuid",
+    "isEligible",
+    "showPII",
+    "studyID",
+    "drugID",
+    "placebo",
+  ];
   const {
     patientDetails,
     setShowSpinner,
@@ -18,6 +27,7 @@ export default function PatientDetails() {
   } = useContextValues();
   const { getByID, deletePatient } = useJaneHopkins();
   const [patientData, setPatientData] = useState();
+  const [once, setOnce] = useState(false);
   const deletePatientValue = () => {
     setShowDeleteWarning(true);
   };
@@ -35,7 +45,10 @@ export default function PatientDetails() {
     }
   }, [confirmDeletePatient]);
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (!once) {
+      window.scrollTo(0, 0);
+      setOnce(true);
+    }
     let queryString = window.location.search;
     let urlParams = new URLSearchParams(queryString);
     let opportunity_id = urlParams.get("id");
@@ -109,7 +122,21 @@ export default function PatientDetails() {
             <BackButton />
           </div>
         </Card.Footer>
-      </Card>
+      </Card>{" "}
+      {patientData?.studyID && (
+        <Card>
+          <Card.Header>Progress</Card.Header>
+          <Card.Body>
+            <Row>
+              <Doses
+                patientDoses={patientData.doses}
+                patient={patientData}
+                dose={patientData.drugID}
+              />
+            </Row>
+          </Card.Body>
+        </Card>
+      )}
     </>
   );
 }

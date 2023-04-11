@@ -153,10 +153,10 @@ export default function StudyInfo() {
             </Card.Body>
             <Card.Footer>
               <div style={{ display: "flex", justifyContent: "flex-start" }}>
-                <Button variant="primary">
+                <Button variant="primary" style={{ margin: "5px" }}>
                   Approve All Current Pending Studies
                 </Button>
-                <Button variant="danger">
+                <Button variant="danger" style={{ margin: "5px" }}>
                   Decline All Current Pending Studies
                 </Button>
               </div>

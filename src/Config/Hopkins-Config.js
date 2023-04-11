@@ -151,6 +151,25 @@ const getStudyPatients = async (studyID) => {
     return false;
   }
 };
+const applyDose = async (patient, dose, setShowSpinner) => {
+  try {
+    // let patient = await entities.patient.get(id);
+    if (patient.doses != null) {
+      patient.doses.push(dose);
+    } else {
+      patient.doses = [];
+      patient.doses.push(dose);
+    }
+    delete patient["_owner"];
+    entities.patient.update(patient);
+    setShowSpinner(false);
+    return true;
+  } catch (e) {
+    setShowSpinner(false);
+    console.log(e);
+    return false;
+  }
+};
 const useJaneHopkins = () => {
   return {
     entities,
@@ -166,6 +185,7 @@ const useJaneHopkins = () => {
     SendPatientListToFDA,
     createNewStudy,
     getStudyPatients,
+    applyDose,
   };
 };
 
