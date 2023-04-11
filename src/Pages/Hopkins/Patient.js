@@ -9,8 +9,6 @@ import { useContextValues } from "../../Context/Context";
 import { useJaneHopkins } from "../../Config/Hopkins-Config";
 import { ConfirmationModel } from "../../Components";
 const ButtonCell = (props) => {
-  const { setPatientDetails } = useContextValues();
-  const {} = useJaneHopkins();
   return (
     <NavLink
       to={"/hopkins/patient/details" + "?id=" + props.data._id}
@@ -33,6 +31,7 @@ export default function Patient() {
     setConfirmSendPatientList,
   } = useContextValues();
   const [patientList, setPatientList] = useState(null);
+  const [eligiblePatientList, setEligiblePatientList] = useState();
   const { getAll, SendPatientListToFDA } = useJaneHopkins();
   const gridRef = useRef();
   const defaultColDef = useMemo(() => {
@@ -153,6 +152,10 @@ export default function Patient() {
         })
         .then((flattedResult) => {
           setPatientList(flattedResult);
+          let eligiblePatientList = flattedResult.filter(
+            (item) => item.isEligible == null
+          );
+          setEligiblePatientList(eligiblePatientList);
           setShowSpinner(false);
           setIsPageRendered(true);
         });
@@ -178,7 +181,7 @@ export default function Patient() {
   }, [ConfirmSendPatientList]);
   return (
     <Row>
-      <ConfirmationModel />
+      <ConfirmationModel patientData={eligiblePatientList} />
       <Col lg={10}>
         <Card className="box-shadow">
           {/* <Row> */}

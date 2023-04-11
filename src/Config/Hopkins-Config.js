@@ -142,6 +142,15 @@ const createNewStudy = async (study) => {
     return false;
   }
 };
+const getStudyPatients = async (studyID) => {
+  try {
+    let patients = await entities.patient.list();
+    return patients.items.filter((item) => item.studyID == studyID);
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
 const useJaneHopkins = () => {
   return {
     entities,
@@ -156,6 +165,7 @@ const useJaneHopkins = () => {
     getStudyByID,
     SendPatientListToFDA,
     createNewStudy,
+    getStudyPatients,
   };
 };
 

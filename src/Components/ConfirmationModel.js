@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useContextValues } from "../Context/Context";
-export default function ConfirmationModel() {
+import Grid from "./Util/Grid";
+export default function ConfirmationModel({ patientData }) {
   const {
     showConfirmationWarning,
     setShowConfirmationWarning,
@@ -15,6 +16,7 @@ export default function ConfirmationModel() {
     setShowConfirmationWarning(false);
     setConfirmSendPatientList(true);
   };
+  const [columnDefs] = useState([{ field: "name" }, { field: "age" }]);
   return (
     <>
       <Modal show={showConfirmationWarning} onHide={handleClose}>
@@ -23,6 +25,7 @@ export default function ConfirmationModel() {
         </Modal.Header>
         <Modal.Body>
           Patient List will be available for FDA to review!
+          {patientData && <Grid data={patientData} dataColumns={columnDefs} />}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

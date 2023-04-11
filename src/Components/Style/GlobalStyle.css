@@ -23,7 +23,26 @@
   --footer-text-color: var(--hopkins-sidenav-text-color);
   --footer-background-color: var(--hopkins-sidenav-background-color);
 }
-
+.button {
+  color: white;
+  background-color: #811ac5;
+  height: 50px;
+  width: auto;
+  padding: 25px;
+  border-radius: 20px;
+  font-weight: bold;
+  border: none;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  /* text-decoration: underline; */
+}
+.button:hover {
+  opacity: 0.8;
+}
+.hover:hover {
+  opacity: 0.8;
+}
 .header-text-color {
   color: var(--header-text-color);
 }

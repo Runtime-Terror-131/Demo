@@ -74,13 +74,3 @@ export default function Login({ user, setUser }) {
     </div>
   );
 }
-
-/*Button one if we need
-<Card.Footer style={{ background: "#2B223D" }}>
-            <Button variant="outline-light" onClick={SignInButtonClick}>
-              SignIn
-            </Button>
-            <Button variant="outline-light" onClick={SignUpButtonClick}>
-              SignUp
-            </Button>
-          </Card.Footer> */

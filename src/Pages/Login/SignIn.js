@@ -74,13 +74,9 @@ export default function SignIn({ setLoginUser }) {
         <span style={{ color: "red" }}>{loginErrorMessage}</span>
       )}
       <div>
-        <Button
-          variant="outline-primary"
-          className="button"
-          onClick={submitForm}
-        >
+        <button className="button" onClick={submitForm}>
           Login
-        </Button>
+        </button>
       </div>
     </div>
   );
