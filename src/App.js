@@ -25,6 +25,8 @@ function App() {
     setUserType,
     showSpinner,
     setShowSpinner,
+    showGridSpinner,
+    setShowGridSpinner,
     setLoginUserType,
     setLoginUserName,
     loginUserType,
@@ -69,6 +71,7 @@ function App() {
   return (
     <div>
       {showSpinner && <LoadingSpinner />}
+      {showGridSpinner && <LoadingSpinner />}
       {!user ? (
         <Login user={user} setUser={setUser} />
       ) : (
@@ -81,7 +84,7 @@ function App() {
               </Col>
               <Col lg={10}>
                 <Row>
-                  <AllRoutes />
+                  <AllRoutes type={loginUserType} />
                 </Row>
               </Col>
             </Row>

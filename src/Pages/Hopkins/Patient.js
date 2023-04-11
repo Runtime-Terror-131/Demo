@@ -25,7 +25,7 @@ export default function Patient() {
   const [isPageRendered, setIsPageRendered] = useState(false);
   const {
     setPatientDetails,
-    setShowSpinner,
+    setShowGridSpinner,
     setShowConfirmationWarning,
     ConfirmSendPatientList,
     setConfirmSendPatientList,
@@ -42,7 +42,7 @@ export default function Patient() {
   }, []);
 
   const undo = () => {
-    setShowSpinner(true);
+    setShowGridSpinner(true);
     document.getElementById("Name").value = "";
     document.getElementById("Age").value = "";
     document.getElementById("Insurance Number").value = "";
@@ -60,7 +60,7 @@ export default function Patient() {
         })
         .then((flattedResult) => {
           setPatientList(flattedResult);
-          setShowSpinner(false);
+          setShowGridSpinner(false);
           setIsPageRendered(true);
         });
     }
@@ -140,7 +140,7 @@ export default function Patient() {
     { field: "isEligible" },
   ];
   useEffect(() => {
-    setShowSpinner(true);
+    setShowGridSpinner(true);
     if (getAll) {
       getAll()
         .then((result) => {
@@ -156,14 +156,14 @@ export default function Patient() {
             (item) => item.isEligible == null
           );
           setEligiblePatientList(eligiblePatientList);
-          setShowSpinner(false);
+          setShowGridSpinner(false);
           setIsPageRendered(true);
         });
     }
   }, []);
   useEffect(() => {
     if (ConfirmSendPatientList) {
-      setShowSpinner(true);
+      setShowGridSpinner(true);
       try {
         let eligiblePatientList = patientList.filter(
           (item) => item.isEligible == null
@@ -171,11 +171,11 @@ export default function Patient() {
         SendPatientListToFDA(
           eligiblePatientList,
           setConfirmSendPatientList,
-          setShowSpinner
+          setShowGridSpinner
         );
       } catch (e) {
         console.log(e);
-        setShowSpinner(false);
+        setShowGridSpinner(false);
       }
     }
   }, [ConfirmSendPatientList]);
@@ -291,7 +291,7 @@ export default function Patient() {
 
       <div
         className="ag-theme-alpine"
-        style={{ marginTop: "5px", marginBottom: "5px" }}
+        style={{ marginTop: "10px", marginBottom: "5px" }}
       >
         <AgGridReact
           className="box-shadow"

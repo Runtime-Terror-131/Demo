@@ -59,7 +59,7 @@ export default function Study() {
   const [completedStudies, setCompletedStudies] = useState(0);
   const [canceledStudies, setCanceledStudies] = useState(0);
   const gridRef = useRef();
-  const { setShowSpinner } = useContextValues();
+  const { setShowGridSpinner } = useContextValues();
   const { getStudyList } = useJaneHopkins();
   const [columnDefs] = useState([
     {
@@ -82,7 +82,7 @@ export default function Study() {
     gridRef.current.api.exportDataAsCsv();
   };
   useEffect(() => {
-    setShowSpinner(true);
+    setShowGridSpinner(true);
     try {
       getStudyList()
         .then((result) => {
@@ -107,7 +107,7 @@ export default function Study() {
           setActiveStudies(active);
           setCompletedStudies(complete);
           setCanceledStudies(canceled);
-          setShowSpinner(false);
+          setShowGridSpinner(false);
         });
     } catch (e) {
       alert(e);
@@ -175,7 +175,7 @@ export default function Study() {
         </Col>
       </Row>
       <Row>
-        <Col lg={10}>
+        <Col lg={12}>
           <div
             className="ag-theme-alpine"
             style={{ marginTop: "5px", marginBottom: "5px" }}

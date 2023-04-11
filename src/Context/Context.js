@@ -13,6 +13,7 @@ export function ContextProvider({ children }) {
   const [loginErrorMessage, setLoginErrorMessage] = useState(null);
   const [patientDetails, setPatientDetails] = useState(null);
   const [showSpinner, setShowSpinner] = useState(false);
+  const [showGridSpinner, setShowGridSpinner] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
   const [showConfirmationWarning, setShowConfirmationWarning] = useState(false);
   const [ConfirmSendPatientList, setConfirmSendPatientList] = useState(false);
@@ -43,6 +44,8 @@ export function ContextProvider({ children }) {
         setPatientDetails,
         showSpinner,
         setShowSpinner,
+        showGridSpinner,
+        setShowGridSpinner,
         showDeleteWarning,
         setShowDeleteWarning,
         confirmDeletePatient,
@@ -57,8 +60,7 @@ export function ContextProvider({ children }) {
         setConfirmSendPatientList,
         hideBackground,
         setHideBackground,
-      }}
-    >
+      }}>
       {children}
     </userContext.Provider>
   );
