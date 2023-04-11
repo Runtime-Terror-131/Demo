@@ -18,9 +18,10 @@ import HopkinsStudy from "./Hopkins/HopkinsStudy";
 import BavariaStudy from "./Bavaria/BavariaStudy";
 import BavariaStudyDetails from "./Bavaria/BavariaStudyDetails";
 import HopkinsStudyDetails from "./Hopkins/HopkinsStudyDetails";
-import FDAPatient from "./FDA/FDAPatient";
+import FDAParticipant from "./FDA/FDAParticipant";
 import FDAStudyDetails from "./FDA/FDAStudyDetails";
 import CreateStudy from "./Hopkins/CreateStudy";
+import Profile from "./Profile";
 export {
   Bavaria,
   FDA,
@@ -42,7 +43,8 @@ export {
   BavariaStudy,
   BavariaStudyDetails,
   HopkinsStudyDetails,
-  FDAPatient,
+  FDAParticipant,
   FDAStudyDetails,
   CreateStudy,
+  Profile,
 };

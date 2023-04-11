@@ -58,7 +58,7 @@ const Legend = (props) => {
 };
 export default function StudyInfo() {
   const [studyData, setStudyData] = useState();
-  const { setShowSpinner } = useContextValues();
+  const { setShowGridSpinner } = useContextValues();
   const { getStudyList } = useFDA();
   const [columnDefs] = useState([
     {
@@ -77,7 +77,7 @@ export default function StudyInfo() {
     { field: "MaxNumberOfParticipants" },
   ]);
   useEffect(() => {
-    setShowSpinner(true);
+    setShowGridSpinner(true);
     try {
       getStudyList()
         .then((result) => {
@@ -85,7 +85,7 @@ export default function StudyInfo() {
         })
         .then((items) => {
           setStudyData(items);
-          setShowSpinner(false);
+          setShowGridSpinner(false);
         });
     } catch (e) {
       alert(e);
@@ -96,7 +96,7 @@ export default function StudyInfo() {
       <InfoCards />
       <br />
       <Row>
-        <Col lg={8}>
+        <Col lg={9}>
           <Card style={{ height: "370px" }}>
             <Card.Header>Studies</Card.Header>
             <Card.Body>
@@ -114,12 +114,12 @@ export default function StudyInfo() {
             </Card.Footer>
           </Card>
         </Col>
-        <Col lg={4}>
+        <Col lg={3}>
           <Notifications studyData={studyData} />
         </Col>
       </Row>
       <Row>
-        <Col lg={8}>
+        <Col lg={12}>
           <div
             className="ag-theme-alpine"
             style={{ marginTop: "5px", marginBottom: "5px" }}>

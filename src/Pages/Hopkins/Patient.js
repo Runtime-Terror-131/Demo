@@ -15,8 +15,7 @@ const ButtonCell = (props) => {
     <NavLink
       to={"/hopkins/patient/details" + "?id=" + props.data._id}
       id={`detailsLink-${props.data.name}`}
-      style={{ textDecoration: "none" }}
-    >
+      style={{ textDecoration: "none" }}>
       {" "}
       Details
     </NavLink>
@@ -27,7 +26,7 @@ export default function Patient() {
   const [isPageRendered, setIsPageRendered] = useState(false);
   const {
     setPatientDetails,
-    setShowSpinner,
+    setShowGridSpinner,
     setShowConfirmationWarning,
     ConfirmSendPatientList,
     setConfirmSendPatientList,
@@ -43,7 +42,7 @@ export default function Patient() {
   }, []);
 
   const undo = () => {
-    setShowSpinner(true);
+    setShowGridSpinner(true);
     document.getElementById("Name").value = "";
     document.getElementById("Age").value = "";
     document.getElementById("Insurance Number").value = "";
@@ -61,7 +60,7 @@ export default function Patient() {
         })
         .then((flattedResult) => {
           setPatientList(flattedResult);
-          setShowSpinner(false);
+          setShowGridSpinner(false);
           setIsPageRendered(true);
         });
     }
@@ -141,7 +140,7 @@ export default function Patient() {
     { field: "isEligible" },
   ];
   useEffect(() => {
-    setShowSpinner(true);
+    setShowGridSpinner(true);
     if (getAll) {
       getAll()
         .then((result) => {
@@ -153,14 +152,14 @@ export default function Patient() {
         })
         .then((flattedResult) => {
           setPatientList(flattedResult);
-          setShowSpinner(false);
+          setShowGridSpinner(false);
           setIsPageRendered(true);
         });
     }
   }, []);
   useEffect(() => {
     if (ConfirmSendPatientList) {
-      setShowSpinner(true);
+      setShowGridSpinner(true);
       try {
         let eligiblePatientList = patientList.filter(
           (item) => item.isEligible == null
@@ -168,18 +167,18 @@ export default function Patient() {
         SendPatientListToFDA(
           eligiblePatientList,
           setConfirmSendPatientList,
-          setShowSpinner
+          setShowGridSpinner
         );
       } catch (e) {
         console.log(e);
-        setShowSpinner(false);
+        setShowGridSpinner(false);
       }
     }
   }, [ConfirmSendPatientList]);
   return (
     <Row>
       <ConfirmationModel />
-      <Col lg={10}>
+      <Col lg={12}>
         <Card className="box-shadow">
           {/* <Row> */}
           <Card.Header className="border-bottom-0">Patient Search</Card.Header>
@@ -238,16 +237,14 @@ export default function Patient() {
                   variant="warning"
                   type="button"
                   className="m-2"
-                  onClick={goToCreatePatient}
-                >
+                  onClick={goToCreatePatient}>
                   <NavLink
                     to={"/hopkins/createpatient"}
                     style={{
                       textDecoration: "none",
                       color: "white",
                       fontWeight: "600",
-                    }}
-                  >
+                    }}>
                     Create New Patient
                   </NavLink>
                 </Button>
@@ -255,8 +252,7 @@ export default function Patient() {
                   variant="success"
                   onClick={() => {
                     setShowConfirmationWarning(true);
-                  }}
-                >
+                  }}>
                   Send Valid Patient list to FDA for Approvel
                 </Button>
               </div>
@@ -268,15 +264,13 @@ export default function Patient() {
                   className="m-2"
                   variant="secondary"
                   type="button"
-                  onClick={undo}
-                >
+                  onClick={undo}>
                   Undo
                 </Button>
                 <Button
                   variant="primary"
                   type="button"
-                  onClick={downloadResult}
-                >
+                  onClick={downloadResult}>
                   Download Result
                 </Button>
               </div>
@@ -288,8 +282,7 @@ export default function Patient() {
 
       <div
         className="ag-theme-alpine"
-        style={{ marginTop: "5px", marginBottom: "5px" }}
-      >
+        style={{ marginTop: "10px", marginBottom: "5px" }}>
         <AgGridReact
           className="box-shadow"
           ref={gridRef}
@@ -298,8 +291,7 @@ export default function Patient() {
           defaultColDef={defaultColDef}
           pagination={true} //paginates the rows
           paginationPageSize={10} //setting each page to contain 10 rows
-          domLayout="autoHeight"
-        ></AgGridReact>
+          domLayout="autoHeight"></AgGridReact>
       </div>
       <NavLink
         to={"/hopkins/patient/details"}
