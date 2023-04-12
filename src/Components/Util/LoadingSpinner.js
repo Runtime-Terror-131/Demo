@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Spinner from "react-bootstrap/Spinner";
 import { useContextValues } from "../../Context/Context";
+import spinner from "../../images/spinner.gif";
 
 export default function LoadingSpinner() {
   const { hideBackground } = useContextValues();
@@ -15,13 +15,8 @@ export default function LoadingSpinner() {
         justifyContent: "center",
         alignItems: "center",
         background: hideBackground ? " rgba(0,0,0,1)" : "rgba(0,0,0,0.5)",
-      }}
-    >
-      <Spinner animation="border" variant="primary" />
-      <Spinner animation="border" variant="secondary" />
-      <Spinner animation="border" variant="success" />
-      <Spinner animation="border" variant="danger" />
-      <Spinner animation="border" variant="warning" />
+      }}>
+      <img src={spinner} alt="Spinner" />
     </div>
   );
 }
