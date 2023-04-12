@@ -42,13 +42,15 @@ const getPatientList = async () => {
   try {
     let patients = await entities.patient.list();
 
-    return patients.items.filter((item) => item.isEligible);
+    return patients.items.filter(
+      (item) => item.isEligible && item.studyID == null
+    );
   } catch (e) {
     console.log(e);
     return false;
   }
 };
-const getDrugList = async () => {
+const getAllDrugList = async () => {
   try {
     let drugs = await entities.drug.list();
     return drugs.items.filter((item) => item.availableToFDA);
@@ -57,26 +59,6 @@ const getDrugList = async () => {
     return false;
   }
 };
-// const includePatientsInStudy =  async (
-//   list, studyID
-//   // setConfirmSendPatientList,
-//   setShowSpinner
-// ) => {
-//   try {
-//     const promises = list.map(async (item) => {
-//       let patient = await entities.patient.get(item._id);
-//       patient.studyID = studyID;
-//       delete patient["_owner"];
-//       return entities.patient.update(patient);
-//     });
-//     // setConfirmSendPatientList(false);
-//     await Promise.all(promises);
-//     setShowSpinner(false);
-//   } catch (e) {
-//     console.log(e);
-//     // setConfirmSendPatientList(false);
-//   }
-// };
 const updatePatientListWithStudyID = async (studyID, list, setShowSpinner) => {
   try {
     console.log(list);
@@ -102,7 +84,7 @@ const useFDA = () => {
     getStudyByID,
     getPatientList,
     updatePatientListWithStudyID,
-    getDrugList,
+    getAllDrugList,
   };
 };
 

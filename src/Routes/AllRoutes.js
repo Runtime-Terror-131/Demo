@@ -26,6 +26,7 @@ import {
   BavariaStudyDetails,
   CreateStudy,
   Profile,
+  DrugList,
 } from "../Pages";
 import { useContextValues } from "../Context/Context";
 
@@ -78,6 +79,7 @@ export default function AllRoutes({ type }) {
               <Route path="Home" element={<FDAHome />} />
               <Route path="studyInfo" element={<StudyInfo />} />
               <Route path="participant" element={<FDAParticipant />} />
+              <Route path="druglist" element={<DrugList />} />
             </Route>
             <Route path="fda/studyinfo/details" element={<FDAStudyDetails />} />
             <Route path="*" element={<NoMatch />} />
