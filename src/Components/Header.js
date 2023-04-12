@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Navbar, Nav, Button } from "react-bootstrap";
 import logo from "../images/logo.gif";
 import Avatar from "./Avatar";
+
 export default function Header() {
   return (
     <Navbar expand="lg" sticky="top" className="box-shadow header-background ">
@@ -18,14 +19,9 @@ export default function Header() {
           />
           <h1 style={{ color: "white" }}>RunTime Terror</h1>
         </Navbar.Brand>
-        <div>
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            <Nav className="me-auto">
-              <Avatar />
-            </Nav>
-          </Navbar.Collapse>
-        </div>
+        <Nav className="ms-auto">
+          <Avatar />
+        </Nav>
       </Container>
     </Navbar>
   );

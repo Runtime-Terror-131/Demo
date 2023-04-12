@@ -104,13 +104,11 @@ export default function FDAParticipant() {
         <Col lg={12}>
           <div
             className="ag-theme-alpine"
-            style={{ marginTop: "5px", marginBottom: "5px" }}
-          >
+            style={{ marginTop: "5px", marginBottom: "5px" }}>
             <AgGridReact
               rowData={patientData}
               columnDefs={columnDefs}
-              domLayout="autoHeight"
-            ></AgGridReact>
+              domLayout="autoHeight"></AgGridReact>
           </div>
         </Col>
       </Row>

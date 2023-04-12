@@ -17,6 +17,7 @@ export function ContextProvider({ children }) {
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
   const [showConfirmationWarning, setShowConfirmationWarning] = useState(false);
   const [ConfirmSendPatientList, setConfirmSendPatientList] = useState(false);
+  const [ConfirmSendDrugList, setConfirmSendDrugList] = useState(false);
   const [showConfirmationStudy, setShowConfirmationStudy] = useState(false);
   const [ConfirmAddStudy, setConfirmAddStudy] = useState(false);
   const [confirmDeletePatient, setConfirmDeletePatient] = useState(false);
@@ -58,6 +59,8 @@ export function ContextProvider({ children }) {
         setConfirmAddStudy,
         ConfirmSendPatientList,
         setConfirmSendPatientList,
+        ConfirmSendDrugList,
+        setConfirmSendDrugList,
         hideBackground,
         setHideBackground,
       }}>

@@ -50,6 +50,15 @@ const getPatientList = async () => {
     return false;
   }
 };
+const getAllDrugList = async () => {
+  try {
+    let drugs = await entities.drug.list();
+    return drugs.items.filter((item) => item.availableToFDA);
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
 const updatePatientListWithStudyID = async (
   studyID,
   list,
@@ -104,6 +113,7 @@ const useFDA = () => {
     getStudyByID,
     getPatientList,
     updatePatientListWithStudyID,
+    getAllDrugList,
     getStudyPatients,
     getDrugList,
   };

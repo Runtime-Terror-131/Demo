@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { useContextValues } from "../../Context/Context";
 
-export default function LoadingSpinner() {
+export default function Spinner2() {
   const { hideBackground } = useContextValues();
   return (
     <div
@@ -15,8 +15,7 @@ export default function LoadingSpinner() {
         justifyContent: "center",
         alignItems: "center",
         background: hideBackground ? " rgba(0,0,0,1)" : "rgba(0,0,0,0.5)",
-      }}
-    >
+      }}>
       <Spinner animation="border" variant="primary" />
       <Spinner animation="border" variant="secondary" />
       <Spinner animation="border" variant="success" />

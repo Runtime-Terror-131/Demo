@@ -13,6 +13,7 @@ import { StudyStatusConst } from "./Util/StaticConst";
 import ConfirmationModel from "./ConfirmationModel";
 import StudyConfirmModel from "./StudyConfirmModel";
 import { UpdateDateFormat } from "./Util/UpdateDateFormat";
+import DrugConfirmation from "./DrugConfirmation";
 import Grid from "./Util/Grid";
 import Doses from "./Doses";
 export {
@@ -31,6 +32,7 @@ export {
   ConfirmationModel,
   StudyConfirmModel,
   UpdateDateFormat,
+  DrugConfirmation,
   Grid,
   Doses,
 };

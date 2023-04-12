@@ -14,11 +14,13 @@ import EditPatient from "./Hopkins/EditPatient";
 import Reports from "./Hopkins/Reports";
 import StudyInfo from "./FDA/StudyInfo";
 import DrugInfo from "./Bavaria/DrugInfo";
+import CreateDrug from "./Bavaria/CreateDrug";
 import HopkinsStudy from "./Hopkins/HopkinsStudy";
 import BavariaStudy from "./Bavaria/BavariaStudy";
 import BavariaStudyDetails from "./Bavaria/BavariaStudyDetails";
 import HopkinsStudyDetails from "./Hopkins/HopkinsStudyDetails";
 import FDAParticipant from "./FDA/FDAParticipant";
+import DrugList from "./FDA/DrugList";
 import FDAStudyDetails from "./FDA/FDAStudyDetails";
 import CreateStudy from "./Hopkins/CreateStudy";
 import Profile from "./Profile";
@@ -39,11 +41,13 @@ export {
   Reports,
   StudyInfo,
   DrugInfo,
+  CreateDrug,
   HopkinsStudy,
   BavariaStudy,
   BavariaStudyDetails,
   HopkinsStudyDetails,
   FDAParticipant,
+  DrugList,
   FDAStudyDetails,
   CreateStudy,
   Profile,
