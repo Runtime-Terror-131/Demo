@@ -59,13 +59,19 @@ const getAllDrugList = async () => {
     return false;
   }
 };
-const updatePatientListWithStudyID = async (studyID, list, setShowSpinner) => {
+const updatePatientListWithStudyID = async (
+  studyID,
+  list,
+  realDrugID,
+  placeboID,
+  setShowSpinner
+) => {
   try {
-    console.log(list);
-    const promises = list.map(async (item) => {
+    const promises = list.map(async (item, i) => {
       let patient = await entities.patient.get(item._id);
       patient.studyID = studyID;
       delete patient["_owner"];
+      patient.drugID = i % 2 == 0 ? realDrugID : placeboID;
       return entities.patient.update(patient);
     });
 
@@ -77,6 +83,29 @@ const updatePatientListWithStudyID = async (studyID, list, setShowSpinner) => {
     return e;
   }
 };
+const getStudyPatients = async (studyID) => {
+  try {
+    let patients = await entities.patient.list();
+    return patients.items.filter((item) => item.studyID == studyID);
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
+const getDrugList = async () => {
+  try {
+    let drugList = await entities.drug.list();
+    drugList = drugList.items;
+    let placebo = drugList.filter((item) => {
+      return item.placebo;
+    });
+    let realDrug = drugList.filter((item) => !item.placebo);
+    return [realDrug, placebo];
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
 const useFDA = () => {
   return {
     getStudyList,
@@ -85,6 +114,8 @@ const useFDA = () => {
     getPatientList,
     updatePatientListWithStudyID,
     getAllDrugList,
+    getStudyPatients,
+    getDrugList,
   };
 };
 

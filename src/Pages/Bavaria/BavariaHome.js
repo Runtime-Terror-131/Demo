@@ -7,7 +7,7 @@ export default function BavariaHome() {
   return (
     <Row className="justify-content-center">
       <Col md={3}>
-        <Card className="box-shadow">
+        <Card className="box-shadow hover">
           <Card.Link href="https://www.youtube.com">
             <Card.Img
               src={info}
@@ -21,7 +21,7 @@ export default function BavariaHome() {
         </Card>
       </Col>
       <Col md={3}>
-        <Card className="box-shadow">
+        <Card className="box-shadow hover">
           <Card.Link href="https://www.google.com">
             <Card.Img
               src={pills}

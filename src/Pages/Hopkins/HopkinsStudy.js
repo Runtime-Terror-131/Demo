@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col, Card, Alert, Button } from "react-bootstrap";
+import React, { useEffect, useState, useRef } from "react";
+import { Row, Col, Card, Alert, Button, Form } from "react-bootstrap";
 import { InfoCards, Notifications, StudyStatusConst } from "../../Components";
 import { AgGridReact } from "ag-grid-react";
 import { useContextValues } from "../../Context/Context";
@@ -10,7 +10,8 @@ const ButtonCell = (props) => {
     <NavLink
       to={"/hopkins/studyinfo/details" + "?id=" + props.data._id}
       id={`detailsLink-${props.data.name}`}
-      style={{ textDecoration: "none" }}>
+      style={{ textDecoration: "none" }}
+    >
       {" "}
       Details
     </NavLink>
@@ -45,7 +46,8 @@ const Legend = (props) => {
         fontWeight: "bold",
         alignItems: "center",
         flexDirection: "column",
-      }}>
+      }}
+    >
       {status}
     </Alert>
   );
@@ -56,7 +58,7 @@ export default function Study() {
   const [activeStudies, setActiveStudies] = useState(0);
   const [completedStudies, setCompletedStudies] = useState(0);
   const [canceledStudies, setCanceledStudies] = useState(0);
-
+  const gridRef = useRef();
   const { setShowGridSpinner } = useContextValues();
   const { getStudyList } = useJaneHopkins();
   const [columnDefs] = useState([
@@ -76,6 +78,9 @@ export default function Study() {
     { field: "agreedByFDA" },
     { field: "MaxNumberOfParticipants" },
   ]);
+  const downloadResult = () => {
+    gridRef.current.api.exportDataAsCsv();
+  };
   useEffect(() => {
     setShowGridSpinner(true);
     try {
@@ -120,9 +125,30 @@ export default function Study() {
       <Row>
         <Col lg={9}>
           <Card style={{ height: "370px" }}>
-            <Card.Header>Studies</Card.Header>
+            <Card.Header>Studies Search</Card.Header>
             <Card.Body>
-              this is where the new study search stuff should go
+              <Form>
+                <Row>
+                  <Col lg={4}>
+                    <Form.Group className="mb-3" controlId="Name">
+                      <Form.Label>Name</Form.Label>
+                      <Form.Control type="text" />
+                    </Form.Group>
+                  </Col>
+                  <Col lg={4}>
+                    <Form.Group className="mb-3" controlId="Name">
+                      <Form.Label>Status</Form.Label>
+                      <Form.Select aria-label="Default select example">
+                        <option></option>
+                        <option value="1">Pending</option>
+                        <option value="2">Active</option>
+                        <option value="3">Completed</option>
+                        <option value="3">Canceled</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </Form>
             </Card.Body>
             <Card.Footer>
               <Button variant="warning" type="button" className="m-2">
@@ -132,9 +158,14 @@ export default function Study() {
                     textDecoration: "none",
                     color: "white",
                     fontWeight: "600",
-                  }}>
+                  }}
+                >
                   Create New Study
                 </NavLink>
+              </Button>
+
+              <Button variant="primary" type="button" onClick={downloadResult}>
+                Download Result
               </Button>
             </Card.Footer>
           </Card>
@@ -147,11 +178,14 @@ export default function Study() {
         <Col lg={12}>
           <div
             className="ag-theme-alpine"
-            style={{ marginTop: "5px", marginBottom: "5px" }}>
+            style={{ marginTop: "5px", marginBottom: "5px" }}
+          >
             <AgGridReact
+              ref={gridRef}
               rowData={studyData}
               columnDefs={columnDefs}
-              domLayout="autoHeight"></AgGridReact>
+              domLayout="autoHeight"
+            ></AgGridReact>
           </div>
         </Col>
       </Row>
