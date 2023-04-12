@@ -15,6 +15,7 @@ import {
   CreatePatient,
   Reports,
   DrugInfo,
+  CreateDrug,
   StudyInfo,
   EditPatient,
   HopkinsStudy,
@@ -62,6 +63,7 @@ export default function AllRoutes({ type }) {
             <Route path="bavaria" element={<Bavaria />}>
               <Route path="home" element={<BavariaHome />} />
               <Route path="drugInfo" element={<DrugInfo />} />
+              <Route path="createDrug" element={<CreateDrug />} />
               <Route path="studyInfo" element={<BavariaStudy />} />
             </Route>
             <Route

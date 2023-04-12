@@ -46,13 +46,57 @@ const approveStudy = async (studyData) => {
     return false;
   }
 };
+const createNewDrug = async (drugs) => {
+  try {
+    await entities.drug.add(drugs);
+    return true;
+  } catch (error) {
+    return error.message;
+  }
+};
+const updateDrugData = async (drugs) => {
+  try {
+    await entities.drug.update(drugs);
+    return true;
+  } catch (error) {
+    return error.message;
+  }
+};
+const SendDrugListToFDA = async (
+  list,
+  setConfirmSendDrugList,
+  setShowSpinner
+) => {
+  try {
+    const eligibleDrugList = list.filter(
+      (item) => item.availableToFDA === false
+    );
+
+    const promises = eligibleDrugList.map(async (item) => {
+      let drug = await entities.drug.get(item._id);
+      drug.availableToFDA = true;
+      delete drug["_owner"];
+      return entities.drug.update(drug);
+    });
+    setConfirmSendDrugList(false);
+    await Promise.all(promises);
+    setShowSpinner(false);
+  } catch (e) {
+    console.log(e);
+    setConfirmSendDrugList(false);
+  }
+};
+
 const useBavaria = () => {
   return {
+    SendDrugListToFDA,
     getDrugList,
     getStudyList,
     getStudyList,
     getStudyByID,
     approveStudy,
+    createNewDrug,
+    updateDrugData,
   };
 };
 

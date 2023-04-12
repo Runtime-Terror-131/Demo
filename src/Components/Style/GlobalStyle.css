@@ -290,4 +290,7 @@ avatar section
   .nav-height {
     height: 100%;
   }
+  .avatar-text {
+    display: none;
+  }
 }

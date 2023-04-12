@@ -48,6 +48,15 @@ const getPatientList = async () => {
     return false;
   }
 };
+const getDrugList = async () => {
+  try {
+    let drugs = await entities.drug.list();
+    return drugs.items.filter((item) => item.availableToFDA);
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
 // const includePatientsInStudy =  async (
 //   list, studyID
 //   // setConfirmSendPatientList,
@@ -93,6 +102,7 @@ const useFDA = () => {
     getStudyByID,
     getPatientList,
     updatePatientListWithStudyID,
+    getDrugList,
   };
 };
 

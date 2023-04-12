@@ -14,6 +14,7 @@ import EditPatient from "./Hopkins/EditPatient";
 import Reports from "./Hopkins/Reports";
 import StudyInfo from "./FDA/StudyInfo";
 import DrugInfo from "./Bavaria/DrugInfo";
+import CreateDrug from "./Bavaria/CreateDrug";
 import HopkinsStudy from "./Hopkins/HopkinsStudy";
 import BavariaStudy from "./Bavaria/BavariaStudy";
 import BavariaStudyDetails from "./Bavaria/BavariaStudyDetails";
@@ -39,6 +40,7 @@ export {
   Reports,
   StudyInfo,
   DrugInfo,
+  CreateDrug,
   HopkinsStudy,
   BavariaStudy,
   BavariaStudyDetails,
