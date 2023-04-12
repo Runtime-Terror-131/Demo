@@ -96,13 +96,13 @@ export default function SignUp({ loginUser, setLoginUser }) {
         <br />
 
         <div>
-          <Button
+          <button
             variant="outline-primary"
             className="button"
             onClick={submitForm}
           >
             Create Account
-          </Button>
+          </button>
         </div>
       </div>
     </div>

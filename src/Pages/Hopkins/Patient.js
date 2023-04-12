@@ -9,13 +9,12 @@ import { useContextValues } from "../../Context/Context";
 import { useJaneHopkins } from "../../Config/Hopkins-Config";
 import { ConfirmationModel } from "../../Components";
 const ButtonCell = (props) => {
-  const { setPatientDetails } = useContextValues();
-  const {} = useJaneHopkins();
   return (
     <NavLink
       to={"/hopkins/patient/details" + "?id=" + props.data._id}
       id={`detailsLink-${props.data.name}`}
-      style={{ textDecoration: "none" }}>
+      style={{ textDecoration: "none" }}
+    >
       {" "}
       Details
     </NavLink>
@@ -32,6 +31,7 @@ export default function Patient() {
     setConfirmSendPatientList,
   } = useContextValues();
   const [patientList, setPatientList] = useState(null);
+  const [eligiblePatientList, setEligiblePatientList] = useState();
   const { getAll, SendPatientListToFDA } = useJaneHopkins();
   const gridRef = useRef();
   const defaultColDef = useMemo(() => {
@@ -152,6 +152,10 @@ export default function Patient() {
         })
         .then((flattedResult) => {
           setPatientList(flattedResult);
+          let eligiblePatientList = flattedResult.filter(
+            (item) => item.isEligible == null
+          );
+          setEligiblePatientList(eligiblePatientList);
           setShowGridSpinner(false);
           setIsPageRendered(true);
         });
@@ -177,8 +181,8 @@ export default function Patient() {
   }, [ConfirmSendPatientList]);
   return (
     <Row>
-      <ConfirmationModel />
-      <Col lg={12}>
+      <ConfirmationModel patientData={eligiblePatientList} />
+      <Col lg={10}>
         <Card className="box-shadow">
           {/* <Row> */}
           <Card.Header className="border-bottom-0">Patient Search</Card.Header>
@@ -237,14 +241,16 @@ export default function Patient() {
                   variant="warning"
                   type="button"
                   className="m-2"
-                  onClick={goToCreatePatient}>
+                  onClick={goToCreatePatient}
+                >
                   <NavLink
                     to={"/hopkins/createpatient"}
                     style={{
                       textDecoration: "none",
                       color: "white",
                       fontWeight: "600",
-                    }}>
+                    }}
+                  >
                     Create New Patient
                   </NavLink>
                 </Button>
@@ -252,7 +258,8 @@ export default function Patient() {
                   variant="success"
                   onClick={() => {
                     setShowConfirmationWarning(true);
-                  }}>
+                  }}
+                >
                   Send Valid Patient list to FDA for Approvel
                 </Button>
               </div>
@@ -264,13 +271,15 @@ export default function Patient() {
                   className="m-2"
                   variant="secondary"
                   type="button"
-                  onClick={undo}>
+                  onClick={undo}
+                >
                   Undo
                 </Button>
                 <Button
                   variant="primary"
                   type="button"
-                  onClick={downloadResult}>
+                  onClick={downloadResult}
+                >
                   Download Result
                 </Button>
               </div>
@@ -282,7 +291,8 @@ export default function Patient() {
 
       <div
         className="ag-theme-alpine"
-        style={{ marginTop: "10px", marginBottom: "5px" }}>
+        style={{ marginTop: "10px", marginBottom: "5px" }}
+      >
         <AgGridReact
           className="box-shadow"
           ref={gridRef}
@@ -291,7 +301,8 @@ export default function Patient() {
           defaultColDef={defaultColDef}
           pagination={true} //paginates the rows
           paginationPageSize={10} //setting each page to contain 10 rows
-          domLayout="autoHeight"></AgGridReact>
+          domLayout="autoHeight"
+        ></AgGridReact>
       </div>
       <NavLink
         to={"/hopkins/patient/details"}

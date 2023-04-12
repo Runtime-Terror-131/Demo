@@ -30,7 +30,7 @@ export default function DrugInfo() {
   return (
     <div>
       <Row>
-        <Col lg={5}>
+        <Col lg={4}>
           <Card className="box-shadow">
             <Card.Header className="border-bottom-0">Drug</Card.Header>
             <Card.Body>
@@ -41,19 +41,20 @@ export default function DrugInfo() {
             </Card.Body>
           </Card>
         </Col>
-      </Row>
-      <Row>
-        <Col lg={6}>
+        <Col lg={8}>
           <div
-            className="ag-theme-alpine"
-            style={{ marginTop: "5px", marginBottom: "5px" }}>
+            className="ag-theme-alpine box-shadow"
+            style={{ marginTop: "5px", marginBottom: "5px" }}
+          >
             <AgGridReact
               rowData={drugData}
               columnDefs={columnDefs}
-              domLayout="autoHeight"></AgGridReact>
+              domLayout="autoHeight"
+            ></AgGridReact>
           </div>
         </Col>
       </Row>
+      <Row></Row>
     </div>
   );
 }

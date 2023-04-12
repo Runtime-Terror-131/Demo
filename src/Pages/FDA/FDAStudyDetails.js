@@ -3,11 +3,21 @@ import { Card, Row, Col, Spinner, Button } from "react-bootstrap";
 import { Breadcrumbs } from "../../Components";
 import { useFDA } from "../../Config/FDA-Config";
 import { useContextValues } from "../../Context/Context";
-
+import { AgGridReact } from "ag-grid-react";
 export default function FDAStudyDetails() {
-  const { getStudyByID, approveStudy } = useFDA();
+  const { getStudyByID, approveStudy, getStudyPatients } = useFDA();
   const { setShowSpinner } = useContextValues();
   const [studyData, setStudyData] = useState();
+  const [patientData, setPatientData] = useState();
+  const [columnDefs] = useState([
+    { field: "uuid" },
+    { field: "_id" },
+    { field: "currentMedications" },
+    { field: "icdHealthCodes" },
+    { field: "drugID" },
+    { field: "currentlyEmployed" },
+    { field: "currentlyInsured" },
+  ]);
   const approveFDAStudy = () => {
     try {
       setShowSpinner(true);
@@ -31,46 +41,72 @@ export default function FDAStudyDetails() {
     getStudyByID(opportunity_id).then((result) => {
       setStudyData(result);
     });
+    getStudyPatients(opportunity_id).then((result) => {
+      setPatientData(result);
+    });
   }, []);
   return (
-    <Row>
-      <Breadcrumbs />
-      <Card>
-        <Card.Header>Study Details</Card.Header>
-        <Card.Body>
-          <Row>
-            {studyData ? (
-              Object.entries(studyData).map((item, i) => (
-                <Col lg={4} key={i}>
-                  <div>
-                    <span style={{ color: "grey" }} key={item[0].toString()}>
-                      {item[0]}:
-                    </span>
-                    <h4 key={JSON.stringify(item[1])}>
-                      {JSON.stringify(item[1])}
-                    </h4>
-                  </div>
-                </Col>
-              ))
-            ) : (
-              <Spinner />
-            )}
-          </Row>
-        </Card.Body>
-        <Card.Footer>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <Button
-              variant="success"
-              onClick={approveFDAStudy}
-              disabled={studyData && studyData.agreedByFDA ? true : false}
-            >
-              {studyData && studyData.agreedByFDA
-                ? "Study Already Approved"
-                : "Approve Study"}
-            </Button>
+    <>
+      <Row>
+        <Breadcrumbs />
+        <Card>
+          <Card.Header>Study Details</Card.Header>
+          <Card.Body>
+            <Row>
+              {studyData ? (
+                Object.entries(studyData).map((item, i) => (
+                  <Col lg={4} key={i}>
+                    <div>
+                      <span style={{ color: "grey" }} key={item[0].toString()}>
+                        {item[0]}:
+                      </span>
+                      <h4 key={JSON.stringify(item[1])}>
+                        {JSON.stringify(item[1])}
+                      </h4>
+                    </div>
+                  </Col>
+                ))
+              ) : (
+                <Spinner />
+              )}
+            </Row>
+          </Card.Body>
+          <Card.Footer>
+            <div style={{ display: "flex", justifyContent: "flex-start" }}>
+              <Button
+                variant="success"
+                onClick={approveFDAStudy}
+                disabled={studyData && studyData.agreedByFDA ? true : false}
+              >
+                {studyData && studyData.agreedByFDA
+                  ? "Study Already Approved"
+                  : "Approve Study"}
+              </Button>
+            </div>
+          </Card.Footer>
+        </Card>
+      </Row>
+
+      <Row style={{ marginTop: "10px", paddingRight: 0 }}>
+        <Col lg={8}>
+          <Card>
+            <Card.Header style={{ fontWeight: "boldd" }}>
+              Participants
+            </Card.Header>
+          </Card>
+          <div
+            className="ag-theme-alpine"
+            style={{ marginTop: "5px", marginBottom: "5px" }}
+          >
+            <AgGridReact
+              rowData={patientData}
+              columnDefs={columnDefs}
+              overlayNoRowsTemplate="No Participants associated with this study"
+              domLayout="autoHeight"
+            ></AgGridReact>
           </div>
-        </Card.Footer>
-      </Card>
-    </Row>
+        </Col>
+      </Row>
+    </>
   );
 }

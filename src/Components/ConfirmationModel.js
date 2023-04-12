@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useContextValues } from "../Context/Context";
-export default function ConfirmationModel() {
+import Grid from "./Util/Grid";
+export default function ConfirmationModel({ patientData }) {
   const {
     showConfirmationWarning,
     setShowConfirmationWarning,
@@ -15,6 +16,17 @@ export default function ConfirmationModel() {
     setShowConfirmationWarning(false);
     setConfirmSendPatientList(true);
   };
+  const [columnDefs] = useState([
+    { field: "name" },
+    { field: "age" },
+    {
+      field: "currentMedications",
+      valueGetter: (params) => {
+        return JSON.stringify(params.data.currentMedications);
+      },
+    },
+    { field: "isEligible" },
+  ]);
   return (
     <>
       <Modal show={showConfirmationWarning} onHide={handleClose}>
@@ -22,7 +34,9 @@ export default function ConfirmationModel() {
           <Modal.Title>Send Eligible Patients</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Patient List will be available for FDA to review!
+          This Patient List will be available for FDA to review!
+          {patientData && <Grid data={patientData} dataColumns={columnDefs} />}
+          This is irreversable! make sure to review the list please!
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

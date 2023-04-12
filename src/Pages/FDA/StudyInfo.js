@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Card, Alert, Button } from "react-bootstrap";
-import { InfoCards, Notifications } from "../../Components";
+import { Row, Col, Card, Alert, Button, Form } from "react-bootstrap";
+import { InfoCards, Notifications, StudyStatusConst } from "../../Components";
 import { AgGridReact } from "ag-grid-react";
 import { useContextValues } from "../../Context/Context";
 import { useFDA } from "../../Config/FDA-Config";
@@ -16,7 +16,8 @@ const ButtonCell = (props) => {
     <NavLink
       to={"/fda/studyinfo/details" + "?id=" + props.data._id}
       id={`detailsLink-${props.data.name}`}
-      style={{ textDecoration: "none" }}>
+      style={{ textDecoration: "none" }}
+    >
       {" "}
       Details
     </NavLink>
@@ -51,13 +52,18 @@ const Legend = (props) => {
         fontWeight: "bold",
         alignItems: "center",
         flexDirection: "column",
-      }}>
+      }}
+    >
       {status}
     </Alert>
   );
 };
 export default function StudyInfo() {
   const [studyData, setStudyData] = useState();
+  const [pendingStudies, setPendingStudies] = useState(0);
+  const [activeStudies, setActiveStudies] = useState(0);
+  const [completedStudies, setCompletedStudies] = useState(0);
+  const [canceledStudies, setCanceledStudies] = useState(0);
   const { setShowGridSpinner } = useContextValues();
   const { getStudyList } = useFDA();
   const [columnDefs] = useState([
@@ -85,6 +91,23 @@ export default function StudyInfo() {
         })
         .then((items) => {
           setStudyData(items);
+          let pending = 0,
+            active = 0,
+            complete = 0,
+            canceled = 0;
+          items.forEach((element) => {
+            element.status == StudyStatusConst.Pending
+              ? pending++
+              : element.status == StudyStatusConst.Active
+              ? active++
+              : element.status == StudyStatusConst.Completed
+              ? complete++
+              : canceled++;
+          });
+          setPendingStudies(pending);
+          setActiveStudies(active);
+          setCompletedStudies(complete);
+          setCanceledStudies(canceled);
           setShowGridSpinner(false);
         });
     } catch (e) {
@@ -93,21 +116,47 @@ export default function StudyInfo() {
   }, []);
   return (
     <div>
-      <InfoCards />
+      <InfoCards
+        pending={pendingStudies}
+        active={activeStudies}
+        completed={completedStudies}
+        canceled={canceledStudies}
+      />
       <br />
       <Row>
         <Col lg={9}>
           <Card style={{ height: "370px" }}>
             <Card.Header>Studies</Card.Header>
             <Card.Body>
-              this is where the new study search stuff should go
+              <Form>
+                <Row>
+                  <Col lg={4}>
+                    <Form.Group className="mb-3" controlId="Name">
+                      <Form.Label>Name</Form.Label>
+                      <Form.Control type="text" />
+                    </Form.Group>
+                  </Col>
+                  <Col lg={4}>
+                    <Form.Group className="mb-3" controlId="Name">
+                      <Form.Label>Status</Form.Label>
+                      <Form.Select aria-label="Default select example">
+                        <option></option>
+                        <option value="1">Pending</option>
+                        <option value="2">Active</option>
+                        <option value="3">Completed</option>
+                        <option value="3">Canceled</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </Form>
             </Card.Body>
             <Card.Footer>
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <Button variant="primary">
+              <div style={{ display: "flex", justifyContent: "flex-start" }}>
+                <Button variant="primary" style={{ margin: "5px" }}>
                   Approve All Current Pending Studies
                 </Button>
-                <Button variant="danger">
+                <Button variant="danger" style={{ margin: "5px" }}>
                   Decline All Current Pending Studies
                 </Button>
               </div>
@@ -122,11 +171,13 @@ export default function StudyInfo() {
         <Col lg={12}>
           <div
             className="ag-theme-alpine"
-            style={{ marginTop: "5px", marginBottom: "5px" }}>
+            style={{ marginTop: "5px", marginBottom: "5px" }}
+          >
             <AgGridReact
               rowData={studyData}
               columnDefs={columnDefs}
-              domLayout="autoHeight"></AgGridReact>
+              domLayout="autoHeight"
+            ></AgGridReact>
           </div>
         </Col>
       </Row>

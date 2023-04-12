@@ -13,6 +13,8 @@ import { StudyStatusConst } from "./Util/StaticConst";
 import ConfirmationModel from "./ConfirmationModel";
 import StudyConfirmModel from "./StudyConfirmModel";
 import { UpdateDateFormat } from "./Util/UpdateDateFormat";
+import Grid from "./Util/Grid";
+import Doses from "./Doses";
 export {
   Header,
   SideNav,
@@ -29,4 +31,6 @@ export {
   ConfirmationModel,
   StudyConfirmModel,
   UpdateDateFormat,
+  Grid,
+  Doses,
 };
