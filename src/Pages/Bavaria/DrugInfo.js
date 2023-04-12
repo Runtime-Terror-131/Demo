@@ -88,6 +88,8 @@ export default function DrugInfo() {
                 </Button>
                 <Button
                   variant="success"
+                  type="button"
+                  className="m-2"
                   onClick={() => {
                     setShowConfirmationWarning(true);
                   }}>
