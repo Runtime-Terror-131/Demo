@@ -20,6 +20,7 @@ export default function DrugInfo() {
   } = useContextValues();
   const [DrugList, setDrugList] = useState(null);
   const [drugData, setDrugData] = useState();
+  const [eligibleDrugList, setEligibleDrugList] = useState();
   const [columnDefs] = useState([
     { field: "id" },
     { field: "placebo" },
@@ -35,6 +36,10 @@ export default function DrugInfo() {
         })
         .then((items) => {
           setDrugData(items);
+          let eligibleDrugList = items.filter(
+            (item) => item.availableToFDA === false
+          );
+          setEligibleDrugList(eligibleDrugList);
           setShowGridSpinner(false);
         });
     } catch (e) {
@@ -64,7 +69,7 @@ export default function DrugInfo() {
 
   return (
     <div>
-      <DrugConfirmation />
+      <DrugConfirmation drugData={eligibleDrugList} />
       <Row>
         <Col lg={4}>
           <Card className="box-shadow">

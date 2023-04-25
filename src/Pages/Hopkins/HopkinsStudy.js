@@ -5,13 +5,13 @@ import { AgGridReact } from "ag-grid-react";
 import { useContextValues } from "../../Context/Context";
 import { useJaneHopkins } from "../../Config/Hopkins-Config";
 import { NavLink } from "react-router-dom";
+import { UserTypeConst } from "../../Components/Util/StaticConst";
 const ButtonCell = (props) => {
   return (
     <NavLink
       to={"/hopkins/studyinfo/details" + "?id=" + props.data._id}
       id={`detailsLink-${props.data.name}`}
-      style={{ textDecoration: "none" }}
-    >
+      style={{ textDecoration: "none" }}>
       {" "}
       Details
     </NavLink>
@@ -46,13 +46,12 @@ const Legend = (props) => {
         fontWeight: "bold",
         alignItems: "center",
         flexDirection: "column",
-      }}
-    >
+      }}>
       {status}
     </Alert>
   );
 };
-export default function Study() {
+export default function Study({ userType }) {
   const [studyData, setStudyData] = useState();
   const [pendingStudies, setPendingStudies] = useState(0);
   const [activeStudies, setActiveStudies] = useState(0);
@@ -151,18 +150,19 @@ export default function Study() {
               </Form>
             </Card.Body>
             <Card.Footer>
-              <Button variant="warning" type="button" className="m-2">
-                <NavLink
-                  to={"/hopkins/createstudy"}
-                  style={{
-                    textDecoration: "none",
-                    color: "white",
-                    fontWeight: "600",
-                  }}
-                >
-                  Create New Study
-                </NavLink>
-              </Button>
+              {userType === UserTypeConst.hopkinsAdmin && (
+                <Button variant="warning" type="button" className="m-2">
+                  <NavLink
+                    to={"/hopkins/createstudy"}
+                    style={{
+                      textDecoration: "none",
+                      color: "white",
+                      fontWeight: "600",
+                    }}>
+                    Create New Study
+                  </NavLink>
+                </Button>
+              )}
 
               <Button variant="primary" type="button" onClick={downloadResult}>
                 Download Result
@@ -178,14 +178,12 @@ export default function Study() {
         <Col lg={12}>
           <div
             className="ag-theme-alpine"
-            style={{ marginTop: "5px", marginBottom: "5px" }}
-          >
+            style={{ marginTop: "5px", marginBottom: "5px" }}>
             <AgGridReact
               ref={gridRef}
               rowData={studyData}
               columnDefs={columnDefs}
-              domLayout="autoHeight"
-            ></AgGridReact>
+              domLayout="autoHeight"></AgGridReact>
           </div>
         </Col>
       </Row>

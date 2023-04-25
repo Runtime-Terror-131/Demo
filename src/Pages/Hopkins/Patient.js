@@ -8,20 +8,21 @@ import { Location } from "react-router-dom";
 import { useContextValues } from "../../Context/Context";
 import { useJaneHopkins } from "../../Config/Hopkins-Config";
 import { ConfirmationModel } from "../../Components";
+import { UserTypeConst } from "../../Components/Util/StaticConst";
 const ButtonCell = (props) => {
   return (
     <NavLink
       to={"/hopkins/patient/details" + "?id=" + props.data._id}
       id={`detailsLink-${props.data.name}`}
-      style={{ textDecoration: "none" }}
-    >
+      style={{ textDecoration: "none" }}>
       {" "}
       Details
     </NavLink>
   );
 };
 
-export default function Patient() {
+export default function Patient({ userType }) {
+  userType = parseInt(userType);
   const [isPageRendered, setIsPageRendered] = useState(false);
   const {
     setPatientDetails,
@@ -237,31 +238,32 @@ export default function Patient() {
           <Card.Footer>
             <Col>
               <div className="float-start">
-                <Button
-                  variant="warning"
-                  type="button"
-                  className="m-2"
-                  onClick={goToCreatePatient}
-                >
-                  <NavLink
-                    to={"/hopkins/createpatient"}
-                    style={{
-                      textDecoration: "none",
-                      color: "white",
-                      fontWeight: "600",
-                    }}
-                  >
-                    Create New Patient
-                  </NavLink>
-                </Button>
-                <Button
-                  variant="success"
-                  onClick={() => {
-                    setShowConfirmationWarning(true);
-                  }}
-                >
-                  Send Valid Patient list to FDA for Approvel
-                </Button>
+                {userType === UserTypeConst.hopkinsAdmin && (
+                  <Button
+                    variant="warning"
+                    type="button"
+                    className="m-2"
+                    onClick={goToCreatePatient}>
+                    <NavLink
+                      to={"/hopkins/createpatient"}
+                      style={{
+                        textDecoration: "none",
+                        color: "white",
+                        fontWeight: "600",
+                      }}>
+                      Create New Patient
+                    </NavLink>
+                  </Button>
+                )}
+                {userType === UserTypeConst.hopkinsAdmin && (
+                  <Button
+                    variant="success"
+                    onClick={() => {
+                      setShowConfirmationWarning(true);
+                    }}>
+                    Send Valid Patient list to FDA for Approvel
+                  </Button>
+                )}
               </div>
               <div className="float-end">
                 <Button variant="primary" type="button" onClick={filter}>
@@ -271,15 +273,13 @@ export default function Patient() {
                   className="m-2"
                   variant="secondary"
                   type="button"
-                  onClick={undo}
-                >
+                  onClick={undo}>
                   Undo
                 </Button>
                 <Button
                   variant="primary"
                   type="button"
-                  onClick={downloadResult}
-                >
+                  onClick={downloadResult}>
                   Download Result
                 </Button>
               </div>
@@ -291,8 +291,7 @@ export default function Patient() {
 
       <div
         className="ag-theme-alpine"
-        style={{ marginTop: "10px", marginBottom: "5px" }}
-      >
+        style={{ marginTop: "10px", marginBottom: "5px" }}>
         <AgGridReact
           className="box-shadow"
           ref={gridRef}
@@ -301,8 +300,7 @@ export default function Patient() {
           defaultColDef={defaultColDef}
           pagination={true} //paginates the rows
           paginationPageSize={10} //setting each page to contain 10 rows
-          domLayout="autoHeight"
-        ></AgGridReact>
+          domLayout="autoHeight"></AgGridReact>
       </div>
       <NavLink
         to={"/hopkins/patient/details"}

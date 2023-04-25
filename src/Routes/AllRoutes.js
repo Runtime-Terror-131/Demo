@@ -42,11 +42,16 @@ export default function AllRoutes({ type }) {
           <>
             <Route path="Hopkins" element={<Hopkins />}>
               <Route path="home" element={<HopkinsHome />} />
-              <Route path="patient" element={<Patient />}></Route>
+              <Route
+                path="patient"
+                element={<Patient userType={type} />}></Route>
               <Route path="createPatient" element={<CreatePatient />} />
               <Route path="EditPatient" element={<EditPatient />} />
               <Route path="Reports" element={<Reports />} />
-              <Route path="StudyInfo" element={<HopkinsStudy />} />
+              <Route
+                path="StudyInfo"
+                element={<HopkinsStudy userType={type} />}
+              />
               <Route path="CreateStudy" element={<CreateStudy />} />
             </Route>
             <Route
