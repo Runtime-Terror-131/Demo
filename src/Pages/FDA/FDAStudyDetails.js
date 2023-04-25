@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Card, Row, Col, Spinner, Button } from "react-bootstrap";
-import { Breadcrumbs, StudyStatusConst } from "../../Components";
+import {
+  Breadcrumbs,
+  ReportConfirmation,
+  StudyStatusConst,
+} from "../../Components";
 import { useFDA } from "../../Config/FDA-Config";
 import { useContextValues } from "../../Context/Context";
 import { AgGridReact } from "ag-grid-react";
@@ -12,7 +16,7 @@ export default function FDAStudyDetails() {
     completeStudy,
     disapproveStudy,
   } = useFDA();
-  const { setShowSpinner } = useContextValues();
+  const { setShowSpinner, setShowReportStudy } = useContextValues();
   const [studyData, setStudyData] = useState();
   const [patientData, setPatientData] = useState();
   const [columnDefs] = useState([
@@ -55,19 +59,7 @@ export default function FDAStudyDetails() {
     }
   };
   const finishStudy = () => {
-    try {
-      setShowSpinner(true);
-      completeStudy(studyData).then((result) => {
-        if (!result) {
-        } else {
-          setStudyData(result.result);
-          setShowSpinner(false);
-        }
-      });
-    } catch (e) {
-      setShowSpinner(false);
-      console.log(e);
-    }
+    setShowReportStudy(true);
   };
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -84,6 +76,11 @@ export default function FDAStudyDetails() {
   return (
     <>
       <Row>
+        <ReportConfirmation
+          studyData={studyData}
+          setStudyData={setStudyData}
+          numberOfParticipants={patientData ? patientData.length : 0}
+        />
         <Breadcrumbs />
         <Card>
           <Card.Header>Study Details</Card.Header>
@@ -110,6 +107,7 @@ export default function FDAStudyDetails() {
           <Card.Footer>
             <div style={{ display: "flex", justifyContent: "space-evenly" }}>
               <Button
+                className="m-2"
                 variant="success"
                 onClick={approveFDAStudy}
                 disabled={
@@ -123,6 +121,7 @@ export default function FDAStudyDetails() {
                 Approve Study
               </Button>
               <Button
+                className="m-2"
                 variant="danger"
                 onClick={cancelStudy}
                 disabled={
@@ -136,6 +135,7 @@ export default function FDAStudyDetails() {
                 Disapprove Study
               </Button>
               <Button
+                className="m-2"
                 variant="danger"
                 disabled={
                   studyData &&
@@ -147,7 +147,7 @@ export default function FDAStudyDetails() {
                 }
                 onClick={finishStudy}
               >
-                Finish Study
+                Complete Study
               </Button>
             </div>
           </Card.Footer>
@@ -155,7 +155,7 @@ export default function FDAStudyDetails() {
       </Row>
 
       <Row style={{ marginTop: "10px", paddingRight: 0 }}>
-        <Col lg={8}>
+        <Col lg={12}>
           <Card>
             <Card.Header style={{ fontWeight: "boldd" }}>
               Participants

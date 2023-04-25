@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Row, ProgressBar, Container } from "react-bootstrap";
 import { useJaneHopkins } from "../Config/Hopkins-Config";
 import { useContextValues } from "../Context/Context";
-export default function Doses({ patientDoses, patient }) {
+export default function Doses({ patientDoses, patient, setRender }) {
   const { applyDose } = useJaneHopkins();
   const { setShowGridSpinner } = useContextValues();
   const [current, setCurrent] = useState(0);
@@ -36,6 +36,7 @@ export default function Doses({ patientDoses, patient }) {
         setDisableButtonThree(true);
         setDisableButtonFour(true);
         setDisableButtonFive(true);
+
         break;
       case 1:
         setDisableButtonOne(true);
@@ -74,6 +75,8 @@ export default function Doses({ patientDoses, patient }) {
         setCurrent(number);
         break;
     }
+    let random = Math.random() * 100;
+    setRender(random);
   };
   const updateDosage = (buttonNumber) => {
     try {

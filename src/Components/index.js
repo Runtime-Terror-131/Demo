@@ -16,6 +16,7 @@ import { UpdateDateFormat } from "./Util/UpdateDateFormat";
 import DrugConfirmation from "./DrugConfirmation";
 import Grid from "./Util/Grid";
 import Doses from "./Doses";
+import ReportConfirmation from "./Models/ReportConfirmation";
 export {
   Header,
   SideNav,
@@ -35,4 +36,5 @@ export {
   DrugConfirmation,
   Grid,
   Doses,
+  ReportConfirmation,
 };

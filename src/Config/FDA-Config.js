@@ -133,6 +133,14 @@ const completeStudy = async (studyData) => {
     return false;
   }
 };
+const generateReport = async (report) => {
+  try {
+    await entities.report.add(report);
+    return true;
+  } catch (error) {
+    return error.message;
+  }
+};
 const useFDA = () => {
   return {
     getStudyList,
@@ -145,6 +153,7 @@ const useFDA = () => {
     getDrugList,
     completeStudy,
     disapproveStudy,
+    generateReport,
   };
 };
 

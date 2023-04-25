@@ -40,6 +40,16 @@
   padding-bottom: 5px;
   /* text-decoration: underline; */
 }
+.download-button {
+  color: white;
+  background-color: #811ac5;
+  height: 30px;
+  width: auto;
+  /* border-radius: 20px; */
+  font-weight: bold;
+  padding-bottom: 40px;
+  border-radius: 5px;
+}
 .button:hover {
   opacity: 0.8;
 }

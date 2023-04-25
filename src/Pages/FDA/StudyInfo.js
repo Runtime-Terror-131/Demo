@@ -149,9 +149,24 @@ export default function StudyInfo() {
                     </Form.Group>
                   </Col>
                 </Row>
+                <Row>
+                  <Col lg={4}>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="hideCanceledCheckBox"
+                    >
+                      <Form.Check
+                        type="checkbox"
+                        label="Hide Completed Studies"
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
               </Form>
             </Card.Body>
-            <Card.Footer>
+            <Card.Footer
+              style={{ display: "flex", justifyContent: "space-between" }}
+            >
               <div style={{ display: "flex", justifyContent: "flex-start" }}>
                 <Button variant="primary" style={{ margin: "5px" }}>
                   Approve All Current Pending Studies
@@ -159,6 +174,10 @@ export default function StudyInfo() {
                 <Button variant="danger" style={{ margin: "5px" }}>
                   Decline All Current Pending Studies
                 </Button>
+              </div>
+              <div>
+                <Button className="m-2">Search</Button>
+                <Button variant="secondary">Undo</Button>
               </div>
             </Card.Footer>
           </Card>
