@@ -95,7 +95,7 @@ const getStudyPatients = async (studyID) => {
 const getDrugList = async () => {
   try {
     let drugList = await entities.drug.list();
-    drugList = drugList.items;
+    drugList = drugList.items.filter((item) => item.availableToFDA);
     let placebo = drugList.filter((item) => {
       return item.placebo;
     });
