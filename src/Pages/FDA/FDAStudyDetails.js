@@ -5,8 +5,13 @@ import { useFDA } from "../../Config/FDA-Config";
 import { useContextValues } from "../../Context/Context";
 import { AgGridReact } from "ag-grid-react";
 export default function FDAStudyDetails() {
-  const { getStudyByID, approveStudy, getStudyPatients, completeStudy } =
-    useFDA();
+  const {
+    getStudyByID,
+    approveStudy,
+    getStudyPatients,
+    completeStudy,
+    disapproveStudy,
+  } = useFDA();
   const { setShowSpinner } = useContextValues();
   const [studyData, setStudyData] = useState();
   const [patientData, setPatientData] = useState();
@@ -23,6 +28,21 @@ export default function FDAStudyDetails() {
     try {
       setShowSpinner(true);
       approveStudy(studyData).then((result) => {
+        if (!result) {
+        } else {
+          setStudyData(result.result);
+          setShowSpinner(false);
+        }
+      });
+    } catch (e) {
+      setShowSpinner(false);
+      console.log(e);
+    }
+  };
+  const cancelStudy = () => {
+    try {
+      setShowSpinner(true);
+      disapproveStudy(studyData).then((result) => {
         if (!result) {
         } else {
           setStudyData(result.result);
@@ -88,13 +108,32 @@ export default function FDAStudyDetails() {
             </Row>
           </Card.Body>
           <Card.Footer>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
               <Button
                 variant="success"
                 onClick={approveFDAStudy}
-                disabled={studyData && studyData.agreedByFDA ? true : false}
+                disabled={
+                  studyData &&
+                  studyData.status == StudyStatusConst.Pending &&
+                  studyData.agreedByFDA == null
+                    ? false
+                    : true
+                }
               >
                 Approve Study
+              </Button>
+              <Button
+                variant="danger"
+                onClick={cancelStudy}
+                disabled={
+                  studyData &&
+                  studyData.status == StudyStatusConst.Pending &&
+                  studyData.agreedByFDA == null
+                    ? false
+                    : true
+                }
+              >
+                Disapprove Study
               </Button>
               <Button
                 variant="danger"
