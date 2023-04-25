@@ -106,6 +106,19 @@ const getDrugList = async () => {
     return false;
   }
 };
+const completeStudy = async (studyData) => {
+  try {
+    let study = await entities.study.update({
+      _id: studyData._id,
+      status: "3",
+    });
+
+    return study;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
 const useFDA = () => {
   return {
     getStudyList,
@@ -116,6 +129,7 @@ const useFDA = () => {
     getAllDrugList,
     getStudyPatients,
     getDrugList,
+    completeStudy,
   };
 };
 

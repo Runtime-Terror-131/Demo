@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Card, Row, Col, Spinner, Button } from "react-bootstrap";
-import { Breadcrumbs } from "../../Components";
+import { Breadcrumbs, StudyStatusConst } from "../../Components";
 import { useFDA } from "../../Config/FDA-Config";
 import { useContextValues } from "../../Context/Context";
 import { AgGridReact } from "ag-grid-react";
 export default function FDAStudyDetails() {
-  const { getStudyByID, approveStudy, getStudyPatients } = useFDA();
+  const { getStudyByID, approveStudy, getStudyPatients, completeStudy } =
+    useFDA();
   const { setShowSpinner } = useContextValues();
   const [studyData, setStudyData] = useState();
   const [patientData, setPatientData] = useState();
@@ -22,6 +23,21 @@ export default function FDAStudyDetails() {
     try {
       setShowSpinner(true);
       approveStudy(studyData).then((result) => {
+        if (!result) {
+        } else {
+          setStudyData(result.result);
+          setShowSpinner(false);
+        }
+      });
+    } catch (e) {
+      setShowSpinner(false);
+      console.log(e);
+    }
+  };
+  const finishStudy = () => {
+    try {
+      setShowSpinner(true);
+      completeStudy(studyData).then((result) => {
         if (!result) {
         } else {
           setStudyData(result.result);
@@ -72,15 +88,27 @@ export default function FDAStudyDetails() {
             </Row>
           </Card.Body>
           <Card.Footer>
-            <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
               <Button
                 variant="success"
                 onClick={approveFDAStudy}
                 disabled={studyData && studyData.agreedByFDA ? true : false}
               >
-                {studyData && studyData.agreedByFDA
-                  ? "Study Already Approved"
-                  : "Approve Study"}
+                Approve Study
+              </Button>
+              <Button
+                variant="danger"
+                disabled={
+                  studyData &&
+                  studyData.agreedByFDA &&
+                  studyData.agreedByBavaria &&
+                  studyData.status != StudyStatusConst.Completed
+                    ? false
+                    : true
+                }
+                onClick={finishStudy}
+              >
+                Finish Study
               </Button>
             </div>
           </Card.Footer>
