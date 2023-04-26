@@ -177,7 +177,7 @@ export default function StudyInfo() {
               </div>
               <div className="res-buttons">
                 <Button className="m-2">Search</Button>
-                <Button variant="secondary">Undo...</Button>
+                <Button variant="secondary">Undo</Button>
               </div>
             </Card.Footer>
           </Card>
@@ -196,6 +196,8 @@ export default function StudyInfo() {
               rowData={studyData}
               columnDefs={columnDefs}
               domLayout="autoHeight"
+              pagination={true}
+              paginationPageSize={10}
             ></AgGridReact>
           </div>
         </Col>

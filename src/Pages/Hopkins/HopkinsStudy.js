@@ -180,7 +180,7 @@ export default function Study({ userType }) {
               </div>
               <div className=" res-buttons">
                 <Button className="m-2">Search</Button>
-                <Button variant="secondary">Undo...</Button>
+                <Button variant="secondary">Undo</Button>
               </div>
             </Card.Footer>
           </Card>

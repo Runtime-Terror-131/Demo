@@ -21,11 +21,18 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
     backgroundColor: "#E4E4E4",
+    flexWrap: "wrap",
   },
   section: {
     margin: 10,
     padding: 10,
     flexGrow: 1,
+  },
+  explination: {
+    flexDirection: "row",
+    flexWrap: "wrap !important",
+    margin: "5px",
+    maxWidth: "200",
   },
 });
 
@@ -65,7 +72,7 @@ const MyDocument = ({ data }) => {
         </View>
         <View style={styles.section}>
           <Text>FDA Notes:</Text>
-          <Text>{data.notes}</Text>
+          <Text style={styles.explination}>{data.notes}</Text>
         </View>
         <View style={styles.section}>
           <Text>Result:</Text>
