@@ -3,6 +3,9 @@ import { Card, Col, Row } from "react-bootstrap";
 import { useJaneHopkins } from "../../Config/Hopkins-Config";
 import { useContextValues } from "../../Context/Context";
 import { AgGridReact } from "ag-grid-react";
+import logo from "../../images/pills.png";
+import logo2 from "../../images/study.png";
+import "../../Components/Style/GlobalStyle.css";
 import {
   Document,
   Page,
@@ -10,12 +13,13 @@ import {
   View,
   StyleSheet,
   PDFDownloadLink,
+  Image,
 } from "@react-pdf/renderer";
 
 // Create styles
 const styles = StyleSheet.create({
   page: {
-    flexDirection: "row",
+    flexDirection: "column",
     backgroundColor: "#E4E4E4",
   },
   section: {
@@ -30,13 +34,54 @@ const MyDocument = ({ data }) => {
   return (
     <Document>
       <Page style={styles.page}>
+        <View>
+          <Image
+            src={logo}
+            alt="LOGO"
+            style={{
+              width: "100px",
+              height: "100px",
+              float: "left",
+            }}
+          />
+          <Image
+            src={logo2}
+            alt="LOGO"
+            style={{
+              width: "100px",
+              height: "100px",
+              position: "absolute",
+              top: 0,
+              right: 0,
+            }}
+          />
+          <Text style={{ color: "#1d3263", textAlign: "center" }}>
+            FDA Study Report
+          </Text>
+        </View>
         <View style={styles.section}>
           <Text>Study Name:</Text>
           <Text>{data.StudyName}</Text>
         </View>
         <View style={styles.section}>
+          <Text>FDA Notes:</Text>
+          <Text>{data.notes}</Text>
+        </View>
+        <View style={styles.section}>
           <Text>Result:</Text>
           <Text>{data.result == "true" ? "Success!" : "Failure"}</Text>
+        </View>
+        <View style={styles.section}>
+          <Text>Number of Participants:</Text>
+          <Text>{data.numberOfParticipants}</Text>
+        </View>
+        {/* <View style={styles.section}>
+          <Text>DrugID:</Text>
+          <Text>{data.realDrugID}</Text>
+        </View> */}
+        <View style={styles.section}>
+          <Text>StudyID:</Text>
+          <Text>{data.StudyID}</Text>
         </View>
       </Page>
     </Document>
@@ -101,7 +146,10 @@ export default function Reports() {
         <Col lg={8}>
           <Card>
             <Card.Header>Reports</Card.Header>
-            <Card.Body>Search Fields</Card.Body>
+            <Card.Body>
+              Reports will be added once they are created by fda. click the
+              download link to download a PDF format
+            </Card.Body>
           </Card>
         </Col>
       </Row>
@@ -115,6 +163,8 @@ export default function Reports() {
               rowData={reports}
               columnDefs={columnDefs}
               domLayout="autoHeight"
+              pagination={true}
+              paginationPageSize={10}
             ></AgGridReact>
           </div>
         </Col>

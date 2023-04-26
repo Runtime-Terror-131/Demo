@@ -154,7 +154,7 @@ export default function Study({ userType }) {
             <Card.Footer
               style={{ display: "flex", justifyContent: "space-between" }}
             >
-              <div>
+              <div className=" res-buttons">
                 {userType === UserTypeConst.hopkinsAdmin && (
                   <Button variant="warning" type="button" className="m-2">
                     <NavLink
@@ -175,12 +175,12 @@ export default function Study({ userType }) {
                   type="button"
                   onClick={downloadResult}
                 >
-                  Download Result
+                  Download Result...
                 </Button>
               </div>
-              <div>
+              <div className=" res-buttons">
                 <Button className="m-2">Search</Button>
-                <Button variant="secondary">Undo</Button>
+                <Button variant="secondary">Undo...</Button>
               </div>
             </Card.Footer>
           </Card>

@@ -125,7 +125,7 @@ export default function StudyInfo() {
       <br />
       <Row>
         <Col lg={9}>
-          <Card style={{ height: "370px" }}>
+          <Card style={{ height: "auto" }}>
             <Card.Header>Studies</Card.Header>
             <Card.Body>
               <Form>
@@ -175,9 +175,9 @@ export default function StudyInfo() {
                   Decline All Current Pending Studies
                 </Button>
               </div>
-              <div>
+              <div className="res-buttons">
                 <Button className="m-2">Search</Button>
-                <Button variant="secondary">Undo</Button>
+                <Button variant="secondary">Undo...</Button>
               </div>
             </Card.Footer>
           </Card>

@@ -14,7 +14,8 @@ const ButtonCell = (props) => {
     <NavLink
       to={"/hopkins/patient/details" + "?id=" + props.data._id}
       id={`detailsLink-${props.data.name}`}
-      style={{ textDecoration: "none" }}>
+      style={{ textDecoration: "none" }}
+    >
       {" "}
       Details
     </NavLink>
@@ -237,20 +238,22 @@ export default function Patient({ userType }) {
           </Card.Body>
           <Card.Footer>
             <Col>
-              <div className="float-start">
+              <div className="float-start res-buttons">
                 {userType === UserTypeConst.hopkinsAdmin && (
                   <Button
                     variant="warning"
                     type="button"
                     className="m-2"
-                    onClick={goToCreatePatient}>
+                    onClick={goToCreatePatient}
+                  >
                     <NavLink
                       to={"/hopkins/createpatient"}
                       style={{
                         textDecoration: "none",
                         color: "white",
                         fontWeight: "600",
-                      }}>
+                      }}
+                    >
                       Create New Patient
                     </NavLink>
                   </Button>
@@ -260,12 +263,13 @@ export default function Patient({ userType }) {
                     variant="success"
                     onClick={() => {
                       setShowConfirmationWarning(true);
-                    }}>
+                    }}
+                  >
                     Send Valid Patient list to FDA for Approvel
                   </Button>
                 )}
               </div>
-              <div className="float-end">
+              <div className="float-end res-buttons">
                 <Button variant="primary" type="button" onClick={filter}>
                   Search
                 </Button>
@@ -273,13 +277,15 @@ export default function Patient({ userType }) {
                   className="m-2"
                   variant="secondary"
                   type="button"
-                  onClick={undo}>
+                  onClick={undo}
+                >
                   Undo
                 </Button>
                 <Button
                   variant="primary"
                   type="button"
-                  onClick={downloadResult}>
+                  onClick={downloadResult}
+                >
                   Download Result
                 </Button>
               </div>
@@ -291,7 +297,8 @@ export default function Patient({ userType }) {
 
       <div
         className="ag-theme-alpine"
-        style={{ marginTop: "10px", marginBottom: "5px" }}>
+        style={{ marginTop: "10px", marginBottom: "5px" }}
+      >
         <AgGridReact
           className="box-shadow"
           ref={gridRef}
@@ -300,7 +307,8 @@ export default function Patient({ userType }) {
           defaultColDef={defaultColDef}
           pagination={true} //paginates the rows
           paginationPageSize={10} //setting each page to contain 10 rows
-          domLayout="autoHeight"></AgGridReact>
+          domLayout="autoHeight"
+        ></AgGridReact>
       </div>
       <NavLink
         to={"/hopkins/patient/details"}

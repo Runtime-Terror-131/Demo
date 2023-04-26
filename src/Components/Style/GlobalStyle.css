@@ -263,7 +263,20 @@ avatar section
 .side-nav svg {
   margin-right: 10px;
 }
+.res-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.res-buttons button {
+  margin: 5px;
+}
 @media only screen and(max-width: 700px) {
+  .res-buttons button {
+    width: 100%;
+  }
+
   #login-logo {
     display: none;
     position: absolute;

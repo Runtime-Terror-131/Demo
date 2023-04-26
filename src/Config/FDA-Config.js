@@ -133,6 +133,25 @@ const completeStudy = async (studyData) => {
     return false;
   }
 };
+const updateStudyWithParticipantsAndDrugIDs = async (
+  studyID,
+  drugId,
+  placeboID,
+  numberOfParticipants
+) => {
+  try {
+    let study = await getStudyByID(studyID);
+    study.drugID = drugId;
+    study.placeboID = placeboID;
+    study.currentNumberOfParticipants = numberOfParticipants;
+    delete study["_owner"];
+    entities.study.update(study);
+    return true;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
 const generateReport = async (report) => {
   try {
     await entities.report.add(report);
@@ -154,6 +173,7 @@ const useFDA = () => {
     completeStudy,
     disapproveStudy,
     generateReport,
+    updateStudyWithParticipantsAndDrugIDs,
   };
 };
 
