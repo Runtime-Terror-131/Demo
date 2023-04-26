@@ -188,6 +188,26 @@
 .breadcrumbs .crumb:last-child:after {
   display: none;
 }
+.no-match {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.no-match__heading {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.no-match__text {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.no-match__link {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
 /*
 avatar section
 */

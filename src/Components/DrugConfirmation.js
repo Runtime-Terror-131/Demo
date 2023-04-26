@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useContextValues } from "../Context/Context";
-export default function DrugConfirmation() {
+import Grid from "./Util/Grid";
+export default function DrugConfirmation({ drugData }) {
   const {
     showConfirmationWarning,
     setShowConfirmationWarning,
     setConfirmSendDrugList,
   } = useContextValues();
-
+  const [columnDefs] = useState([
+    { field: "id" },
+    { field: "placebo" },
+    { field: "batchNumber" },
+  ]);
   const handleClose = () => setShowConfirmationWarning(false);
   const handleShow = () => setShowConfirmationWarning(true);
   const SendDrugList = () => {
@@ -21,7 +26,11 @@ export default function DrugConfirmation() {
         <Modal.Header closeButton>
           <Modal.Title>Send Drug List</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Drug List will be available for FDA</Modal.Body>
+        <Modal.Body>
+          Drug List will be available for FDA
+          {drugData && <Grid data={drugData} dataColumns={columnDefs} />}
+          This is irreversable! make sure to review the list please!
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
