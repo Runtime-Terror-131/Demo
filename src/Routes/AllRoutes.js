@@ -26,6 +26,7 @@ import {
   BavariaStudyDetails,
   CreateStudy,
   Profile,
+  EditProfile,
   DrugList,
 } from "../Pages";
 import { useContextValues } from "../Context/Context";
@@ -93,6 +94,7 @@ export default function AllRoutes({ type }) {
           <Route path="*" element={<NoMatch />} />
         )}
         <Route path="profile" element={<Profile />} />
+        <Route path="editprofile" element={<EditProfile />} />
       </Routes>
     </>
   );

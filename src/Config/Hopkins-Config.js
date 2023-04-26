@@ -96,6 +96,27 @@ const getUserData = async (
     return e;
   }
 };
+const getUserInfo = async (uuid) => {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    const result = await entities.user.list();
+    const user = result.items.filter((item) => item.UserUID === uuid)[0];
+
+    return user;
+  } catch (e) {
+    return e;
+  }
+};
+const updateUserData = async (user) => {
+  try {
+    await entities.user.update(user);
+    return true;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 const getStudyList = async () => {
   try {
     let studies = entities.study.list();
@@ -180,6 +201,8 @@ const useJaneHopkins = () => {
     deletePatient,
     setUserType,
     getUserData,
+    getUserInfo,
+    updateUserData,
     getStudyList,
     getStudyByID,
     SendPatientListToFDA,

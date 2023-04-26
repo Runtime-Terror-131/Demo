@@ -37,23 +37,26 @@ export default function Avatar() {
               background: "inherit",
               border: "none",
               color: "black",
-            }}
-          ></Dropdown.Toggle>
+            }}></Dropdown.Toggle>
 
           <Dropdown.Menu
             style={{
               background: "var(--header-background-color)",
               color: "white !important",
-            }}
-          >
+            }}>
             <Dropdown.Item href="#/action-2" style={{ color: "white" }}>
               <Nav.Link to={"/profile"} as={NavLink} style={{ color: "white" }}>
-                <span>Profile</span>
+                <span>View Profile</span>
               </Nav.Link>
             </Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item href="#/action-3" style={{ color: "white" }}>
-              Settings
+              <Nav.Link
+                to={"/editprofile"}
+                as={NavLink}
+                style={{ color: "white" }}>
+                <span>Edit Profile</span>
+              </Nav.Link>
             </Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item href="#/action-1" style={{ color: "white" }}>
