@@ -191,6 +191,15 @@ const applyDose = async (patient, dose, setShowSpinner) => {
     return false;
   }
 };
+const getReports = async () => {
+  try {
+    let reports = await entities.report.list();
+    return reports;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
 const useJaneHopkins = () => {
   return {
     entities,
@@ -209,6 +218,7 @@ const useJaneHopkins = () => {
     createNewStudy,
     getStudyPatients,
     applyDose,
+    getReports,
   };
 };
 

@@ -23,6 +23,7 @@ export function ContextProvider({ children }) {
   const [confirmDeletePatient, setConfirmDeletePatient] = useState(false);
   const [userReadyToSeeApp, setUserReadyToSeeApp] = useState(false);
   const [hideBackground, setHideBackground] = useState(false);
+  const [showReportStudy, setShowReportStudy] = useState(false);
   const updateUserType = (value) => {
     setUserType(value);
   };
@@ -63,7 +64,10 @@ export function ContextProvider({ children }) {
         setConfirmSendDrugList,
         hideBackground,
         setHideBackground,
-      }}>
+        showReportStudy,
+        setShowReportStudy,
+      }}
+    >
       {children}
     </userContext.Provider>
   );

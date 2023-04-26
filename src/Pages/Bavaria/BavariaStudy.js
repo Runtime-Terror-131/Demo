@@ -42,7 +42,7 @@ const Legend = (props) => {
           ? "success"
           : props.data.status == 3
           ? "warning"
-          : "info"
+          : "dark"
       }
       style={{
         display: "flex",

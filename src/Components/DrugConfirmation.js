@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useContextValues } from "../Context/Context";
 import Grid from "./Util/Grid";
-export default function DrugConfirmation({ drugData }) {
+import React, { useState } from "react";
+import Grid from "./Util/Grid";
+export default function DrugConfirmation({ drugData }{ drugData }) {
   const {
     showConfirmationWarning,
     setShowConfirmationWarning,

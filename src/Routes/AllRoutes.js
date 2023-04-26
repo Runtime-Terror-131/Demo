@@ -28,6 +28,7 @@ import {
   Profile,
   EditProfile,
   DrugList,
+  BavariaReport,
 } from "../Pages";
 import { useContextValues } from "../Context/Context";
 
@@ -45,7 +46,8 @@ export default function AllRoutes({ type }) {
               <Route path="home" element={<HopkinsHome />} />
               <Route
                 path="patient"
-                element={<Patient userType={type} />}></Route>
+                element={<Patient userType={type} />}
+              ></Route>
               <Route path="createPatient" element={<CreatePatient />} />
               <Route path="EditPatient" element={<EditPatient />} />
               <Route path="Reports" element={<Reports />} />
@@ -72,6 +74,7 @@ export default function AllRoutes({ type }) {
               <Route path="drugInfo" element={<DrugInfo />} />
               <Route path="createDrug" element={<CreateDrug />} />
               <Route path="studyInfo" element={<BavariaStudy />} />
+              <Route path="reports" element={<BavariaReport />} />
             </Route>
             <Route
               path="bavaria/studyinfo/details"

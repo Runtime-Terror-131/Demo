@@ -21,18 +21,11 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
     backgroundColor: "#E4E4E4",
-    flexWrap: "wrap",
   },
   section: {
     margin: 10,
     padding: 10,
     flexGrow: 1,
-  },
-  explination: {
-    flexDirection: "row",
-    flexWrap: "wrap !important",
-    margin: "5px",
-    maxWidth: "200",
   },
 });
 
@@ -72,7 +65,7 @@ const MyDocument = ({ data }) => {
         </View>
         <View style={styles.section}>
           <Text>FDA Notes:</Text>
-          <Text style={styles.explination}>{data.notes}</Text>
+          <Text>{data.notes}</Text>
         </View>
         <View style={styles.section}>
           <Text>Result:</Text>
@@ -82,10 +75,6 @@ const MyDocument = ({ data }) => {
           <Text>Number of Participants:</Text>
           <Text>{data.numberOfParticipants}</Text>
         </View>
-        {/* <View style={styles.section}>
-          <Text>DrugID:</Text>
-          <Text>{data.realDrugID}</Text>
-        </View> */}
         <View style={styles.section}>
           <Text>StudyID:</Text>
           <Text>{data.StudyID}</Text>
@@ -121,7 +110,7 @@ function myArrayBuffer() {
   });
 }
 
-export default function Reports() {
+export default function BavariaReport() {
   const { getReports } = useJaneHopkins();
   const { setShowGridSpinner } = useContextValues();
   const [reports, setReports] = useState([]);
@@ -169,9 +158,9 @@ export default function Reports() {
             <AgGridReact
               rowData={reports}
               columnDefs={columnDefs}
-              domLayout="autoHeight"
               pagination={true}
               paginationPageSize={10}
+              domLayout="autoHeight"
             ></AgGridReact>
           </div>
         </Col>

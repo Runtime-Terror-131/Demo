@@ -38,6 +38,20 @@ const approveStudy = async (studyData) => {
     return false;
   }
 };
+const disapproveStudy = async (studyData) => {
+  try {
+    let study = await entities.study.update({
+      _id: studyData._id,
+      agreedByFDA: false,
+      status: "4",
+    });
+
+    return study;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
 const getPatientList = async () => {
   try {
     let patients = await entities.patient.list();
@@ -106,6 +120,46 @@ const getDrugList = async () => {
     return false;
   }
 };
+const completeStudy = async (studyData) => {
+  try {
+    let study = await entities.study.update({
+      _id: studyData._id,
+      status: "3",
+    });
+
+    return study;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
+const updateStudyWithParticipantsAndDrugIDs = async (
+  studyID,
+  drugId,
+  placeboID,
+  numberOfParticipants
+) => {
+  try {
+    let study = await getStudyByID(studyID);
+    study.drugID = drugId;
+    study.placeboID = placeboID;
+    study.currentNumberOfParticipants = numberOfParticipants;
+    delete study["_owner"];
+    entities.study.update(study);
+    return true;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
+const generateReport = async (report) => {
+  try {
+    await entities.report.add(report);
+    return true;
+  } catch (error) {
+    return error.message;
+  }
+};
 const useFDA = () => {
   return {
     getStudyList,
@@ -116,6 +170,10 @@ const useFDA = () => {
     getAllDrugList,
     getStudyPatients,
     getDrugList,
+    completeStudy,
+    disapproveStudy,
+    generateReport,
+    updateStudyWithParticipantsAndDrugIDs,
   };
 };
 
