@@ -24,6 +24,8 @@ import DrugList from "./FDA/DrugList";
 import FDAStudyDetails from "./FDA/FDAStudyDetails";
 import CreateStudy from "./Hopkins/CreateStudy";
 import Profile from "./Profile";
+import EditProfile from "./EditProfile";
+import BavariaReport from "./Bavaria/BavariaReport";
 export {
   Bavaria,
   FDA,
@@ -51,4 +53,6 @@ export {
   FDAStudyDetails,
   CreateStudy,
   Profile,
+  EditProfile,
+  BavariaReport,
 };

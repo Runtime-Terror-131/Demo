@@ -1,17 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Card, Row, Col, Spinner, Button } from "react-bootstrap";
-import { Breadcrumbs } from "../../Components";
+import { Breadcrumbs, StudyStatusConst } from "../../Components";
 import { useBavaria } from "../../Config/Bavaria-Config";
 import { useContextValues } from "../../Context/Context";
 
 export default function BavariaStudyDetails() {
-  const { getStudyByID, approveStudy } = useBavaria();
+  const { getStudyByID, approveStudy, disapproveStudy } = useBavaria();
   const { setShowSpinner } = useContextValues();
   const [studyData, setStudyData] = useState();
   const approveBavariaStudy = () => {
     try {
       setShowSpinner(true);
       approveStudy(studyData).then((result) => {
+        if (!result) {
+        } else {
+          setStudyData(result.result);
+          setShowSpinner(false);
+        }
+      });
+    } catch (e) {
+      setShowSpinner(false);
+      console.log(e);
+    }
+  };
+  const cancelStudy = () => {
+    try {
+      setShowSpinner(true);
+      disapproveStudy(studyData).then((result) => {
         if (!result) {
         } else {
           setStudyData(result.result);
@@ -32,6 +47,7 @@ export default function BavariaStudyDetails() {
       setStudyData(result);
     });
   }, []);
+
   return (
     <Row>
       <Breadcrumbs />
@@ -62,11 +78,28 @@ export default function BavariaStudyDetails() {
             <Button
               variant="success"
               onClick={approveBavariaStudy}
-              disabled={studyData && studyData.agreedByBavaria ? true : false}
+              disabled={
+                studyData &&
+                studyData.status == StudyStatusConst.Pending &&
+                studyData.agreedByBavaria == null
+                  ? false
+                  : true
+              }
             >
-              {studyData && studyData.agreedByBavaria
-                ? "Study already approved"
-                : "Approve Study"}
+              Approve Study
+            </Button>
+            <Button
+              variant="danger"
+              onClick={cancelStudy}
+              disabled={
+                studyData &&
+                studyData.status == StudyStatusConst.Pending &&
+                studyData.agreedByBavaria == null
+                  ? false
+                  : true
+              }
+            >
+              Disapprove Study
             </Button>
           </div>
         </Card.Footer>

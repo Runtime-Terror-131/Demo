@@ -40,6 +40,16 @@
   padding-bottom: 5px;
   /* text-decoration: underline; */
 }
+.download-button {
+  color: white;
+  background-color: #811ac5;
+  height: 30px;
+  width: auto;
+  /* border-radius: 20px; */
+  font-weight: bold;
+  padding-bottom: 40px;
+  border-radius: 5px;
+}
 .button:hover {
   opacity: 0.8;
 }
@@ -188,6 +198,26 @@
 .breadcrumbs .crumb:last-child:after {
   display: none;
 }
+.no-match {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.no-match__heading {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.no-match__text {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.no-match__link {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
 /*
 avatar section
 */
@@ -253,7 +283,20 @@ avatar section
 .side-nav svg {
   margin-right: 10px;
 }
+.res-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.res-buttons button {
+  margin: 5px;
+}
 @media only screen and(max-width: 700px) {
+  .res-buttons button {
+    width: 100%;
+  }
+
   #login-logo {
     display: none;
     position: absolute;

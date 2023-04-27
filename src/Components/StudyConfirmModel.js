@@ -16,7 +16,10 @@ export default function StudyConfirmModel({
     setConfirmAddStudy,
     setShowSpinner,
   } = useContextValues();
-  const { updatePatientListWithStudyID } = useFDA();
+  const {
+    updatePatientListWithStudyID,
+    updateStudyWithParticipantsAndDrugIDs,
+  } = useFDA();
   const handleClose = () => setShowConfirmationStudy(false);
   const handleShow = () => setShowConfirmationStudy(true);
   const updateStudy = () => {
@@ -24,7 +27,22 @@ export default function StudyConfirmModel({
     const studyID = document.getElementById("studyConfirmation").value;
     const realDrugID = document.getElementById("studyConfirmation2").value;
     const placeboID = document.getElementById("studyConfirmation3").value;
+    const numberOfParticipants = patientList
+      ? patientList.length.toString()
+      : "0";
 
+    //testing
+    try {
+      updateStudyWithParticipantsAndDrugIDs(
+        studyID,
+        realDrugID,
+        placeboID,
+        numberOfParticipants
+      );
+    } catch (e) {
+      console.log(e);
+    }
+    // finish testing
     updatePatientListWithStudyID(
       studyID,
       patientList,

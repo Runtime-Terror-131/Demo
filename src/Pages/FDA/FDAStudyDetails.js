@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Card, Row, Col, Spinner, Button } from "react-bootstrap";
-import { Breadcrumbs } from "../../Components";
+import {
+  Breadcrumbs,
+  ReportConfirmation,
+  StudyStatusConst,
+} from "../../Components";
 import { useFDA } from "../../Config/FDA-Config";
 import { useContextValues } from "../../Context/Context";
 import { AgGridReact } from "ag-grid-react";
 export default function FDAStudyDetails() {
-  const { getStudyByID, approveStudy, getStudyPatients } = useFDA();
-  const { setShowSpinner } = useContextValues();
+  const {
+    getStudyByID,
+    approveStudy,
+    getStudyPatients,
+    completeStudy,
+    disapproveStudy,
+  } = useFDA();
+  const { setShowSpinner, setShowReportStudy } = useContextValues();
   const [studyData, setStudyData] = useState();
   const [patientData, setPatientData] = useState();
   const [columnDefs] = useState([
@@ -33,6 +43,24 @@ export default function FDAStudyDetails() {
       console.log(e);
     }
   };
+  const cancelStudy = () => {
+    try {
+      setShowSpinner(true);
+      disapproveStudy(studyData).then((result) => {
+        if (!result) {
+        } else {
+          setStudyData(result.result);
+          setShowSpinner(false);
+        }
+      });
+    } catch (e) {
+      setShowSpinner(false);
+      console.log(e);
+    }
+  };
+  const finishStudy = () => {
+    setShowReportStudy(true);
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
     let queryString = window.location.search;
@@ -48,6 +76,11 @@ export default function FDAStudyDetails() {
   return (
     <>
       <Row>
+        <ReportConfirmation
+          studyData={studyData}
+          setStudyData={setStudyData}
+          numberOfParticipants={patientData ? patientData.length : 0}
+        />
         <Breadcrumbs />
         <Card>
           <Card.Header>Study Details</Card.Header>
@@ -72,15 +105,49 @@ export default function FDAStudyDetails() {
             </Row>
           </Card.Body>
           <Card.Footer>
-            <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
               <Button
+                className="m-2"
                 variant="success"
                 onClick={approveFDAStudy}
-                disabled={studyData && studyData.agreedByFDA ? true : false}
+                disabled={
+                  studyData &&
+                  studyData.status == StudyStatusConst.Pending &&
+                  studyData.agreedByFDA == null
+                    ? false
+                    : true
+                }
               >
-                {studyData && studyData.agreedByFDA
-                  ? "Study Already Approved"
-                  : "Approve Study"}
+                Approve Study
+              </Button>
+              <Button
+                className="m-2"
+                variant="danger"
+                onClick={cancelStudy}
+                disabled={
+                  studyData &&
+                  studyData.status == StudyStatusConst.Pending &&
+                  studyData.agreedByFDA == null
+                    ? false
+                    : true
+                }
+              >
+                Disapprove Study
+              </Button>
+              <Button
+                className="m-2"
+                variant="danger"
+                disabled={
+                  studyData &&
+                  studyData.agreedByFDA &&
+                  studyData.agreedByBavaria &&
+                  studyData.status != StudyStatusConst.Completed
+                    ? false
+                    : true
+                }
+                onClick={finishStudy}
+              >
+                Complete Study
               </Button>
             </div>
           </Card.Footer>
@@ -88,7 +155,7 @@ export default function FDAStudyDetails() {
       </Row>
 
       <Row style={{ marginTop: "10px", paddingRight: 0 }}>
-        <Col lg={8}>
+        <Col lg={12}>
           <Card>
             <Card.Header style={{ fontWeight: "boldd" }}>
               Participants

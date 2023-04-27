@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Card, Col, Row } from "react-bootstrap";
 import AlertText from "./Util/AlertText";
+import { StudyStatusConst } from "./Util/StaticConst";
 export default function Notifications({ studyData }) {
   const [data, setData] = useState();
 
@@ -8,7 +9,14 @@ export default function Notifications({ studyData }) {
     if (studyData && !data) {
       let notificationData = [];
       studyData.map((item, i) => {
-        item.agreedByBavaria && item.agreedByFDA
+        item.status == StudyStatusConst.Completed
+          ? notificationData.push([
+              `${item.studyName} was Completed!`,
+              "warning",
+            ])
+          : item.status == StudyStatusConst.Canceled
+          ? notificationData.push([`${item.studyName} was Canceled!`, "dark"])
+          : item.agreedByBavaria && item.agreedByFDA
           ? notificationData.push([
               `${item.studyName} is approved by both bavaria and FDA-status updated to Active`,
               "success",

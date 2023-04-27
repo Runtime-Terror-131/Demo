@@ -28,6 +28,7 @@ export default function PatientDetails() {
   const { getByID, deletePatient } = useJaneHopkins();
   const [patientData, setPatientData] = useState();
   const [once, setOnce] = useState(false);
+  const [render, setRender] = useState(0);
   const deletePatientValue = () => {
     setShowDeleteWarning(true);
   };
@@ -131,6 +132,7 @@ export default function PatientDetails() {
               <Doses
                 patientDoses={patientData.doses}
                 patient={patientData}
+                setRender={setRender}
                 dose={patientData.drugID}
               />
             </Row>

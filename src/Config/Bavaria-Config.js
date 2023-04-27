@@ -46,6 +46,20 @@ const approveStudy = async (studyData) => {
     return false;
   }
 };
+const disapproveStudy = async (studyData) => {
+  try {
+    let study = await entities.study.update({
+      _id: studyData._id,
+      agreedByBavaria: false,
+      status: "4",
+    });
+
+    return study;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
 const createNewDrug = async (drugs) => {
   try {
     await entities.drug.add(drugs);
@@ -97,6 +111,7 @@ const useBavaria = () => {
     approveStudy,
     createNewDrug,
     updateDrugData,
+    disapproveStudy,
   };
 };
 
