@@ -3,8 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import { useContextValues } from "../Context/Context";
 import Grid from "./Util/Grid";
 import React, { useState } from "react";
-import Grid from "./Util/Grid";
-export default function DrugConfirmation({ drugData }{ drugData }) {
+export default function DrugConfirmation({ drugData }) {
   const {
     showConfirmationWarning,
     setShowConfirmationWarning,

@@ -75,6 +75,10 @@ const MyDocument = ({ data }) => {
           <Text>Number of Participants:</Text>
           <Text>{data.numberOfParticipants}</Text>
         </View>
+        {/* <View style={styles.section}>
+          <Text>DrugID:</Text>
+          <Text>{data.realDrugID}</Text>
+        </View> */}
         <View style={styles.section}>
           <Text>StudyID:</Text>
           <Text>{data.StudyID}</Text>
@@ -110,7 +114,7 @@ function myArrayBuffer() {
   });
 }
 
-export default function BavariaReport() {
+export default function Reports() {
   const { getReports } = useJaneHopkins();
   const { setShowGridSpinner } = useContextValues();
   const [reports, setReports] = useState([]);
@@ -158,9 +162,9 @@ export default function BavariaReport() {
             <AgGridReact
               rowData={reports}
               columnDefs={columnDefs}
+              domLayout="autoHeight"
               pagination={true}
               paginationPageSize={10}
-              domLayout="autoHeight"
             ></AgGridReact>
           </div>
         </Col>
