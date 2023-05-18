@@ -11,8 +11,7 @@ const ButtonCell = (props) => {
     <NavLink
       to={"/hopkins/studyinfo/details" + "?id=" + props.data._id}
       id={`detailsLink-${props.data.name}`}
-      style={{ textDecoration: "none" }}
-    >
+      style={{ textDecoration: "none" }}>
       {" "}
       Details
     </NavLink>
@@ -47,8 +46,7 @@ const Legend = (props) => {
         fontWeight: "bold",
         alignItems: "center",
         flexDirection: "column",
-      }}
-    >
+      }}>
       {status}
     </Alert>
   );
@@ -152,8 +150,7 @@ export default function Study({ userType }) {
               </Form>
             </Card.Body>
             <Card.Footer
-              style={{ display: "flex", justifyContent: "space-between" }}
-            >
+              style={{ display: "flex", justifyContent: "space-between" }}>
               <div className=" res-buttons">
                 {userType === UserTypeConst.hopkinsAdmin && (
                   <Button variant="warning" type="button" className="m-2">
@@ -163,8 +160,7 @@ export default function Study({ userType }) {
                         textDecoration: "none",
                         color: "white",
                         fontWeight: "600",
-                      }}
-                    >
+                      }}>
                       Create New Study
                     </NavLink>
                   </Button>
@@ -173,14 +169,16 @@ export default function Study({ userType }) {
                 <Button
                   variant="primary"
                   type="button"
-                  onClick={downloadResult}
-                >
+                  className="m-2"
+                  onClick={downloadResult}>
                   Download Result...
                 </Button>
               </div>
               <div className=" res-buttons">
                 <Button className="m-2">Search</Button>
-                <Button variant="secondary">Undo</Button>
+                <Button variant="secondary" className="m-2">
+                  Undo..
+                </Button>
               </div>
             </Card.Footer>
           </Card>
@@ -193,14 +191,12 @@ export default function Study({ userType }) {
         <Col lg={12}>
           <div
             className="ag-theme-alpine"
-            style={{ marginTop: "5px", marginBottom: "5px" }}
-          >
+            style={{ marginTop: "5px", marginBottom: "5px" }}>
             <AgGridReact
               ref={gridRef}
               rowData={studyData}
               columnDefs={columnDefs}
-              domLayout="autoHeight"
-            ></AgGridReact>
+              domLayout="autoHeight"></AgGridReact>
           </div>
         </Col>
       </Row>
