@@ -16,8 +16,7 @@ const ButtonCell = (props) => {
     <NavLink
       to={"/fda/studyinfo/details" + "?id=" + props.data._id}
       id={`detailsLink-${props.data.name}`}
-      style={{ textDecoration: "none" }}
-    >
+      style={{ textDecoration: "none" }}>
       {" "}
       Details
     </NavLink>
@@ -52,8 +51,7 @@ const Legend = (props) => {
         fontWeight: "bold",
         alignItems: "center",
         flexDirection: "column",
-      }}
-    >
+      }}>
       {status}
     </Alert>
   );
@@ -153,8 +151,7 @@ export default function StudyInfo() {
                   <Col lg={4}>
                     <Form.Group
                       className="mb-3"
-                      controlId="hideCanceledCheckBox"
-                    >
+                      controlId="hideCanceledCheckBox">
                       <Form.Check
                         type="checkbox"
                         label="Hide Completed Studies"
@@ -165,8 +162,7 @@ export default function StudyInfo() {
               </Form>
             </Card.Body>
             <Card.Footer
-              style={{ display: "flex", justifyContent: "space-between" }}
-            >
+              style={{ display: "flex", justifyContent: "space-between" }}>
               <div style={{ display: "flex", justifyContent: "flex-start" }}>
                 <Button variant="primary" style={{ margin: "5px" }}>
                   Approve All Current Pending Studies
@@ -177,7 +173,9 @@ export default function StudyInfo() {
               </div>
               <div className="res-buttons">
                 <Button className="m-2">Search</Button>
-                <Button variant="secondary">Undo</Button>
+                <Button variant="secondary" className="m-2">
+                  Undo..
+                </Button>
               </div>
             </Card.Footer>
           </Card>
@@ -190,15 +188,13 @@ export default function StudyInfo() {
         <Col lg={12}>
           <div
             className="ag-theme-alpine"
-            style={{ marginTop: "5px", marginBottom: "5px" }}
-          >
+            style={{ marginTop: "5px", marginBottom: "5px" }}>
             <AgGridReact
               rowData={studyData}
               columnDefs={columnDefs}
               domLayout="autoHeight"
               pagination={true}
-              paginationPageSize={10}
-            ></AgGridReact>
+              paginationPageSize={10}></AgGridReact>
           </div>
         </Col>
       </Row>
